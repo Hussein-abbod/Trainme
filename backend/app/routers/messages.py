@@ -66,6 +66,34 @@ def get_conversation(
     return messages
 
 
+@router.get("/contacts")
+def get_contacts(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """Retrieve a list of users the current user has active conversations with."""
+    # Find all messages where current user is sender or receiver
+    messages = db.query(Message).filter(
+        or_(Message.sender_id == current_user.id, Message.receiver_id == current_user.id)
+    ).order_by(Message.created_at.desc()).all()
+    
+    contacts = {}
+    for m in messages:
+        other_id = m.receiver_id if m.sender_id == current_user.id else m.sender_id
+        if other_id not in contacts:
+            other_user = db.query(User).filter(User.id == other_id).first()
+            if other_user:
+                contacts[other_id] = {
+                    "id": other_user.id,
+                    "name": other_user.name,
+                    "role": other_user.role.value if hasattr(other_user.role, 'value') else other_user.role,
+                    "last_message": m.content,
+                    "last_message_at": m.created_at.isoformat(),
+                    "unread": 0
+                }
+        if m.receiver_id == current_user.id and not m.is_read:
+            contacts[other_id]["unread"] += 1
+
+    return list(contacts.values())
+
+
 @router.get("/unread-count")
 def unread_count(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     count = db.query(Message).filter(

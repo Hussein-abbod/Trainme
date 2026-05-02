@@ -9,6 +9,12 @@ import { skeletonCard } from '../../utils/helpers.jsx';
 
 const PAGE_SIZE = 9;
 
+const MALAYSIA_LOCATIONS = [
+  'Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan', 'Malacca', 
+  'Negeri Sembilan', 'Pahang', 'Penang', 'Perak', 'Perlis', 'Putrajaya', 
+  'Sabah', 'Sarawak', 'Selangor', 'Terengganu'
+];
+
 function InternshipCard({ item, isBookmarked, onToggleBookmark, navigate }) {
   const skills = (item.skills || []).slice(0, 3);
   return (
@@ -141,8 +147,10 @@ export default function DiscoveryFeed() {
               </div>
               <div className="flex gap-sm w-full sm:w-auto flex-wrap">
                 <select value={location} onChange={e => setLocation(e.target.value)} className={selectCls}>
-                  <option value="">Location</option>
-                  {['selangor','kl','malacca','penang','johor'].map(l => <option key={l} value={l} className="capitalize">{l.charAt(0).toUpperCase()+l.slice(1)}</option>)}
+                  <option value="">All Locations</option>
+                  {MALAYSIA_LOCATIONS.map(loc => (
+                    <option key={loc} value={loc}>{loc}</option>
+                  ))}
                 </select>
                 <select value={industry} onChange={e => setIndustry(e.target.value)} className={selectCls}>
                   <option value="">Industry</option>

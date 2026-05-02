@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { apiCache } from '../api/client.js';
 
 const AuthContext = createContext(null);
 
@@ -18,6 +19,7 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => {
     localStorage.removeItem('tm_token');
     localStorage.removeItem('tm_user');
+    apiCache.clear(); // wipe all cached API responses on logout
     setUser(null);
   }, []);
 

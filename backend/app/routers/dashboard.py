@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.dependencies import require_company
-from app.models import Application, ApplicationStatus, Internship, InternshipStatus, User, StudentProfile
+from app.models import Application, ApplicationStatus, Internship, InternshipStatus, User, Student
 from sqlalchemy.orm import joinedload
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
@@ -41,7 +41,7 @@ def company_dashboard(
         .filter(Internship.company_id == current_user.id)
         .options(
             joinedload(Application.internship),
-            joinedload(Application.student).joinedload(StudentProfile.user)
+            joinedload(Application.student).joinedload(Student.user)
         )
         .order_by(Application.applied_at.desc())
         .limit(5)

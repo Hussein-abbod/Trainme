@@ -17,7 +17,7 @@ export class ApiError extends Error {
   }
 }
 
-const apiCache = new Map();
+export const apiCache = new Map();
 
 export async function apiFetch(path, options = {}) {
   const method = options.method || 'GET';
@@ -30,12 +30,9 @@ export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('tm_token');
   const cacheKey = `${method}:${path}:${token}`;
 
-  // Use cache for GET requests (except unread-count polling) if less than 60 minutes old
+  // Serve from cache for GET requests (cache lives until logout or a mutation)
   if (method === 'GET' && !path.includes('unread-count') && apiCache.has(cacheKey)) {
-    const cached = apiCache.get(cacheKey);
-    if (Date.now() - cached.timestamp < 60 * 60 * 1000) { // 60 minutes
-      return cached.data; // Return instantly
-    }
+    return apiCache.get(cacheKey).data;
   }
 
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };

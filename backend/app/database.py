@@ -19,11 +19,15 @@ connect_args = {"ssl": {"ssl_disabled": False}} if settings.DB_SSL else {}
 engine = create_engine(
     settings.database_url,
     connect_args=connect_args,
-    pool_pre_ping=True,       # reconnect on stale connections
-    pool_recycle=3600,        # recycle connections every hour
-    pool_size=5,
-    max_overflow=10,
-    echo=settings.DEBUG,      # log SQL queries in debug mode
+    # pool_pre_ping is REQUIRED for cloud/Aiven MySQL — without it, connections
+    # that the server dropped while idle cause silent query failures.
+    # The SELECT 1 it issues is cheap compared to a broken request.
+    pool_pre_ping=True,
+    pool_recycle=1800,        # recycle connections every 30 min (Aiven default timeout)
+    pool_size=10,
+    max_overflow=20,
+    pool_timeout=30,
+    echo=False,
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

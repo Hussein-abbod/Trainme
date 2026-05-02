@@ -54,12 +54,16 @@ def apply_to_internship(
     )
     db.add(application)
 
+    # Resolve student name for the notification (TokenUser has no .name)
+    student_user = db.query(User).filter(User.id == current_user.id).first()
+    student_name = student_user.name if student_user else "A student"
+
     # Notify the company
     _create_notification(
         db, internship.company_id,
         NotificationType.application_received,
         "New Application Received",
-        f"{current_user.name} applied for {internship.title}.",
+        f"{student_name} applied for {internship.title}.",
     )
 
     db.commit()

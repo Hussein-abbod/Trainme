@@ -6,6 +6,12 @@ import { Internships } from '../../api/index.js';
 import { useToast } from '../../context/ToastContext.jsx';
 import { Spinner } from '../../utils/helpers.jsx';
 
+const MALAYSIA_LOCATIONS = [
+  'Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan', 'Malacca', 
+  'Negeri Sembilan', 'Pahang', 'Penang', 'Perak', 'Perlis', 'Putrajaya', 
+  'Sabah', 'Sarawak', 'Selangor', 'Terengganu'
+];
+
 export default function CreateInternship() {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -83,7 +89,12 @@ export default function CreateInternship() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-md">
             <div className="flex flex-col gap-xs">
               <label className="font-label-md text-on-surface">Location</label>
-              <input value={form.location} onChange={set('location')} placeholder="e.g. Kuala Lumpur" className={inputCls} />
+              <select required value={form.location} onChange={set('location')} className={inputCls}>
+                <option value="" disabled>Select a location</option>
+                {MALAYSIA_LOCATIONS.map(loc => (
+                  <option key={loc} value={loc}>{loc}</option>
+                ))}
+              </select>
             </div>
             <div className="flex flex-col gap-xs">
               <label className="font-label-md text-on-surface">Work Type</label>

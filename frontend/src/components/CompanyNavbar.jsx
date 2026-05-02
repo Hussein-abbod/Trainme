@@ -11,16 +11,22 @@ export default function CompanyNavbar() {
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    Notifications.unreadCount().then(d => setUnreadCount(d?.unread_count || 0)).catch(() => {});
+    // Fetch immediately, then poll every 30 s so badge stays live
+    const fetchCount = () =>
+      Notifications.unreadCount().then(d => setUnreadCount(d?.unread_count || 0)).catch(() => {});
+    fetchCount();
+    const interval = setInterval(fetchCount, 30_000);
+    return () => clearInterval(interval);
   }, []);
 
   const initials = user?.name?.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase() || 'C';
 
   const navLinks = [
-    { to: '/dashboard',      label: 'Dashboard'       },
-    { to: '/applicants',     label: 'Applicants'      },
-    { to: '/post-internship',label: 'Post Internship' },
-    { to: '/messages',       label: 'Messages'        },
+    { to: '/dashboard',       label: 'Dashboard'        },
+    { to: '/my-internships',  label: 'My Internships'   },
+    { to: '/applicants',      label: 'Applicants'       },
+    { to: '/post-internship', label: 'Post Internship'  },
+    { to: '/messages',        label: 'Messages'         },
   ];
 
   function handleLogout() {

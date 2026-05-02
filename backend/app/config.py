@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     # ── App ───────────────────────────────────────────
     APP_NAME: str = "TrainMe API"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False  # Set True in .env only for SQL echo debugging
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
     # ── File Upload ───────────────────────────────────

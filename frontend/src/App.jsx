@@ -21,11 +21,13 @@ import ApplicationSuccess from './pages/student/ApplicationSuccess.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
 import ApplicantTracking from './pages/company/ApplicantTracking.jsx';
 import CreateInternship from './pages/company/CreateInternship.jsx';
+import MyInternships from './pages/company/MyInternships.jsx';
 import CompanyProfileEdit from './pages/company/CompanyProfileEdit.jsx';
 import CompaniesDirectory from './pages/company/CompaniesDirectory.jsx';
 
 import Messages from './pages/shared/Messages.jsx';
 import Notifications from './pages/shared/Notifications.jsx';
+import PublicCompanyProfile from './pages/student/PublicCompanyProfile.jsx';
 
 import About from './pages/info/About.jsx';
 import Privacy from './pages/info/Privacy.jsx';
@@ -64,15 +66,17 @@ export default function App() {
 
             {/* Company - protected */}
             <Route element={<ProtectedRoute requiredRole="company" />}>
-              <Route path="/dashboard" element={<CompanyDashboard />} />
-              <Route path="/applicants" element={<ApplicantTracking />} />
-              <Route path="/post-internship" element={<CreateInternship />} />
-              <Route path="/company-profile" element={<CompanyProfileEdit />} />
+              <Route path="/dashboard"        element={<CompanyDashboard />} />
+              <Route path="/applicants"        element={<ApplicantTracking />} />
+              <Route path="/post-internship"   element={<CreateInternship />} />
+              <Route path="/my-internships"    element={<MyInternships />} />
+              <Route path="/company-profile"   element={<CompanyProfileEdit />} />
             </Route>
 
             {/* Shared - any authenticated */}
             <Route element={<ProtectedRoute />}>
               <Route path="/companies" element={<CompaniesDirectory />} />
+              <Route path="/company/:id" element={<PublicCompanyProfile />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/notifications" element={<Notifications />} />
             </Route>

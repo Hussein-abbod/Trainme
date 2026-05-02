@@ -4,6 +4,7 @@ import Footer from '../../components/Footer.jsx';
 import { Companies } from '../../api/index.js';
 import { getMediaUrl } from '../../api/client.js';
 import { Spinner } from '../../utils/helpers.jsx';
+import { Link } from 'react-router-dom';
 
 export default function CompaniesDirectory() {
   const [companies, setCompanies] = useState([]);
@@ -38,17 +39,17 @@ export default function CompaniesDirectory() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
             {filtered.map(company => (
-              <div key={company.id} className="bg-surface-container-lowest border border-surface-variant rounded-xl p-md flex flex-col items-center text-center hover:shadow-md transition-shadow">
+              <Link key={company.id} to={`/company/${company.user_id}`} className="bg-surface-container-lowest border border-surface-variant rounded-xl p-md flex flex-col items-center text-center hover:border-primary hover:shadow-md transition-all group block">
                 <div className="w-20 h-20 rounded-full bg-surface-container-low border border-surface-variant flex items-center justify-center mb-sm overflow-hidden">
-                  {company.logo_url ? <img src={getMediaUrl(company.logo_url)} alt={company.company_name} className="w-full h-full object-cover" /> : <span className="material-symbols-outlined text-[32px] text-outline">domain</span>}
+                  {company.logo_url ? <img src={getMediaUrl(company.logo_url)} alt={company.company_name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" /> : <span className="material-symbols-outlined text-[32px] text-outline">domain</span>}
                 </div>
-                <h3 className="font-h3 text-on-surface mb-1">{company.company_name}</h3>
+                <h3 className="font-h3 text-on-surface mb-1 group-hover:text-primary transition-colors">{company.company_name}</h3>
                 <p className="font-label-sm text-on-surface-variant mb-sm">{company.industry || 'Various Industries'}</p>
                 {company.location && <p className="text-xs text-outline flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">location_on</span> {company.location}</p>}
                 <div className="mt-auto pt-md w-full">
-                  <div className="text-xs text-primary bg-primary/5 py-1.5 rounded-md w-full font-medium">Hiring on TrainMe</div>
+                  <div className="text-xs text-primary bg-primary/5 py-1.5 rounded-md w-full font-medium">View Profile</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

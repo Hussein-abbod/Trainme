@@ -61,9 +61,10 @@ export const Bookmarks = {
 };
 
 export const Messages = {
-  send:         (data)   => apiFetch('/messages/', { method: 'POST', body: JSON.stringify(data) }),
-  conversation: (userId) => apiFetch(`/messages/?other_user_id=${userId}`),
-  unreadCount:  ()       => apiFetch('/messages/unread-count'),
+  send:            (data)   => apiFetch('/messages/', { method: 'POST', body: JSON.stringify(data) }),
+  getConversation: (userId) => apiFetch(`/messages/?other_user_id=${userId}`),
+  contacts:        ()       => apiFetch('/messages/contacts'),
+  unreadCount:     ()       => apiFetch('/messages/unread-count'),
 };
 
 export const Notifications = {
