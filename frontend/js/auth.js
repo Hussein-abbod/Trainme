@@ -41,32 +41,29 @@ const AuthState = {
  */
 function requireAuth(requiredRole = null) {
   if (!AuthState.isLoggedIn()) {
-    window.location.href = getBasePath() + '/login';
+    window.location.href = '/login';
     return false;
   }
   if (requiredRole && AuthState.getRole() !== requiredRole) {
-    // Wrong role — redirect to appropriate home
     const role = AuthState.getRole();
     const home = role === 'company' ? '/dashboard' : '/discover';
-    window.location.href = getBasePath() + home;
+    window.location.href = home;
     return false;
   }
   return true;
 }
 
-/** Redirect already-logged-in users away from auth pages */
 function redirectIfLoggedIn() {
   if (AuthState.isLoggedIn()) {
     const role = AuthState.getRole();
     const home = role === 'company' ? '/dashboard' : '/discover';
-    window.location.href = getBasePath() + home;
+    window.location.href = home;
   }
 }
 
-/** Logout */
 function logout() {
   AuthState.clear();
-  window.location.href = getBasePath() + '/';
+  window.location.href = '/';
 }
 
 // ─── UI Helpers ───────────────────────────────────────────────
@@ -88,11 +85,6 @@ async function updateNotificationBadge() {
       el.classList.toggle('hidden', !unread_count);
     });
   } catch { /* silent */ }
-}
-
-/** Compute base path prefix */
-function getBasePath() {
-  return window.location.pathname.includes('/pages/') ? '../' : '';
 }
 
 // Run on every page load
