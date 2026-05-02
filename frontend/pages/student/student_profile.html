@@ -150,19 +150,19 @@
 </button>
 </div>
 <div class="flex flex-col text-center sm:text-left mt-sm sm:mt-0">
-<h2 class="font-h3 text-h3 text-on-background">Ahmad bin Abdullah</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">University of Malaya</p>
-<p class="font-label-md text-label-md text-primary mt-xs">Computer Science Undergraduate</p>
+<h2 id="profileName" class="font-h3 text-h3 text-on-background">Ahmad bin Abdullah</h2>
+<p id="profileEmail" class="font-body-md text-body-md text-on-surface-variant">University of Malaya</p>
+<p id="profileUniversity" class="font-label-md text-label-md text-primary mt-xs">Computer Science Undergraduate</p>
 </div>
 </div>
 <!-- Progress Indicator -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
 <div class="flex justify-between items-end mb-sm">
 <span class="font-label-md text-label-md text-on-surface-variant">Profile Completeness</span>
-<span class="font-h3 text-h3 text-primary">80%</span>
+<span id="completenessLabel" class="font-h3 text-h3 text-primary">80%</span>
 </div>
 <div class="w-full bg-surface-variant rounded-full h-2">
-<div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+<div id="completenessBar" class="bg-primary h-2 rounded-full" style="width: 80%"></div>
 </div>
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Add your resume and portfolio links to reach 100%.</p>
 </div>
@@ -174,7 +174,7 @@
 </h3>
 <span class="font-label-sm text-label-sm text-on-surface-variant" id="bioCount">0/500</span>
 </div>
-<textarea id="bioField" oninput="document.getElementById('bioCount').textContent=this.value.length+'/500'" maxlength="500" rows="4" class="w-full border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant resize-none" placeholder="Tell employers about yourself — your interests, goals, and what makes you a great intern...">Passionate Computer Science student with a keen interest in full-stack development and UI/UX design. Currently exploring machine learning applications in e-commerce. Looking for a meaningful internship where I can contribute to real-world projects while growing my technical and soft skills.</textarea>
+<textarea id="inputBio" oninput="document.getElementById('bioCount').textContent=this.value.length+'/500'" maxlength="500" rows="4" class="w-full border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant resize-none" placeholder="Tell employers about yourself — your interests, goals, and what makes you a great intern...">Passionate Computer Science student with a keen interest in full-stack development and UI/UX design. Currently exploring machine learning applications in e-commerce. Looking for a meaningful internship where I can contribute to real-world projects while growing my technical and soft skills.</textarea>
 </div>
 <!-- Education Details -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
@@ -184,19 +184,19 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
 <div class="flex flex-col gap-xs">
 <label class="font-label-sm text-label-sm text-on-surface-variant">Degree Programme</label>
-<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Bachelor of Computer Science (Software Engineering)" type="text"/>
+<input id="inputMajor" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Bachelor of Computer Science (Software Engineering)" type="text"/>
 </div>
 <div class="flex flex-col gap-xs">
 <label class="font-label-sm text-label-sm text-on-surface-variant">University</label>
-<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Universiti Malaya" type="text"/>
+<input id="inputUniversity" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Universiti Malaya" type="text"/>
 </div>
 <div class="flex flex-col gap-xs">
 <label class="font-label-sm text-label-sm text-on-surface-variant">Expected Graduation</label>
-<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="June 2027" type="month"/>
+<input id="inputYear" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="June 2027" type="month"/>
 </div>
 <div class="flex flex-col gap-xs">
 <label class="font-label-sm text-label-sm text-on-surface-variant">Current CGPA</label>
-<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="3.72" type="text" placeholder="e.g. 3.50"/>
+<input id="inputCgpa" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="3.72" type="text" placeholder="e.g. 3.50"/>
 </div>
 </div>
 </div>
@@ -205,11 +205,15 @@
 <!-- Document Upload -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col col-span-1">
 <h3 class="font-label-md text-label-md text-on-background mb-sm">Resume / CV</h3>
-<div class="flex-grow border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group">
+<div id="cv-upload-area" class="flex-grow border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group" onclick="document.getElementById('cvInput').click()">
+<input type="file" id="cvInput" accept=".pdf" class="hidden"/>
 <span class="material-symbols-outlined text-4xl text-outline mb-sm group-hover:text-primary transition-colors">upload_file</span>
 <p class="font-label-md text-label-md text-on-background">Upload your CV</p>
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">(PDF only, max 5MB)</p>
 </div>
+<a id="cv-link" href="#" target="_blank" class="hidden mt-sm inline-flex items-center gap-1 text-primary font-label-sm text-label-sm hover:underline">
+<span class="material-symbols-outlined text-[16px]">description</span> View uploaded CV
+</a>
 </div>
 <!-- Portfolio Links -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col gap-sm col-span-1">
@@ -220,7 +224,7 @@
 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-outline text-sm">link</span>
 </div>
-<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://linkedin.com/in/username" type="url"/>
+<input id="inputLinkedin" class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://linkedin.com/in/username" type="url"/>
 </div>
 </div>
 <div class="flex flex-col gap-xs">
@@ -229,7 +233,7 @@
 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-outline text-sm">code</span>
 </div>
-<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://github.com/username" type="url"/>
+<input id="inputGithub" class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://github.com/username" type="url"/>
 </div>
 </div>
 <div class="flex flex-col gap-xs">
@@ -238,7 +242,7 @@
 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-outline text-sm">language</span>
 </div>
-<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://yourportfolio.com" type="url"/>
+<input id="inputPortfolio" class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://yourportfolio.com" type="url"/>
 </div>
 </div>
 </div>
@@ -249,7 +253,7 @@
 <h3 class="font-label-md text-label-md text-on-background">Skills</h3>
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Add skills to help employers find you.</p>
 </div>
-<div class="flex flex-wrap gap-2 mb-xs">
+<div id="skillsTags" class="flex flex-wrap gap-2 mb-xs">
 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary-container text-on-secondary-container">
                         Python
                         <button class="flex-shrink-0 ml-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-on-secondary-container hover:bg-secondary hover:text-on-secondary focus:outline-none focus:bg-secondary focus:text-on-secondary" type="button">
@@ -269,16 +273,19 @@
 </button>
 </span>
 </div>
-<div class="relative mt-xs">
-<input class="block w-full pl-3 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="Add a skill... (e.g. React, Data Analysis)" type="text"/>
+<div class="relative mt-xs flex gap-xs">
+<input id="skillInput" class="block w-full pl-3 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="Add a skill... (e.g. React, Data Analysis)" type="text"/>
+<button id="addSkillBtn" type="button" class="px-3 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:bg-surface-tint transition-colors whitespace-nowrap">Add</button>
 </div>
 </div>
 <!-- Action Area -->
+<form id="profileForm">
 <div class="flex justify-end pt-sm border-t border-surface-container-highest mt-sm">
-<button class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-2 px-6 rounded-lg transition-colors shadow-sm">
+<button type="submit" class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-2 px-6 rounded-lg transition-colors shadow-sm">
                     Save Changes
                 </button>
 </div>
+</form>
 </div>
 </main>
 <!-- BottomNavBar (Mobile Only) -->
