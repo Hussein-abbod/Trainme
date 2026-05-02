@@ -16,7 +16,6 @@ export default function StudentProfile() {
   const [uploading, setUploading] = useState(false);
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState('');
-  const [cvModal, setCvModal] = useState(false);
   const [form, setForm] = useState({ university: '', major: '', year_of_study: '', cgpa: '', bio: '', linkedin: '', github: '', portfolio: '' });
   const cvInputRef = useRef(null);
 
@@ -98,6 +97,19 @@ export default function StudentProfile() {
   const cvUrl = profile?.cv_url ? getMediaUrl(profile.cv_url) : null;
   const user = profile?.user || {};
 
+  const getMissingText = () => {
+    if (pct === 100) return "Your profile is fully complete! Great job.";
+    const missing = [];
+    if (!profile?.cv_url) missing.push("resume");
+    if (!form.portfolio && !form.linkedin && !form.github) missing.push("portfolio/social links");
+    if (!form.bio) missing.push("about me details");
+    if (skills.length === 0) missing.push("skills");
+    if (!form.major || !form.university) missing.push("education details");
+
+    if (missing.length === 0) return "Add more details to reach 100%.";
+    return `Add your ${missing.join(", ")} to reach 100%.`;
+  };
+
   if (loading) return (
     <div className="min-h-screen flex flex-col"><Navbar />
       <div className="flex-grow flex items-center justify-center"><Spinner className="w-10 h-10 text-primary" /></div>
@@ -140,7 +152,7 @@ export default function StudentProfile() {
             <div className="w-full bg-surface-variant rounded-full h-2">
               <div className="bg-primary h-2 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
             </div>
-            <p className="font-label-sm text-label-sm text-on-surface-variant mt-xs">Add your resume and portfolio links to reach 100%.</p>
+            <p className="font-label-sm text-label-sm text-on-surface-variant mt-xs">{getMissingText()}</p>
           </div>
 
           <form onSubmit={handleSave} className="flex flex-col gap-md">
@@ -186,22 +198,38 @@ export default function StudentProfile() {
               <div className="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col">
                 <h3 className="font-label-md text-label-md text-on-background mb-sm">Resume / CV</h3>
                 <input type="file" accept=".pdf" ref={cvInputRef} onChange={handleCVUpload} className="hidden" />
-                <div
-                  onClick={() => cvInputRef.current?.click()}
-                  className="flex-grow border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group"
-                >
-                  {uploading
-                    ? <Spinner className="w-8 h-8 text-primary" />
-                    : <><span className="material-symbols-outlined text-4xl text-outline mb-sm group-hover:text-primary transition-colors">upload_file</span>
-                        <p className="font-label-md text-label-md text-on-background">Upload your CV</p>
-                        <p className="font-label-sm text-label-sm text-on-surface-variant mt-xs">(PDF only, max 5MB)</p>
+                {cvUrl ? (
+                  <div className="flex-grow border border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low text-center">
+                    {uploading ? (
+                      <Spinner className="w-8 h-8 text-primary" />
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-4xl text-primary mb-sm">description</span>
+                        <p className="font-label-md text-label-md text-on-background">CV Uploaded</p>
+                        <div className="flex gap-2 mt-sm">
+                          <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+                            <span className="material-symbols-outlined text-[16px]">open_in_new</span> View CV
+                          </a>
+                          <button type="button" onClick={() => cvInputRef.current?.click()} className="inline-flex items-center justify-center gap-2 px-4 py-2 border border-outline-variant text-on-surface-variant rounded-lg font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                            <span className="material-symbols-outlined text-[16px]">update</span> Replace
+                          </button>
+                        </div>
                       </>
-                  }
-                </div>
-                {cvUrl && (
-                  <button type="button" onClick={() => setCvModal(true)} className="mt-sm inline-flex items-center gap-2 px-3 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">
-                    <span className="material-symbols-outlined text-[16px]">description</span> Preview CV
-                  </button>
+                    )}
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => cvInputRef.current?.click()}
+                    className="flex-grow border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group"
+                  >
+                    {uploading
+                      ? <Spinner className="w-8 h-8 text-primary" />
+                      : <><span className="material-symbols-outlined text-4xl text-outline mb-sm group-hover:text-primary transition-colors">upload_file</span>
+                          <p className="font-label-md text-label-md text-on-background">Upload your CV</p>
+                          <p className="font-label-sm text-label-sm text-on-surface-variant mt-xs">(PDF only, max 5MB)</p>
+                        </>
+                    }
+                  </div>
                 )}
               </div>
 
@@ -266,30 +294,6 @@ export default function StudentProfile() {
         </div>
       </main>
       <Footer />
-
-      {/* CV Modal */}
-      {cvModal && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setCvModal(false)} />
-          <div className="relative bg-white rounded-2xl shadow-2xl w-[90vw] max-w-4xl h-[90vh] flex flex-col overflow-hidden z-10">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">description</span>
-                <span className="font-label-md text-label-md text-on-background">Your CV</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container rounded-lg text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
-                  <span className="material-symbols-outlined text-[16px]">open_in_new</span> Open in new tab
-                </a>
-                <button onClick={() => setCvModal(false)} className="p-1.5 rounded-full hover:bg-surface-container-low transition-colors">
-                  <span className="material-symbols-outlined text-on-surface-variant">close</span>
-                </button>
-              </div>
-            </div>
-            <iframe src={cvUrl} className="flex-1 w-full border-0" title="CV Preview" />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
