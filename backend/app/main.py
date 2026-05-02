@@ -88,14 +88,6 @@ app.add_middleware(
 
 API_PREFIX = "/api/v1"
 
-@app.get(f"{API_PREFIX}/debug")
-def debug_env():
-    return {
-        "db_host": settings.DB_HOST,
-        "db_ssl": settings.DB_SSL,
-        "allowed_origins": settings.ALLOWED_ORIGINS
-    }
-
 for router_module in [
     auth,
     students,
