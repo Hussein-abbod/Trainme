@@ -49,6 +49,12 @@ function getBasePath() {
   return path.includes('/pages/') ? '../' : '';
 }
 
+// Helper to format media URLs (local vs Cloudinary)
+function getMediaUrl(path) {
+  if (!path) return '';
+  return path.startsWith('http') ? path : `http://localhost:8000${path}`;
+}
+
 // ─── Auth ──────────────────────────────────────────────────────
 
 const Auth = {

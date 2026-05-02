@@ -103,10 +103,11 @@ function internshipCard(item) {
   <article class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col gap-4 hover:border-primary hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-all duration-200">
     <div class="flex justify-between items-start">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center border border-surface-variant overflow-hidden">
+        <div class="w-12 h-12 bg-white border border-gray-100 rounded-md overflow-hidden shrink-0 flex items-center justify-center">
           ${item.company?.logo_url
-            ? `<img src="http://localhost:8000${item.company.logo_url}" alt="${item.company?.company_name} logo" class="w-full h-full object-cover">`
-            : `<span class="material-symbols-outlined text-outline">business</span>`}
+            ? `<img src="${getMediaUrl(item.company.logo_url)}" alt="${item.company?.company_name} logo" class="w-full h-full object-cover">`
+            : `<span class="material-symbols-outlined text-gray-300">domain</span>`
+          }
         </div>
         <div>
           <h3 class="font-label-md text-label-md text-on-surface">${item.company?.company_name || 'Company'}</h3>

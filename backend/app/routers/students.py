@@ -68,17 +68,11 @@ async def upload_cv(
     if len(contents) > max_bytes:
         raise HTTPException(status_code=400, detail=f"File exceeds {settings.MAX_FILE_SIZE_MB} MB limit.")
 
-    upload_dir = Path(settings.UPLOAD_DIR) / "cvs"
-    upload_dir.mkdir(parents=True, exist_ok=True)
-
-    filename = f"cv_{current_user.id}.pdf"
-    file_path = upload_dir / filename
-
-    with open(file_path, "wb") as f:
-        f.write(contents)
+    from app.cloudinary_utils import upload_file_to_cloudinary
+    secure_url = upload_file_to_cloudinary(contents, folder="trainme/cvs", resource_type="auto")
 
     student = _get_student_or_404(current_user.id, db)
-    student.cv_url = f"/uploads/cvs/{filename}"
+    student.cv_url = secure_url
     db.commit()
 
     return MessageResponse(message="CV uploaded successfully.")

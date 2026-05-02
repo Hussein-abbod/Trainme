@@ -68,10 +68,12 @@ function renderApplicants(applicants, internshipId) {
       <td class="py-4 px-4 text-sm text-on-surface-variant hidden md:table-cell">${formatDate(app.applied_at)}</td>
       <td class="py-4 px-4">${statusBadge(app.status)}</td>
       <td class="py-4 px-4 hidden md:table-cell">
-        <div class="flex gap-1">
-          ${student.cv_url ? `<a href="http://localhost:8000${student.cv_url}" target="_blank" class="text-primary hover:underline text-xs flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">description</span>CV</a>` : ''}
+        <div class="mt-2 flex items-center justify-between">
+          ${student.cv_url ? `<a href="${getMediaUrl(student.cv_url)}" target="_blank" class="text-primary hover:underline text-xs flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">description</span>CV</a>` : ''}
+          <div class="flex gap-2">
           ${student.linkedin ? `<a href="${student.linkedin}" target="_blank" class="text-primary hover:underline text-xs flex items-center gap-1 ml-2"><span class="material-symbols-outlined text-[14px]">link</span>LinkedIn</a>` : ''}
           ${student.github ? `<a href="${student.github}" target="_blank" class="text-primary hover:underline text-xs flex items-center gap-1 ml-2"><span class="material-symbols-outlined text-[14px]">code</span>GitHub</a>` : ''}
+          </div>
         </div>
       </td>
       <td class="py-4 px-4 text-right">

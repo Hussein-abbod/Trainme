@@ -74,13 +74,11 @@ async def upload_logo(
     if len(contents) > 2 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="Logo exceeds 2 MB limit.")
 
-    upload_dir = Path(settings.UPLOAD_DIR) / "logos"
-    upload_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"logo_{current_user.id}{ext}"
-    (upload_dir / filename).write_bytes(contents)
+    from app.cloudinary_utils import upload_file_to_cloudinary
+    secure_url = upload_file_to_cloudinary(contents, folder="trainme/logos", resource_type="auto")
 
     company = _get_company_or_404(current_user.id, db)
-    company.logo_url = f"/uploads/logos/{filename}"
+    company.logo_url = secure_url
     db.commit()
 
     return MessageResponse(message="Logo uploaded successfully.")

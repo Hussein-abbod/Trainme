@@ -52,9 +52,11 @@ function populateProfile(profile) {
   }
 
   // CV link
+  const cvLink = document.getElementById('cv-link');
   if (profile.cv_url) {
-    const cvLink = document.getElementById('cvLink');
-    if (cvLink) { cvLink.href = `http://localhost:8000${profile.cv_url}`; cvLink.classList.remove('hidden'); }
+    if (cvLink) { cvLink.href = getMediaUrl(profile.cv_url); cvLink.classList.remove('hidden'); }
+  } else {
+    if (cvLink) { cvLink.classList.add('hidden'); }
   }
 
   // Completeness bar

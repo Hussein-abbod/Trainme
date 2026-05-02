@@ -35,9 +35,9 @@ function renderDetail(item) {
   const company = item.company || {};
 
   // Company logo
-  const logoEl = document.getElementById('companyLogo');
+  const logoEl = document.getElementById('company-logo');
   if (logoEl && company.logo_url) {
-    logoEl.src = `http://localhost:8000${company.logo_url}`;
+    logoEl.src = getMediaUrl(company.logo_url);
   }
 
   // Text fields

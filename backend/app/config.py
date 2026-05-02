@@ -27,8 +27,8 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
     # ── File Upload ───────────────────────────────────
-    UPLOAD_DIR: str = "uploads"
     MAX_FILE_SIZE_MB: int = 5
+    CLOUDINARY_URL: str = ""
 
     @property
     def database_url(self) -> str:

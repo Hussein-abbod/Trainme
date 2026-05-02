@@ -8,7 +8,6 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
 from app.config import get_settings
 from app.database import check_db_connection, create_tables
@@ -41,10 +40,6 @@ settings = get_settings()
 async def lifespan(app: FastAPI):
     """Startup / shutdown hooks."""
     logger.info("Starting TrainMe API v%s …", settings.APP_VERSION)
-
-    # Ensure upload directories exist
-    for sub in ["cvs", "logos", "avatars"]:
-        Path(settings.UPLOAD_DIR, sub).mkdir(parents=True, exist_ok=True)
 
     # Verify DB connection
     if check_db_connection():
@@ -88,12 +83,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# ─── Static File Serving ──────────────────────────────────────
-
-uploads_path = Path(settings.UPLOAD_DIR)
-uploads_path.mkdir(parents=True, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=str(uploads_path)), name="uploads")
 
 # ─── API Routers ──────────────────────────────────────────────
 

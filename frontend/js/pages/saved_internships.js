@@ -22,10 +22,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       <article class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col gap-4 hover:border-primary hover:shadow-md transition-all duration-200">
         <div class="flex justify-between items-start">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center border border-surface-variant overflow-hidden">
+            <div class="w-12 h-12 bg-white rounded-md border flex items-center justify-center shrink-0 overflow-hidden">
               ${company.logo_url
-                ? `<img src="http://localhost:8000${company.logo_url}" alt="${company.company_name}" class="w-full h-full object-cover">`
-                : `<span class="material-symbols-outlined text-outline">business</span>`}
+                ? `<img src="${getMediaUrl(company.logo_url)}" alt="${company.company_name}" class="w-full h-full object-cover">`
+                : `<span class="material-symbols-outlined text-gray-400">business</span>`
+              }
             </div>
             <div>
               <h3 class="font-label-md text-label-md text-on-surface">${company.company_name || 'Company'}</h3>
