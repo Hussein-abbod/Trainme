@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { Auth } from '../../api/index.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useToast } from '../../context/ToastContext.jsx';
@@ -14,8 +14,7 @@ export default function Login() {
   const [errors, setErrors] = useState({});
 
   if (isLoggedIn) {
-    navigate(role === 'company' ? '/dashboard' : '/discover', { replace: true });
-    return null;
+    return <Navigate to={role === 'company' ? '/dashboard' : '/discover'} replace />;
   }
 
   async function handleSubmit(e) {

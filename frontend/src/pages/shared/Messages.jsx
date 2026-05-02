@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Navbar from '../../components/Navbar.jsx';
+import CompanyNavbar from '../../components/CompanyNavbar.jsx';
 import Footer from '../../components/Footer.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function Messages() {
+  const { user } = useAuth();
   return (
     <div className="bg-background min-h-screen flex flex-col antialiased">
-      <Navbar />
+      {user?.role === 'company' ? <CompanyNavbar /> : <Navbar />}
       <main className="flex-grow max-w-[1200px] w-full mx-auto px-gutter py-lg flex flex-col">
         <h1 className="font-h2 text-on-surface mb-lg">Messages</h1>
         

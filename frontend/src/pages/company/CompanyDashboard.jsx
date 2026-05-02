@@ -23,11 +23,10 @@ export default function CompanyDashboard() {
     load();
   }, []);
 
-  if (loading) return (
-    <div className="min-h-screen flex flex-col"><CompanyNavbar />
-      <div className="flex-grow flex items-center justify-center"><Spinner className="w-10 h-10 text-primary" /></div>
-    </div>
-  );
+  if (loading && stats.total_internships === 0 && stats.recent_applications.length === 0) {
+    // Only show full spinner if we truly have no data yet (e.g. first real load)
+    // Actually, to completely prevent layout shift, let's render the layout and put the spinner inside.
+  }
 
   return (
     <div className="bg-background text-on-background min-h-screen flex flex-col antialiased">
@@ -53,7 +52,9 @@ export default function CompanyDashboard() {
             <div key={s.label} className="bg-surface-container-lowest rounded-xl border border-surface-variant p-md flex items-center justify-between">
               <div>
                 <p className="font-label-md text-on-surface-variant mb-xs">{s.label}</p>
-                <p className="font-h1 text-on-surface">{s.value}</p>
+                <div className="font-h1 text-on-surface">
+                  {loading ? <div className="w-8 h-8 rounded animate-pulse bg-surface-variant" /> : s.value}
+                </div>
               </div>
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${s.color}`}>
                 <span className="material-symbols-outlined text-[24px]">{s.icon}</span>
@@ -68,7 +69,9 @@ export default function CompanyDashboard() {
             <h2 className="font-h3 text-on-surface">Recent Applications</h2>
             <Link to="/applicants" className="text-primary font-label-md hover:underline">View All</Link>
           </div>
-          {stats.recent_applications?.length === 0 ? (
+          {loading ? (
+            <div className="p-xl flex justify-center"><Spinner className="w-8 h-8 text-primary" /></div>
+          ) : stats.recent_applications?.length === 0 ? (
             <div className="p-xl text-center text-on-surface-variant">No applications received yet.</div>
           ) : (
             <div className="overflow-x-auto">

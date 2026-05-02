@@ -35,8 +35,8 @@ export default function Home() {
             <span className="text-2xl font-black text-teal-600 tracking-tighter">TrainMe</span>
           </Link>
           <div className="hidden md:flex space-x-8 items-center">
-            <a href="#" className="text-gray-600 hover:text-teal-700 transition-all">For Students</a>
-            <a href="#" className="text-gray-600 hover:text-teal-700 transition-all">For Companies</a>
+            <a href="#students" className="text-gray-600 hover:text-teal-700 transition-all">For Students</a>
+            <a href="#companies" className="text-gray-600 hover:text-teal-700 transition-all">For Companies</a>
             <a href="#mission" className="text-gray-600 hover:text-teal-700 transition-all">Mission</a>
           </div>
           <div className="flex items-center space-x-4">
@@ -139,7 +139,7 @@ export default function Home() {
         <section className="bg-surface-container-lowest py-xl">
           <div className="max-w-container-max mx-auto px-gutter">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
-              <div className="relative overflow-hidden rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] group hover:border-primary transition-colors">
+              <div id="students" className="relative overflow-hidden rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] group hover:border-primary transition-colors">
                 <div className="flex flex-col h-full justify-between">
                   <div>
                     <span className="inline-flex items-center px-sm py-xs bg-primary-container/10 text-primary font-label-sm text-label-sm rounded-full mb-sm">For Students</span>
@@ -151,7 +151,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] bg-surface-container-low group hover:border-[#005f5f] transition-colors">
+              <div id="companies" className="rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] bg-surface-container-low group hover:border-[#005f5f] transition-colors">
                 <div className="flex flex-col h-full justify-between">
                   <div>
                     <span className="inline-flex items-center px-sm py-xs bg-tertiary/10 text-tertiary font-label-sm text-label-sm rounded-full mb-sm">For Employers</span>

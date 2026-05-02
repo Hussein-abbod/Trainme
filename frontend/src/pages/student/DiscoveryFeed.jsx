@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar.jsx';
 import Footer from '../../components/Footer.jsx';
@@ -92,7 +92,18 @@ export default function DiscoveryFeed() {
     } finally { setLoading(false); }
   }, [search, location, industry, skip]);
 
+  // Initial load
   useEffect(() => {
+    loadInternships(true);
+  }, []);
+
+  // Debounced search
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     const t = setTimeout(() => loadInternships(true), 400);
     return () => clearTimeout(t);
   }, [search, location, industry]);

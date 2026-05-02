@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar.jsx';
+import CompanyNavbar from '../../components/CompanyNavbar.jsx';
 import Footer from '../../components/Footer.jsx';
 import { Notifications as NotificationsAPI } from '../../api/index.js';
 import { useToast } from '../../context/ToastContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { formatDate, Spinner } from '../../utils/helpers.jsx';
 
 export default function Notifications() {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +42,7 @@ export default function Notifications() {
 
   return (
     <div className="bg-background min-h-screen flex flex-col antialiased">
-      <Navbar />
+      {user?.role === 'company' ? <CompanyNavbar /> : <Navbar />}
       <main className="flex-grow max-w-[800px] w-full mx-auto px-gutter py-lg pb-24">
         <div className="flex justify-between items-center mb-lg border-b border-surface-variant pb-md">
           <h1 className="font-h2 text-on-surface">Notifications</h1>

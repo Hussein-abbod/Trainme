@@ -7,7 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.dependencies import require_company
-from app.models import Application, ApplicationStatus, Internship, InternshipStatus, User
+from app.models import Application, ApplicationStatus, Internship, InternshipStatus, User, StudentProfile
+from sqlalchemy.orm import joinedload
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 
@@ -18,30 +19,53 @@ def company_dashboard(
     db: Session = Depends(get_db),
 ):
     """Return aggregated metrics for the company dashboard."""
-    active_listings = db.query(func.count(Internship.id)).filter(
+    active_internships = db.query(func.count(Internship.id)).filter(
         Internship.company_id == current_user.id,
         Internship.status == InternshipStatus.active,
     ).scalar()
 
-    total_applicants = (
+    total_internships = db.query(func.count(Internship.id)).filter(
+        Internship.company_id == current_user.id
+    ).scalar()
+
+    total_applications = (
         db.query(func.count(Application.id))
         .join(Internship, Application.internship_id == Internship.id)
         .filter(Internship.company_id == current_user.id)
         .scalar()
     )
 
-    pending_reviews = (
-        db.query(func.count(Application.id))
+    recent_apps = (
+        db.query(Application)
         .join(Internship, Application.internship_id == Internship.id)
-        .filter(
-            Internship.company_id == current_user.id,
-            Application.status == ApplicationStatus.pending,
+        .filter(Internship.company_id == current_user.id)
+        .options(
+            joinedload(Application.internship),
+            joinedload(Application.student).joinedload(StudentProfile.user)
         )
-        .scalar()
+        .order_by(Application.applied_at.desc())
+        .limit(5)
+        .all()
     )
 
+    # Manually serialize to prevent DetachedInstanceError or Pydantic validation issues
+    recent_applications = []
+    for app in recent_apps:
+        student_name = "Unknown"
+        if app.student and app.student.user:
+            student_name = app.student.user.name
+
+        recent_applications.append({
+            "id": app.id,
+            "status": app.status.value if hasattr(app.status, 'value') else app.status,
+            "applied_at": app.applied_at.isoformat(),
+            "internship": {"title": app.internship.title} if app.internship else {},
+            "student": {"user": {"name": student_name}}
+        })
+
     return {
-        "active_listings": active_listings or 0,
-        "total_applicants": total_applicants or 0,
-        "pending_reviews": pending_reviews or 0,
+        "active_internships": active_internships or 0,
+        "total_internships": total_internships or 0,
+        "total_applications": total_applications or 0,
+        "recent_applications": recent_applications,
     }
