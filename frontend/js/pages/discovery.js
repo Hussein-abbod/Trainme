@@ -138,7 +138,7 @@ function internshipCard(item) {
 
     <div class="mt-auto pt-3 border-t border-surface-variant flex items-center justify-between">
       <span class="text-xs text-on-surface-variant">${item.applicant_count || 0} applicants</span>
-      <a href="internship_detail.html?id=${item.id}"
+      <a href="/internship?id=${item.id}"
          class="px-4 py-2 border-2 border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">
         View Details
       </a>

@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await Auth.registerStudent({ name, email, password, university });
       AuthState.save(data);
       toast('Account created! Welcome to TrainMe.', 'success');
-      setTimeout(() => { window.location.href = 'discovery_feed.html'; }, 800);
+      setTimeout(() => { window.location.href = '/discover'; }, 800);
     } catch (err) {
       restore();
       toast(err.message || 'Registration failed. Please try again.', 'error');

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toast('Welcome back, ' + data.name + '!', 'success');
 
       setTimeout(() => {
-        const home = data.role === 'company' ? 'company_dashboard.html' : 'discovery_feed.html';
+        const home = data.role === 'company' ? '/dashboard' : '/discover';
         window.location.href = home;
       }, 600);
 

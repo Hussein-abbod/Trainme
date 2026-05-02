@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!requireAuth()) return;
 
   const id = new URLSearchParams(window.location.search).get('id');
-  if (!id) { window.location.href = 'discovery_feed.html'; return; }
+  if (!id) { window.location.href = '/discover'; return; }
 
   try {
     const [internship, myApps] = await Promise.all([
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="text-center py-24">
         <span class="material-symbols-outlined text-6xl text-outline-variant">error</span>
         <p class="text-lg mt-4 text-on-surface-variant">${err.message}</p>
-        <a href="discovery_feed.html" class="mt-4 inline-block px-4 py-2 bg-primary text-white rounded-lg">Back to Internships</a>
+        <a href="/discover" class="mt-4 inline-block px-4 py-2 bg-primary text-white rounded-lg">Back to Internships</a>
       </div>`;
   }
 });

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await Auth.registerCompany({ name, email, password, company_name, ssm_number, industry });
       AuthState.save(data);
       toast('Company registered! Welcome to TrainMe.', 'success');
-      setTimeout(() => { window.location.href = 'company_dashboard.html'; }, 800);
+      setTimeout(() => { window.location.href = '/dashboard'; }, 800);
     } catch (err) {
       restore();
       toast(err.message || 'Registration failed. Please try again.', 'error');

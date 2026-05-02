@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await Internships.create(payload);
         toast('Internship published successfully!', 'success');
       }
-      setTimeout(() => { window.location.href = 'company_dashboard.html'; }, 800);
+      setTimeout(() => { window.location.href = '/dashboard'; }, 800);
     } catch (err) {
       restore();
       toast(err.message || 'Failed to save internship.', 'error');

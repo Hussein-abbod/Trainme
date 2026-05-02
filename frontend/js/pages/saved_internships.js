@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="text-sm text-on-surface-variant line-clamp-2">${item.description || ''}</p>
         </div>
         <div class="mt-auto pt-3 border-t border-surface-variant">
-          <a href="internship_detail.html?id=${bm.internship_id}" class="block w-full text-center px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-semibold hover:bg-surface-tint transition-colors">View Details</a>
+          <a href="/internship?id=${bm.internship_id}" class="block w-full text-center px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-semibold hover:bg-surface-tint transition-colors">View Details</a>
         </div>
       </article>`;
     }).join('');

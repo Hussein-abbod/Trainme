@@ -41,13 +41,13 @@ const AuthState = {
  */
 function requireAuth(requiredRole = null) {
   if (!AuthState.isLoggedIn()) {
-    window.location.href = getBasePath() + 'login.html';
+    window.location.href = getBasePath() + '/login';
     return false;
   }
   if (requiredRole && AuthState.getRole() !== requiredRole) {
     // Wrong role — redirect to appropriate home
     const role = AuthState.getRole();
-    const home = role === 'company' ? 'company_dashboard.html' : 'discovery_feed.html';
+    const home = role === 'company' ? '/dashboard' : '/discover';
     window.location.href = getBasePath() + home;
     return false;
   }
@@ -58,7 +58,7 @@ function requireAuth(requiredRole = null) {
 function redirectIfLoggedIn() {
   if (AuthState.isLoggedIn()) {
     const role = AuthState.getRole();
-    const home = role === 'company' ? 'company_dashboard.html' : 'discovery_feed.html';
+    const home = role === 'company' ? '/dashboard' : '/discover';
     window.location.href = getBasePath() + home;
   }
 }
@@ -66,7 +66,7 @@ function redirectIfLoggedIn() {
 /** Logout */
 function logout() {
   AuthState.clear();
-  window.location.href = getBasePath() + 'homepage.html';
+  window.location.href = getBasePath() + '/';
 }
 
 // ─── UI Helpers ───────────────────────────────────────────────

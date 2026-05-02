@@ -19,7 +19,7 @@ async function apiFetch(path, options = {}) {
     // Token expired or invalid — clear session and redirect to login
     localStorage.removeItem('tm_token');
     localStorage.removeItem('tm_user');
-    window.location.href = getBasePath() + 'login.html';
+    window.location.href = getBasePath() + '/login';
     return;
   }
 

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!requireAuth('company')) return;
 
   const id = new URLSearchParams(window.location.search).get('id');
-  if (!id) { window.location.href = 'company_dashboard.html'; return; }
+  if (!id) { window.location.href = '/dashboard'; return; }
 
   await loadApplicants(id);
 

@@ -28,7 +28,7 @@ async function loadListings() {
 
     if (!listings.length) {
       tbody.innerHTML = `<tr><td colspan="4" class="text-center py-10 text-on-surface-variant">
-        No listings yet. <a href="create_internship.html" class="text-primary underline">Post your first internship</a>
+        No listings yet. <a href="/post-internship" class="text-primary underline">Post your first internship</a>
       </td></tr>`;
       return;
     }
@@ -49,7 +49,7 @@ async function loadListings() {
         </td>
         <td class="py-4 px-4 text-right">
           <div class="flex items-center justify-end gap-2">
-            <a href="create_internship.html?edit=${item.id}"
+            <a href="/post-internship?edit=${item.id}"
                class="p-1 text-outline hover:text-primary transition-colors" title="Edit">
               <span class="material-symbols-outlined text-[20px]">edit</span>
             </a>
@@ -59,7 +59,7 @@ async function loadListings() {
                 <span class="w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-200 ml-0.5 ${item.status === 'active' ? 'translate-x-4' : ''}"></span>
               </span>
             </button>
-            <a href="applicant_tracking.html?id=${item.id}"
+            <a href="/applicants?id=${item.id}"
                class="border border-primary-container text-primary-container hover:bg-tertiary-fixed px-3 py-1 rounded-lg text-xs transition-colors hidden md:inline-flex items-center gap-1">
               View Applicants
             </a>

@@ -39,7 +39,7 @@ function renderTable(apps) {
   if (!apps.length) {
     tbody.innerHTML = `<tr><td colspan="4" class="text-center py-12 text-on-surface-variant">
       <span class="material-symbols-outlined text-4xl block mb-2">assignment</span>
-      No applications yet. <a href="discovery_feed.html" class="text-primary underline">Browse internships</a>
+      No applications yet. <a href="/discover" class="text-primary underline">Browse internships</a>
     </td></tr>`;
     return;
   }
@@ -58,7 +58,7 @@ function renderTable(apps) {
       <td class="py-4 px-4 text-sm text-on-surface-variant hidden md:table-cell">${formatDate(app.applied_at)}</td>
       <td class="py-4 px-4 text-right">
         <div class="flex items-center justify-end gap-2">
-          <a href="internship_detail.html?id=${internship.id}" class="text-primary text-xs hover:underline">View</a>
+          <a href="/internship?id=${internship.id}" class="text-primary text-xs hover:underline">View</a>
           ${canWithdraw ? `<button onclick="withdrawApp(${app.id}, this)"
             class="text-xs text-error border border-error px-2 py-1 rounded hover:bg-error-container transition-colors">
             Withdraw
