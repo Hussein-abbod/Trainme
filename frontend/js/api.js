@@ -4,7 +4,12 @@
  * Base URL: http://localhost:8000/api/v1
  */
 
-const API_BASE = 'http://localhost:8000/api/v1';
+// ⚠️ IMPORTANT: Update this with your actual deployed backend URL when deploying!
+const PROD_API_URL = 'https://YOUR-RENDER-BACKEND-URL.onrender.com/api/v1';
+
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000/api/v1'
+  : PROD_API_URL;
 
 // ─── Core Fetch Wrapper ────────────────────────────────────────
 
