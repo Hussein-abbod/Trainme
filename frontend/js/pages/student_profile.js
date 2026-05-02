@@ -51,12 +51,15 @@ function populateProfile(profile) {
     ).join('');
   }
 
-  // CV link
-  const cvLink = document.getElementById('cv-link');
+  // CV preview button
+  const cvBtn = document.getElementById('cv-link');
   if (profile.cv_url) {
-    if (cvLink) { cvLink.href = getMediaUrl(profile.cv_url); cvLink.classList.remove('hidden'); }
+    // Store URL globally for the modal opened by openCVPreview()
+    window._cvUrl = getMediaUrl(profile.cv_url);
+    if (cvBtn) cvBtn.classList.remove('hidden');
   } else {
-    if (cvLink) { cvLink.classList.add('hidden'); }
+    window._cvUrl = '';
+    if (cvBtn) cvBtn.classList.add('hidden');
   }
 
   // Completeness bar

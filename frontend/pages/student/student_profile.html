@@ -191,8 +191,8 @@
 <input id="inputUniversity" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Universiti Malaya" type="text"/>
 </div>
 <div class="flex flex-col gap-xs">
-<label class="font-label-sm text-label-sm text-on-surface-variant">Expected Graduation</label>
-<input id="inputYear" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="June 2027" type="month"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant">Graduation Year</label>
+<input id="inputYear" class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="2027" type="number" min="2020" max="2035" placeholder="e.g. 2027"/>
 </div>
 <div class="flex flex-col gap-xs">
 <label class="font-label-sm text-label-sm text-on-surface-variant">Current CGPA</label>
@@ -211,9 +211,31 @@
 <p class="font-label-md text-label-md text-on-background">Upload your CV</p>
 <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">(PDF only, max 5MB)</p>
 </div>
-<a id="cv-link" href="#" target="_blank" class="hidden mt-sm inline-flex items-center gap-1 text-primary font-label-sm text-label-sm hover:underline">
-<span class="material-symbols-outlined text-[16px]">description</span> View uploaded CV
-</a>
+<button id="cv-link" type="button" onclick="openCVPreview()" class="hidden mt-sm inline-flex items-center gap-2 px-3 py-2 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">description</span> Preview CV
+</button>
+
+<!-- CV Preview Modal -->
+<div id="cv-modal" class="fixed inset-0 z-[9999] flex items-center justify-center hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCVPreview()"></div>
+  <div class="relative bg-white rounded-2xl shadow-2xl w-[90vw] max-w-4xl h-[90vh] flex flex-col overflow-hidden">
+    <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">description</span>
+        <span class="font-label-md text-label-md text-on-background">Your CV</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a id="cv-download-link" href="#" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container rounded-lg text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span> Open in new tab
+        </a>
+        <button onclick="closeCVPreview()" class="p-1.5 rounded-full hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined text-on-surface-variant">close</span>
+        </button>
+      </div>
+    </div>
+    <iframe id="cv-iframe" src="" class="flex-1 w-full border-0"></iframe>
+  </div>
+</div>
 </div>
 <!-- Portfolio Links -->
 <div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col gap-sm col-span-1">
@@ -312,4 +334,20 @@
 <script src="/js/auth.js"></script>
 <script src="/js/utils.js"></script>
 <script src="/js/pages/student_profile.js"></script>
+<script>
+let _cvUrl = '';
+function openCVPreview() {
+  if (!_cvUrl) return;
+  document.getElementById('cv-iframe').src = _cvUrl;
+  document.getElementById('cv-download-link').href = _cvUrl;
+  document.getElementById('cv-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeCVPreview() {
+  document.getElementById('cv-modal').classList.add('hidden');
+  document.getElementById('cv-iframe').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCVPreview(); });
+</script>
 </body></html>
