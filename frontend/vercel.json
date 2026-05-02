@@ -1,0 +1,31 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/homepage.html" },
+    { "source": "/login", "destination": "/pages/auth/login.html" },
+    { "source": "/register", "destination": "/pages/auth/role_selection.html" },
+    { "source": "/register/student", "destination": "/pages/auth/student_registration.html" },
+    { "source": "/register/company", "destination": "/pages/auth/company_registration.html" },
+    { "source": "/forgot-password", "destination": "/pages/auth/forgot_password.html" },
+    
+    { "source": "/discover", "destination": "/pages/student/discovery_feed.html" },
+    { "source": "/internship", "destination": "/pages/student/internship_detail.html" },
+    { "source": "/applications", "destination": "/pages/student/my_applications.html" },
+    { "source": "/profile", "destination": "/pages/student/student_profile.html" },
+    { "source": "/saved", "destination": "/pages/student/saved_internships.html" },
+    { "source": "/application-success", "destination": "/pages/student/application_success.html" },
+
+    { "source": "/dashboard", "destination": "/pages/company/company_dashboard.html" },
+    { "source": "/applicants", "destination": "/pages/company/applicant_tracking.html" },
+    { "source": "/post-internship", "destination": "/pages/company/create_internship.html" },
+    { "source": "/company-profile", "destination": "/pages/company/company_profile_edit.html" },
+    { "source": "/companies", "destination": "/pages/company/companies_directory.html" },
+
+    { "source": "/messages", "destination": "/pages/shared/messages.html" },
+    { "source": "/notifications", "destination": "/pages/shared/notifications.html" },
+
+    { "source": "/about", "destination": "/pages/info/about.html" },
+    { "source": "/privacy", "destination": "/pages/info/privacy.html" },
+    { "source": "/terms", "destination": "/pages/info/terms.html" },
+    { "source": "/settings", "destination": "/pages/info/settings.html" }
+  ]
+}
