@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Company Registration - TrainMe</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#a6efef",
+                    "tertiary-fixed": "#d9e5e5",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e5e2e1",
+                    "primary-container": "#008080",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "surface-variant": "#e5e2e1",
+                    "outline-variant": "#bdc9c8",
+                    "on-tertiary-fixed": "#131d1e",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#a3edec",
+                    "on-secondary-container": "#1d6d6d",
+                    "primary": "#006565",
+                    "on-secondary-fixed-variant": "#004f4f",
+                    "on-primary-fixed-variant": "#004f4f",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fcf9f8",
+                    "surface-bright": "#fcf9f8",
+                    "tertiary-fixed-dim": "#bdc9c9",
+                    "primary-fixed": "#93f2f2",
+                    "inverse-surface": "#313030",
+                    "inverse-primary": "#76d6d5",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#f0eded",
+                    "on-background": "#1c1b1b",
+                    "secondary": "#166969",
+                    "outline": "#6e7979",
+                    "on-primary-container": "#e3fffe",
+                    "on-primary-fixed": "#002020",
+                    "tertiary-container": "#697575",
+                    "on-tertiary-container": "#f0fcfc",
+                    "on-secondary-fixed": "#002020",
+                    "surface-container-high": "#eae7e7",
+                    "on-tertiary-fixed-variant": "#3e4949",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#515c5d",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#76d6d5",
+                    "surface-tint": "#006a6a",
+                    "on-surface-variant": "#3e4949",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed-dim": "#8ad3d2",
+                    "surface-dim": "#dcd9d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Fustat", "sans-serif"],
+                    "label-md": ["Fustat", "sans-serif"],
+                    "label-sm": ["Fustat", "sans-serif"],
+                    "h2": ["Fustat", "sans-serif"],
+                    "h1": ["Fustat", "sans-serif"],
+                    "body-md": ["Fustat", "sans-serif"],
+                    "h3": ["Fustat", "sans-serif"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "h2": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+<main class="flex min-h-screen w-full">
+<!-- Left Column: Branding Imagery (Hidden on smaller screens) -->
+<div class="hidden lg:flex w-1/2 relative bg-primary flex-col justify-between p-xl overflow-hidden shadow-[inset_-10px_0_20px_rgba(0,0,0,0.05)]">
+<!-- Background Image overlay -->
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-multiply" data-alt="A bright, modern corporate office environment in Malaysia with young HR professionals and managers collaborating around a sleek, glass conference table. The scene is illuminated by natural daylight streaming through large architectural windows, creating an optimistic, light-mode aesthetic. The visual style is high-trust, clean, and professional, emphasizing a modern environment of mentorship and early-career talent growth. The color palette relies heavily on pristine whites, deep blacks, and incorporates subtle teal accents to perfectly align with the overarching brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNHxHfRl6FP8AQY6iAIWuC7gio5W9IERXI05mMLGF6SEjBdvraFwwc671O_xHvgoVifr7WP9yamuMhvFvfMogABPWMVNxke3jx7P038r5Az9bPefUj8HL7-5xjscnE7rFEe352pARjS8wlS7lsWkwTBwu7yiCkbmHDcEtnzLQIFKyR1tuOFhfUaOj5bAf4ojhRKGX2ONIj83G6QmU9hgXLn8gpococBadrZNOgebbogvs4mBnUS8nu2Ks8pHrtIXWDKGoQIUFPjkw');">
+</div>
+<!-- Branding Header -->
+<div class="relative z-10 flex items-center gap-base">
+<div class="w-8 h-8 bg-white rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<h1 class="font-h2 text-on-primary font-bold tracking-tighter">TrainMe</h1>
+<span class="font-label-md text-primary-container bg-on-primary px-2 py-1 rounded-sm uppercase tracking-widest text-xs font-bold">Employers</span>
+</div>
+<!-- Value Proposition -->
+<div class="relative z-10 max-w-lg mb-xl">
+<h2 class="font-h1 text-on-primary mb-md">Empower the next generation.</h2>
+<p class="font-body-lg text-on-primary opacity-90 leading-relaxed">
+                    Access Malaysia's largest verified pool of ambitious university talent. Post internships, manage applications, and build your future workforce in one streamlined platform.
+                </p>
+</div>
+</div>
+<!-- Right Column: Registration Form Canvas -->
+<div class="w-full lg:w-1/2 flex items-center justify-center p-gutter sm:p-lg xl:p-xl bg-surface-container-lowest">
+<div class="w-full max-w-[520px] flex flex-col gap-lg">
+<!-- Mobile Branding (Visible only when left column is hidden) -->
+<div class="lg:hidden flex items-center gap-base border-b border-surface-variant pb-md mb-xs">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<h1 class="font-h3 text-primary font-bold tracking-tighter">TrainMe</h1>
+<span class="font-label-md text-on-primary bg-primary px-2 py-0.5 rounded-sm uppercase tracking-widest text-[10px] font-bold">Employers</span>
+</div>
+<!-- Form Header -->
+<div class="flex flex-col gap-xs">
+<h2 class="font-h2 text-on-surface">Company Registration</h2>
+<p class="font-body-md text-on-surface-variant">Create your employer profile to start connecting with students.</p>
+</div>
+<!-- Critical Information Banner -->
+<div class="bg-surface-container-high border border-outline-variant rounded-lg p-md flex items-start gap-sm shadow-sm">
+<span class="material-symbols-outlined text-primary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+<p class="font-label-md text-on-surface-variant leading-relaxed">
+<strong class="text-on-surface font-semibold">Verification Required:</strong> Our team will verify your SSM number within 24 hours to grant you posting privileges.
+                    </p>
+</div>
+<!-- Registration Form -->
+<form class="flex flex-col gap-md">
+<!-- Field: Company Name -->
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="company_name">Company Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="company_name" placeholder="e.g. Acme Corporation Sdn Bhd" required="" type="text"/>
+</div>
+<!-- Row: SSM & Email -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="ssm_number">SSM Registration Number</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="ssm_number" placeholder="e.g. 1234567-X" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="corporate_email">Corporate Email</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="corporate_email" placeholder="hr@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Field: Industry Category -->
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="industry_category">Industry Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer" id="industry_category" required="">
+<option disabled="" selected="" value="">Select an industry category</option>
+<option value="tech">Technology &amp; Software</option>
+<option value="finance">Finance &amp; Banking</option>
+<option value="manufacturing">Manufacturing &amp; Engineering</option>
+<option value="healthcare">Healthcare &amp; Life Sciences</option>
+<option value="consulting">Consulting &amp; Professional Services</option>
+<option value="retail">Retail &amp; FMCG</option>
+<option value="other">Other</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-sm text-outline">
+<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+</div>
+</div>
+</div>
+<!-- Row: Passwords -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md mt-sm pt-md border-t border-surface-variant">
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="password">Password</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="password" placeholder="••••••••" required="" type="password" oninput="checkStrength(this.value)"/>
+<!-- Password Strength Meter -->
+<div class="mt-1">
+<div class="flex gap-1 mb-1">
+<div id="bar1" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar2" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar3" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar4" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+</div>
+<p id="strengthLabel" class="font-label-sm text-label-sm text-outline transition-colors"></p>
+</div>
+</div>
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-on-surface" for="confirm_password">Confirm Password</label>
+<input class="w-full bg-surface border border-outline-variant rounded-md px-sm py-[12px] font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="confirm_password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Terms & Submit -->
+<div class="flex flex-col gap-md mt-sm">
+<label class="flex items-start gap-sm cursor-pointer group">
+<input class="mt-1 w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface" required="" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">
+                                I agree to the <a class="text-primary hover:underline font-medium" href="terms.html">Terms of Service</a> and <a class="text-primary hover:underline font-medium" href="privacy.html">Privacy Policy</a>.
+                            </span>
+</label>
+<button class="w-full bg-primary text-on-primary font-label-md rounded-md py-[14px] px-md flex items-center justify-center gap-xs hover:bg-surface-tint transition-colors shadow-sm focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:outline-none" type="button">
+                            Submit Registration
+                            <span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="text-center pt-md">
+<p class="font-body-md text-sm text-on-surface-variant">
+                        Already have an employer account? 
+                        <a class="text-primary font-label-md hover:text-surface-tint hover:underline transition-colors" href="login.html">Log in here</a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+function checkStrength(pw) {
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    const colors = ['', '#ba1a1a', '#e65100', '#f9a825', '#006565'];
+    const labels = ['', 'Weak', 'Fair', 'Good', 'Strong ✓'];
+    const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3'), document.getElementById('bar4')];
+    const level = pw.length === 0 ? 0 : Math.min(score, 4);
+    bars.forEach((b, i) => { b.style.background = i < level ? colors[level] : '#eae7e7'; });
+    const label = document.getElementById('strengthLabel');
+    label.textContent = labels[level] || '';
+    label.style.color = colors[level] || '';
+}
+</script>
+</body></html>

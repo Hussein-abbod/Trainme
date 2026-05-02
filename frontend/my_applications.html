@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Applications — TrainMe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#3e4949",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#a3edec",
+                        "primary": "#006565",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "on-background": "#1c1b1b",
+                        "primary-container": "#008080",
+                        "surface-tint": "#006a6a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#002020",
+                        "surface-bright": "#fcf9f8",
+                        "inverse-primary": "#76d6d5",
+                        "secondary-fixed-dim": "#8ad3d2",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-container": "#f0fcfc",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#1d6d6d",
+                        "tertiary-fixed-dim": "#bdc9c9",
+                        "secondary-fixed": "#a6efef",
+                        "tertiary": "#515c5d",
+                        "surface-container-high": "#eae7e7",
+                        "outline": "#6e7979",
+                        "on-surface-variant": "#3e4949",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#697575",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-primary-container": "#e3fffe",
+                        "surface-container-low": "#f6f3f2",
+                        "surface": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#76d6d5",
+                        "on-secondary-fixed-variant": "#004f4f",
+                        "secondary": "#166969",
+                        "outline-variant": "#bdc9c8",
+                        "on-secondary-fixed": "#002020",
+                        "tertiary-fixed": "#d9e5e5",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-fixed": "#131d1e",
+                        "background": "#fcf9f8",
+                        "inverse-surface": "#313030",
+                        "primary-fixed": "#93f2f2",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container": "#f0eded",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Fustat"],
+                        "label-sm": ["Fustat"],
+                        "label-md": ["Fustat"],
+                        "h2": ["Fustat"],
+                        "body-md": ["Fustat"],
+                        "h1": ["Fustat"],
+                        "h3": ["Fustat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Fustat', sans-serif; }
+        .filter-tab { background: transparent; color: #3e4949; border: 1px solid #bdc9c8; }
+        .filter-tab:hover { border-color: #006565; color: #006565; }
+        .active-tab { background: #006565 !important; color: #ffffff !important; border-color: #006565 !important; }
+        @keyframes rowFade { from { opacity: 1; } to { opacity: 0; transform: translateX(-20px); } }
+        .row-removing { animation: rowFade 0.3s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest font-['Fustat'] text-sm font-medium antialiased border-b border-surface-variant shadow-sm sticky top-0 z-50 w-full">
+<div class="flex items-center justify-between h-16 w-full px-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: \'FILL\' 1;">school</span></div>
+<a href="homepage.html" class="text-2xl font-black tracking-tight text-primary">TrainMe</a>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="discovery_feed.html">Internships</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="companies_directory.html">Companies</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="saved_internships.html">Saved</a>
+<a class="text-primary border-b-2 border-primary pb-4 pt-4 -mb-[2px] font-label-md text-label-md" href="my_applications.html">Applications</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="messages.html">Messages</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<a href="notifications.html" aria-label="notifications" class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</a>
+<a href="student_profile.html">
+<img alt="Student Profile Avatar" class="w-8 h-8 rounded-full border border-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3n1eNkImGK3C5LRSu6rdlOIlmCsV0RIK4vcp0j8-agvhPhzCtq-v6wHvkgYS1U7bBgryeXVa5J1DTGiVEGPiRJrnXemsPrMpRbwNPdsfkprtO79G8iIRfHV3m8i7xpOyKJZAEVT4Q_shzdvj0-CNdheBRmmStduUTUY1NWVOYF-XEMGrQy42-adQtMqTWL4Sjnv8GviC8FMhmHyytYNsgz2Hdvm3afNNIBru041GcIMRf1IkvS_8Uk1kXyWVBu89jajiXNwakfU"/>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-6 py-12 md:py-16">
+<!-- Header -->
+<header class="mb-10 max-w-3xl">
+<h1 class="font-h1 text-h1 text-on-surface mb-4">My Applications</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Track your internship journey with complete transparency. From initial submission to final decision, monitor your progress and stay informed about your application status.
+            </p>
+</header>
+<!-- Filter Tabs -->
+<div class="mb-6 flex flex-wrap gap-2" id="filterTabs">
+<button class="filter-tab active-tab px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200" data-filter="all">All <span id="statTotal" class="ml-1 bg-primary/10 text-primary px-1.5 py-0.5 rounded-full text-[11px] font-semibold">0</span></button>
+<button class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200" data-filter="pending">Pending</button>
+<button class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200" data-filter="under_review">Under Review <span id="statReview"></span></button>
+<button class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200" data-filter="interview">Interview <span id="statInterview"></span></button>
+<button class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200" data-filter="rejected">Rejected</button>
+</div>
+<!-- Applications Table Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
+<th class="px-6 py-4 font-semibold">Company</th>
+<th class="px-6 py-4 font-semibold">Role</th>
+<th class="px-6 py-4 font-semibold">Date Applied</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="applicationsTableBody" class="font-body-md text-body-md divide-y divide-outline-variant">
+<!-- Row 1: Pending -->
+<tr class="hover:bg-surface-bright transition-colors group" data-status="pending">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-container flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="TechSolutions Inc Logo" class="w-full h-full object-cover" data-alt="A minimalist corporate logo featuring clean geometric lines representing technology and innovation, set against a stark white background. The design is modern, professional, and utilizes a subtle teal and dark gray color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS0OvOlfe8kP0aGxhywtq3hDNY0-p72tNN1Uf7xkHKPX38pjw7vA_69hH3QRAr1VBZF6H9fe2HtRwuEU1kAeemaqom-_I14mj0-Ji0JNItVyaw0Yt8ai8BrlPftGMxp2DiVFNQTun1mZlaqj93gSK4cp69nI3m4-rva2Rqce0jEF2xu4K_HSoMylzj-31LxfPvWid_etXUA9qf7lwQNWKuNhX0fOXZdYMxhdZF89-xSfzhb5-Agv9tDGn0sUR0DETZuSY_AiPnQYA"/>
+</div>
+<span class="font-semibold text-on-surface">TechSolutions Inc.</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">Software Engineering Intern</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant font-label-sm text-label-sm" title="Application sent, waiting for review.">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                    Pending
+                                </div>
+<p class="text-[10px] text-outline mt-1 hidden lg:block">Application sent, waiting for review.</p>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button aria-label="View Details" class="text-primary hover:text-primary-container font-label-md text-label-md transition-colors">View</button>
+<button onclick="withdrawApp(this)" class="text-on-surface-variant hover:text-error border border-outline-variant hover:border-error px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">undo</span>Withdraw</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Under Review -->
+<tr class="hover:bg-surface-bright transition-colors group" data-status="review">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-secondary-container flex items-center justify-center text-secondary font-bold overflow-hidden">
+<img alt="Creative Catalyst Logo" class="w-full h-full object-cover" data-alt="An abstract, vibrant corporate logo depicting synergy and creativity, utilizing soft pastel tones against a clean white background. The aesthetic is modern and energetic, suitable for a contemporary marketing firm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEPKKHvuTq8K3DivNlaLuo9mz-K5sy2VJStkao5L7QPa7zULIKs8HBllkY0RfPC1iYLYFqr5LYi0WnJt53VhYNYqiqG2YtTv-IyY7SP7OmgUhVnUohoFaO2F89mhJaYvP04kQLFHsMwna-YmvlG4PYvoFy3nGGs8VOdZkAT3frL4Yq-U_ommMbKgizi-rr3a4SVMBF-0V2_lhlfMu2F2XfrcRb-R9dUHOORAF4Ffw_4Imfh0aQxGq7CyLuf2IhfJStv09pITaUw_c"/>
+</div>
+<span class="font-semibold text-on-surface">Creative Catalyst</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">Marketing Assistant</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 05, 2023</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 border border-secondary/30 text-secondary font-label-sm text-label-sm" title="The company has opened your CV.">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Under Review
+                                </div>
+<p class="text-[10px] text-outline mt-1 hidden lg:block">The company has opened your CV.</p>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button aria-label="View Details" class="text-primary hover:text-primary-container font-label-md text-label-md transition-colors">View</button>
+<button onclick="withdrawApp(this)" class="text-on-surface-variant hover:text-error border border-outline-variant hover:border-error px-3 py-1.5 rounded-lg font-label-sm text-label-sm transition-all inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">undo</span>Withdraw</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Accepted/Interview -->
+<tr class="hover:bg-surface-bright transition-colors group" data-status="interview">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-primary-container/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="Insight Data Partners Logo" class="w-full h-full object-cover" data-alt="A sharp, data-driven corporate logo featuring stylized charts and graphs in a minimalist style. The colors are deep teal and bright white, conveying accuracy, professionalism, and modern analytics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMFFrQNaTYlUDfo13dHWfyzpeOPXbj4tRE1-tuYWge0E6uygZ6DTIRzfYs1TVtwg6UM8VRDjHOKMqLkZ7X4pahqtprNbCl6MMtT5r2BNXgWLsRVw1nWkqbN1QdnnIEXdZ37bt6xFlL1zTun1G-E54TKBrPqSIW3DwC0UDPvJJnT3AUEm2LCVWdpnIJD-76cLOiYPAXyxFPbLuNn2CO1GXSPVJtP8XslL7SL4DFbf0O_0jyMg_ced9Bnfy9cxLdRAJP-4F1cCt-j98"/>
+</div>
+<span class="font-semibold text-on-surface">Insight Data Partners</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">Data Analyst Intern</td>
+<td class="px-6 py-4 text-on-surface-variant">Sep 28, 2023</td>
+<td class="px-6 py-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E6F4F1] border border-[#008080]/30 text-[#006565] font-label-sm text-label-sm" title="Congratulations! The company wants to move forward.">
+<span class="w-1.5 h-1.5 rounded-full bg-[#008080]"></span>
+                                    Interview
+                                </div>
+<p class="text-[10px] text-[#006565] mt-1 hidden lg:block font-medium">Congrats! Moving forward.</p>
+</td>
+<td class="px-6 py-4 text-right">
+<button aria-label="Schedule Interview" class="px-4 py-2 bg-primary-container text-on-primary rounded-md font-label-md text-label-md hover:bg-surface-tint transition-colors">Schedule</button>
+</td>
+</tr>
+<!-- Row 4: Rejected -->
+<tr class="hover:bg-surface-bright transition-colors group opacity-75" data-status="rejected">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-container flex items-center justify-center text-outline font-bold overflow-hidden grayscale">
+<img alt="BuildWell Eng Logo" class="w-full h-full object-cover" data-alt="A sturdy, industrial corporate logo representing civil engineering, featuring strong structural elements like beams or bridges. Rendered in monochromatic tones with high contrast to emphasize reliability and solid construction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO_eACKoGlkUTYO7jYKryKsWb5EoM8wKWxbcNVrg9wLuC_abzGqHyCFIIlHSMm0DU5c_4wFKkZ0U2nWFYRQxsunEVASd7t0r7MgIAicp05W_NLByScwJ3vhVSHI_9_gVyqeUjjZyy7JSa3JpQK0WMGNB26fpT6Eq9GzYRGDuok1gq3KKDdep9YKdYniRo2og7bz9NYY-OSFUJv3Ugud24gKxNwcBf6qe7qUi61MxL4aCeYQHywDWhzaVh7uAaPSHB92TimEj_c8AQ"/>
+</div>
+<span class="font-semibold text-on-surface">BuildWell Eng</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">Civil Engineering Intern</td>
+<td class="px-6 py-4 text-on-surface-variant">Sep 20, 2023</td>
+<td class="px-6 py-4 relative group/tooltip">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container/30 border border-error/30 text-error font-label-sm text-label-sm cursor-help">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                    Rejected
+                                </div>
+<p class="text-[10px] text-outline mt-1 hidden lg:block">This role has been filled.</p>
+<!-- Tooltip -->
+<div class="absolute bottom-full left-6 mb-2 hidden group-hover/tooltip:block w-48 p-2 bg-inverse-surface text-inverse-on-surface text-xs rounded shadow-lg z-10">
+                                    Don't give up! Apply to similar roles in Engineering.
+                                </div>
+</td>
+<td class="px-6 py-4 text-right">
+<button aria-label="View Details" class="text-outline hover:text-primary font-label-md text-label-md transition-colors">View</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Encouragement/Empty State Placeholder (Hidden for this specific requirement but good practice) -->
+<!--
+        <div class="mt-8 text-center text-on-surface-variant">
+            <span class="material-symbols-outlined text-4xl mb-2 text-outline-variant">search</span>
+            <p>Looking for more opportunities?</p>
+            <a href="#" class="text-primary hover:underline font-medium">Explore new roles</a>
+        </div>
+        -->
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-surface-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="flex items-center gap-2 text-lg font-semibold text-on-background">
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+TrainMe</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2026 TrainMe Malaysia. All rights reserved.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-gutter gap-y-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="about.html">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="privacy.html">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="terms.html">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="#">Help Center</a>
+</nav>
+</div>
+</footer>
+<script>
+function filterApps(status) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active-tab'));
+    document.querySelector('[data-filter="'+status+'"]').classList.add('active-tab');
+    document.querySelectorAll('tbody tr[data-status]').forEach(row => {
+        if (status === 'all' || row.dataset.status === status) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+function withdrawApp(btn) {
+    const row = btn.closest('tr');
+    const role = row.querySelectorAll('td')[1].textContent.trim();
+    if (confirm('Are you sure you want to withdraw your application for "' + role + '"? This action cannot be undone.')) {
+        row.classList.add('row-removing');
+        setTimeout(() => row.remove(), 300);
+    }
+}
+</script>
+<!-- TrainMe JS -->
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pages/my_applications.js"></script>
+</body></html>

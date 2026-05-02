@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Application Submitted — TrainMe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: { extend: {
+            "colors": { "surface-container-low":"#f6f3f2","primary-container":"#008080","surface-variant":"#e5e2e1","error":"#ba1a1a","outline-variant":"#bdc9c8","secondary":"#166969","on-secondary-container":"#1d6d6d","secondary-container":"#a3edec","on-background":"#1c1b1b","primary-fixed":"#93f2f2","outline":"#6e7979","surface-container-lowest":"#ffffff","primary":"#006565","surface-container":"#f0eded","tertiary-fixed":"#d9e5e5","primary-fixed-dim":"#76d6d5","on-surface":"#1c1b1b","background":"#fcf9f8","surface-container-high":"#eae7e7","on-surface-variant":"#3e4949","surface":"#fcf9f8","error-container":"#ffdad6","on-primary":"#ffffff","on-primary-container":"#e3fffe","surface-tint":"#006a6a","on-error":"#ffffff" },
+            "borderRadius": { "DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px" },
+            "spacing": { "md":"24px","base":"8px","lg":"48px","xl":"80px","container-max":"1200px","gutter":"24px","xs":"4px","sm":"12px" },
+            "fontFamily": { "h3":["Fustat"],"h2":["Fustat"],"body-md":["Fustat"],"label-sm":["Fustat"],"body-lg":["Fustat"],"label-md":["Fustat"],"h1":["Fustat"] },
+            "fontSize": { "h3":["24px",{"lineHeight":"1.3","fontWeight":"600"}],"h2":["32px",{"lineHeight":"1.25","letterSpacing":"-0.01em","fontWeight":"600"}],"body-md":["16px",{"lineHeight":"1.5","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"1.2","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"1.4","letterSpacing":"0.01em","fontWeight":"500"}],"h1":["48px",{"lineHeight":"1.2","letterSpacing":"-0.02em","fontWeight":"700"}] }
+        }}
+    }
+</script>
+<style>
+body{font-family:'Fustat',sans-serif}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+@keyframes scaleIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes confetti{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(-400px) rotate(720deg);opacity:0}}
+.animate-scale-in{animation:scaleIn .5s cubic-bezier(.34,1.56,.64,1) forwards}
+.animate-slide-up{animation:slideUp .5s ease-out forwards}
+.delay-200{animation-delay:.2s;opacity:0}
+.delay-400{animation-delay:.4s;opacity:0}
+.delay-600{animation-delay:.6s;opacity:0}
+.confetti-piece{position:fixed;width:10px;height:10px;border-radius:2px;animation:confetti 3s ease-out forwards;pointer-events:none;z-index:100}
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Minimal Header -->
+<header class="bg-surface-container-lowest border-b border-surface-variant shadow-sm font-['Fustat'] antialiased text-sm font-medium sticky top-0 z-50">
+<div class="flex justify-between items-center h-16 w-full px-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<a href="homepage.html" class="text-2xl font-black tracking-tight text-primary">TrainMe</a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center px-gutter py-xl">
+<div class="text-center max-w-lg mx-auto">
+<!-- Success Icon -->
+<div class="animate-scale-in mb-lg">
+<div class="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto ring-4 ring-primary/20">
+<span class="material-symbols-outlined text-[56px] text-primary" style="font-variation-settings:'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Heading -->
+<h1 class="font-h2 text-h2 text-on-surface mb-sm animate-slide-up delay-200">Application Submitted!</h1>
+<!-- Details Card -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-md mb-md animate-slide-up delay-400">
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-sm">Your application for</p>
+<h2 class="font-h3 text-h3 text-primary mb-xs">Software Engineering Intern</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">at <span class="font-semibold text-on-surface">TechSolutions Inc.</span></p>
+<div class="mt-md pt-md border-t border-surface-variant">
+<div class="flex items-center justify-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<p class="font-body-md text-body-md">You'll receive an email confirmation shortly. The company will review your application within 5–7 business days.</p>
+</div>
+</div>
+</div>
+<!-- Timeline -->
+<div class="flex items-center justify-center gap-2 mb-lg animate-slide-up delay-400">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-primary"></span>Submitted</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-outline font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-outline-variant"></span>Under Review</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-outline font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-outline-variant"></span>Decision</div>
+</div>
+<!-- CTA Buttons -->
+<div class="flex flex-col sm:flex-row gap-sm justify-center animate-slide-up delay-600">
+<a href="my_applications.html" class="px-6 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors inline-flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">assignment</span>
+View My Applications
+</a>
+<a href="discovery_feed.html" class="px-6 py-3 border-2 border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors inline-flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">search</span>
+Browse More
+</a>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-surface-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="flex items-center gap-2 text-lg font-semibold text-on-background"><div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">school</span></div>TrainMe</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2026 TrainMe Malaysia. All rights reserved.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-gutter gap-y-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="about.html">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="privacy.html">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="terms.html">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="#">Help Center</a>
+</nav>
+</div>
+</footer>
+<script>
+// Confetti effect
+const colors=['#006565','#008080','#76d6d5','#93f2f2','#a3edec','#166969'];
+for(let i=0;i<30;i++){const el=document.createElement('div');el.className='confetti-piece';el.style.left=Math.random()*100+'vw';el.style.top=(80+Math.random()*20)+'vh';el.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];el.style.animationDelay=Math.random()*1+'s';el.style.animationDuration=(2+Math.random()*2)+'s';el.style.width=(6+Math.random()*8)+'px';el.style.height=(6+Math.random()*8)+'px';el.style.borderRadius=Math.random()>.5?'50%':'2px';document.body.appendChild(el);setTimeout(()=>el.remove(),5000)}
+</script>
+</body></html>

@@ -1,0 +1,23 @@
+# ─── Python / Backend ─────────────────────────────────
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+backend/.env          # ← NEVER commit secrets
+backend/uploads/
+backend/*.log
+backend/.pytest_cache/
+backend/.mypy_cache/
+
+# ─── Node / Frontend ──────────────────────────────────
+frontend/node_modules/
+frontend/.env
+
+# ─── OS & Editor ──────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

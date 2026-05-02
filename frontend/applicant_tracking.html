@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Applicant Tracking — TrainMe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "outline": "#6e7979",
+                        "background": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#e3fffe",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#004f4f",
+                        "primary-container": "#008080",
+                        "error-container": "#ffdad6",
+                        "secondary": "#166969",
+                        "inverse-on-surface": "#f3f0ef",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#131d1e",
+                        "surface-container": "#f0eded",
+                        "primary-fixed": "#93f2f2",
+                        "on-tertiary-container": "#f0fcfc",
+                        "secondary-fixed-dim": "#8ad3d2",
+                        "surface": "#fcf9f8",
+                        "inverse-surface": "#313030",
+                        "inverse-primary": "#76d6d5",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed": "#d9e5e5",
+                        "tertiary-fixed-dim": "#bdc9c9",
+                        "on-error": "#ffffff",
+                        "primary": "#006565",
+                        "primary-fixed-dim": "#76d6d5",
+                        "surface-tint": "#006a6a",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary": "#515c5d",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#697575",
+                        "secondary-fixed": "#a6efef",
+                        "secondary-container": "#a3edec",
+                        "outline-variant": "#bdc9c8",
+                        "on-secondary-fixed": "#002020",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-container": "#1d6d6d",
+                        "on-tertiary-fixed-variant": "#3e4949",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#002020",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#3e4949",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "container-max": "1200px",
+                        "xl": "80px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Fustat"],
+                        "body-lg": ["Fustat"],
+                        "h1": ["Fustat"],
+                        "body-md": ["Fustat"],
+                        "label-md": ["Fustat"],
+                        "h3": ["Fustat"],
+                        "label-sm": ["Fustat"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest font-['Fustat'] text-sm font-medium antialiased border-b border-surface-variant shadow-sm sticky top-0 z-50 w-full">
+<div class="flex items-center justify-between h-16 w-full px-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: \'FILL\' 1;">school</span></div>
+<a href="homepage.html" class="text-2xl font-black tracking-tight text-primary">TrainMe</a>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="company_dashboard.html">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-4 pt-4 -mb-[2px] font-label-md text-label-md" href="applicant_tracking.html">Applicants</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="create_internship.html">Post Internship</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="messages.html">Messages</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<a href="notifications.html" aria-label="notifications" class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</a>
+<a href="#">
+<img alt="Company Profile Avatar" class="w-8 h-8 rounded-full border border-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhvBq3j04U-nGi_S-i1kNubGACqQKFlnfJLvK8Bv39wPvxgcRrdLlmExB0Z2DupqWLCzs8ArdHbBViTszNFsj_MPOv1dIvyDqRVTncc9Y54R3yncWa_8HVr_JnFCgHID65tkj93-8NTQZSAyWElQrP49UZ20FinO1uo4pIvahwbtMa-BFn3WIJtHLeJPFsqW7rZ2_ojqrykcRiEALfSvvcn5PNo5_EBbQ4b79VkEZ6eX2rDmRbAn_GUxsh897oQw7FGov2lsWaV8M"/>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content: ATS View (Using Style Guidance Tokens) -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-lg">
+<!-- Header Section -->
+<div class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-background mb-xs">
+                Applicants for: <span class="text-primary">Software Engineering Intern</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Manage and review incoming applications for the upcoming intake.
+            </p>
+</div>
+<!-- Filter Tabs & Sort -->
+<div class="flex flex-col sm:flex-row gap-sm justify-between items-start sm:items-center mb-md">
+<div class="flex flex-wrap gap-xs" id="filterTabs">
+<button onclick="filterRows('all')" class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-colors bg-primary text-on-primary" data-filter="all">All <span class="ml-1 text-xs opacity-80">3</span></button>
+<button onclick="filterRows('pending')" class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-primary" data-filter="pending">Pending <span class="ml-1 text-xs opacity-80">1</span></button>
+<button onclick="filterRows('review')" class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-primary" data-filter="review">Under Review <span class="ml-1 text-xs opacity-80">1</span></button>
+<button onclick="filterRows('accept')" class="filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-colors bg-surface-container-high text-on-surface-variant hover:text-primary" data-filter="accept">Interview <span class="ml-1 text-xs opacity-80">1</span></button>
+</div>
+<select id="sortSelect" onchange="sortRows()" class="pl-3 pr-8 py-2 border border-outline-variant rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none cursor-pointer">
+<option value="date-desc">Newest First</option>
+<option value="date-asc">Oldest First</option>
+<option value="uni-asc">University (A-Z)</option>
+</select>
+</div>
+<!-- ATS Table Surface -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<!-- Table Header -->
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-md px-gutter font-label-md text-label-md text-on-surface-variant font-semibold">Student</th>
+<th class="py-md px-gutter font-label-md text-label-md text-on-surface-variant font-semibold">Date Applied</th>
+<th class="py-md px-gutter font-label-md text-label-md text-on-surface-variant font-semibold">Resources</th>
+<th class="py-md px-gutter font-label-md text-label-md text-on-surface-variant font-semibold">Status</th>
+<th class="py-md px-gutter font-label-md text-label-md text-on-surface-variant font-semibold">Notes</th>
+</tr>
+</thead>
+<!-- Table Body -->
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-sm px-gutter">
+<div class="flex items-center gap-md">
+<div class="w-xl h-xl rounded-full bg-tertiary-fixed flex items-center justify-center overflow-hidden flex-shrink-0 border border-outline-variant">
+<img alt="Sarah Chen Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a young Asian female university student looking confidently at the camera. She is wearing a modern, smart-casual teal blouse that complements a corporate platform's color scheme. The lighting is soft and flattering, set against a neutral, bright white background typical of professional LinkedIn profile photos." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjyvWea83_oG_Z19IHJ3sTLaKx70M_kd_f7lyX0QNvdNSuvK2pqqXJPvxMrF7FyJaZt7A143LgHPFqg_4EaIE8WE5Yi0kVJZMJ_uk2aig-FT3FgNXQLfsSnB3ngHoARkR95HJWVczPLoT5Onq1Vcfp0JmD15bHYthBGyib4oqo58nlb9rP3kymXHkBL2eKGzCnm_VdppVKJHNr2tvh8WID3wGq8lkkPqyq51qo9N9X0TDYhfURrJjFvXgzjuw9ZPhL_5jfOkDilCE"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary transition-colors">Sarah Chen</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Monash University</span>
+</div>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<span class="font-body-md text-body-md text-on-surface">Oct 15, 2023</span>
+</td>
+<td class="py-sm px-gutter">
+<div class="flex gap-sm">
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View CV">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+</button>
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View GitHub">
+<span class="material-symbols-outlined text-[20px]" data-icon="code">code</span>
+</button>
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View LinkedIn">
+<span class="material-symbols-outlined text-[20px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<select onchange="confirmStatus(this,'Sarah Chen')" class="status-select w-full max-w-[200px] bg-surface-container border border-outline-variant text-on-surface font-label-md text-label-md rounded focus:ring-2 focus:ring-primary focus:border-primary px-sm py-sm outline-none transition-all cursor-pointer hover:border-outline" data-prev="pending" data-status="pending">
+<option selected="" value="pending">Pending</option>
+<option value="review">Under Review</option>
+<option value="accept">Accept / Schedule Interview</option>
+<option value="reject">Reject</option>
+</select>
+</td>
+<td class="py-sm px-gutter">
+<button onclick="toggleNotes(this)" class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="Add Note">
+<span class="material-symbols-outlined text-[20px]">sticky_note_2</span>
+</button>
+</td>
+</tr>
+<tr class="notes-panel hidden">
+<td colspan="5" class="px-gutter py-sm bg-surface-container-low">
+<div class="flex gap-sm items-end max-w-lg">
+<textarea class="flex-grow rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface text-sm p-3 focus:border-primary focus:ring-1 focus:ring-primary" rows="2" placeholder="Add internal notes about this applicant...">Strong GitHub portfolio. React experience worth following up on.</textarea>
+<button onclick="showToast('Note saved!')" class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-tint transition-colors whitespace-nowrap h-fit">Save</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-sm px-gutter">
+<div class="flex items-center gap-md">
+<div class="w-xl h-xl rounded-full bg-tertiary-fixed flex items-center justify-center overflow-hidden flex-shrink-0 border border-outline-variant">
+<img alt="Ahmad Ridhwan Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a young male university student with short dark hair, wearing a clean, pressed light blue oxford shirt. He has a friendly, approachable expression. The background is a soft, out-of-focus modern office environment with bright, natural lighting entering from a nearby window, creating a clean corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfOLzF_tQ9YdxrjCsJZePBiMIduzr2GVylYPcOMH-wYsZDItRV8beI6jLCp7yQbdrGSyS_CxRFtD9W_2ccOT9rDczoe5w6wteTk_02t529Nj29WOXV9a615e7XmnoAY4WJ3dfb0kXyaWwxtAw6IzVx7dvAafcb9N1uLTUnRj_xNW8jCTgxYi4q8Eujg6z4Xyj1RrNvItIeW55kO5N55CkpRmZQqUccvAZDUBlFMOJD8VLCfzphe7PlB0BFyX6nf8YSXMA4jXmWKQk"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary transition-colors">Ahmad Ridhwan</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Universiti Malaya</span>
+</div>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<span class="font-body-md text-body-md text-on-surface">Oct 14, 2023</span>
+</td>
+<td class="py-sm px-gutter">
+<div class="flex gap-sm">
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View CV">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+</button>
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View LinkedIn">
+<span class="material-symbols-outlined text-[20px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<select onchange="confirmStatus(this,'Ahmad Ridhwan')" class="status-select w-full max-w-[200px] bg-tertiary-fixed-dim border border-outline-variant text-on-tertiary-fixed-variant font-label-md text-label-md rounded focus:ring-2 focus:ring-primary focus:border-primary px-sm py-sm outline-none transition-all cursor-pointer hover:border-outline" data-prev="review" data-status="review">
+<option value="pending">Pending</option>
+<option selected="" value="review">Under Review</option>
+<option value="accept">Accept / Schedule Interview</option>
+<option value="reject">Reject</option>
+</select>
+</td>
+<td class="py-sm px-gutter">
+<button onclick="toggleNotes(this)" class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="Add Note">
+<span class="material-symbols-outlined text-[20px]">sticky_note_2</span>
+</button>
+</td>
+</tr>
+<tr class="notes-panel hidden">
+<td colspan="5" class="px-gutter py-sm bg-surface-container-low">
+<div class="flex gap-sm items-end max-w-lg">
+<textarea class="flex-grow rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface text-sm p-3 focus:border-primary focus:ring-1 focus:ring-primary" rows="2" placeholder="Add internal notes about this applicant...">Reviewed portfolio — solid data analysis skills.</textarea>
+<button onclick="showToast('Note saved!')" class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-tint transition-colors whitespace-nowrap h-fit">Save</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-sm px-gutter">
+<div class="flex items-center gap-md">
+<div class="w-xl h-xl rounded-full bg-primary-container flex items-center justify-center overflow-hidden flex-shrink-0 border border-primary-container">
+<span class="font-h3 text-h3 text-on-primary-container">JW</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold group-hover:text-primary transition-colors">Jason Wong</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Taylor's University</span>
+</div>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<span class="font-body-md text-body-md text-on-surface">Oct 12, 2023</span>
+</td>
+<td class="py-sm px-gutter">
+<div class="flex gap-sm">
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View CV">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+</button>
+<button class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="View GitHub">
+<span class="material-symbols-outlined text-[20px]" data-icon="code">code</span>
+</button>
+</div>
+</td>
+<td class="py-sm px-gutter">
+<select onchange="confirmStatus(this,'Jason Wong')" class="status-select w-full max-w-[200px] bg-primary-fixed border border-primary text-on-primary-fixed font-label-md text-label-md rounded focus:ring-2 focus:ring-primary focus:border-primary px-sm py-sm outline-none transition-all cursor-pointer" data-prev="accept" data-status="accept">
+<option value="pending">Pending</option>
+<option value="review">Under Review</option>
+<option selected="" value="accept">Accept / Schedule Interview</option>
+<option value="reject">Reject</option>
+</select>
+</td>
+<td class="py-sm px-gutter">
+<button onclick="toggleNotes(this)" class="w-[36px] h-[36px] rounded-full border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all" title="Add Note">
+<span class="material-symbols-outlined text-[20px]">sticky_note_2</span>
+</button>
+</td>
+</tr>
+<tr class="notes-panel hidden">
+<td colspan="5" class="px-gutter py-sm bg-surface-container-low">
+<div class="flex gap-sm items-end max-w-lg">
+<textarea class="flex-grow rounded-lg border-outline-variant bg-surface-container-lowest text-on-surface text-sm p-3 focus:border-primary focus:ring-1 focus:ring-primary" rows="2" placeholder="Add internal notes about this applicant..."></textarea>
+<button onclick="showToast('Note saved!')" class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-tint transition-colors whitespace-nowrap h-fit">Save</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Minimal Table Footer / Pagination Indicator -->
+<div class="bg-surface-container-lowest border-t border-outline-variant px-gutter py-sm flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 3 of 42 applicants</span>
+<button class="font-label-md text-label-md text-primary hover:text-surface-tint transition-colors">View All</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-surface-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="flex items-center gap-2 text-lg font-semibold text-on-background">
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+TrainMe</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2026 TrainMe Malaysia. All rights reserved.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-gutter gap-y-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="about.html">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="privacy.html">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="terms.html">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="#">Help Center</a>
+</nav>
+</div>
+</footer>
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-on-surface/50 backdrop-blur-sm"></div>
+<div class="relative bg-surface-container-lowest rounded-xl shadow-xl max-w-sm w-full p-lg border border-surface-variant text-center">
+<div id="confirmIcon" class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-md"></div>
+<h2 class="font-h3 text-h3 text-on-surface mb-sm">Confirm Status Change</h2>
+<p id="confirmMsg" class="font-body-md text-body-md text-on-surface-variant mb-lg"></p>
+<div class="flex gap-sm justify-center">
+<button onclick="cancelStatus()" class="border-2 border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary font-label-md text-label-md py-2 px-6 rounded-lg transition-colors">Cancel</button>
+<button onclick="applyStatus()" id="confirmBtn" class="bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md py-2 px-6 rounded-lg transition-colors shadow-sm">Confirm</button>
+</div>
+</div>
+</div>
+<!-- Toast -->
+<div id="toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-lg shadow-lg font-label-md text-label-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">check_circle</span>
+<span id="toastMsg"></span>
+</div>
+<script>
+let pendingSelect=null;
+function confirmStatus(sel,name){
+    const newVal=sel.value;
+    const labels={pending:'Pending',review:'Under Review',accept:'Accept / Schedule Interview',reject:'Reject'};
+    pendingSelect=sel;
+    const isReject=newVal==='reject';
+    document.getElementById('confirmIcon').innerHTML='<span class="material-symbols-outlined text-[28px] '+(isReject?'text-error':'text-primary')+'" style="font-variation-settings:\'FILL\' 1;">'+(isReject?'warning':'swap_horiz')+'</span>';
+    document.getElementById('confirmIcon').className='w-14 h-14 rounded-full '+(isReject?'bg-error-container':'bg-primary/10')+' flex items-center justify-center mx-auto mb-md';
+    document.getElementById('confirmMsg').textContent='Change '+name+"'s status to \""+labels[newVal]+'\"?';
+    document.getElementById('confirmBtn').className='font-label-md text-label-md py-2 px-6 rounded-lg transition-colors shadow-sm '+(isReject?'bg-error hover:bg-error/80 text-on-error':'bg-primary hover:bg-surface-tint text-on-primary');
+    document.getElementById('confirmModal').classList.remove('hidden');
+}
+function cancelStatus(){
+    if(pendingSelect){pendingSelect.value=pendingSelect.dataset.prev;}
+    document.getElementById('confirmModal').classList.add('hidden');
+    pendingSelect=null;
+}
+function applyStatus(){
+    if(pendingSelect){pendingSelect.dataset.prev=pendingSelect.value;pendingSelect.dataset.status=pendingSelect.value;}
+    document.getElementById('confirmModal').classList.add('hidden');
+    showToast('Status updated successfully!');
+    pendingSelect=null;
+}
+function toggleNotes(btn){
+    const row=btn.closest('tr');
+    const panel=row.nextElementSibling;
+    if(panel&&panel.classList.contains('notes-panel'))panel.classList.toggle('hidden');
+}
+function filterRows(status){
+    document.querySelectorAll('.filter-tab').forEach(t=>{t.className='filter-tab px-4 py-2 rounded-full font-label-md text-label-md transition-colors '+(t.dataset.filter===status?'bg-primary text-on-primary':'bg-surface-container-high text-on-surface-variant hover:text-primary');});
+    document.querySelectorAll('tbody tr:not(.notes-panel)').forEach(row=>{
+        const sel=row.querySelector('.status-select');
+        if(!sel)return;
+        row.style.display=(status==='all'||sel.dataset.status===status)?'':'none';
+        const panel=row.nextElementSibling;
+        if(panel&&panel.classList.contains('notes-panel')&&row.style.display==='none')panel.classList.add('hidden');
+    });
+}
+function sortRows(){
+    const v=document.getElementById('sortSelect').value;
+    const tbody=document.querySelector('tbody');
+    const rows=[];
+    tbody.querySelectorAll('tr:not(.notes-panel)').forEach(r=>{const panel=r.nextElementSibling;rows.push({row:r,panel:panel&&panel.classList.contains('notes-panel')?panel:null});});
+    rows.sort((a,b)=>{
+        if(v==='date-desc'||v==='date-asc'){const da=new Date(a.row.querySelector('td:nth-child(2) span').textContent);const db=new Date(b.row.querySelector('td:nth-child(2) span').textContent);return v==='date-desc'?db-da:da-db;}
+        if(v==='uni-asc'){const ua=a.row.querySelector('.text-label-sm').textContent;const ub=b.row.querySelector('.text-label-sm').textContent;return ua.localeCompare(ub);}
+    });
+    rows.forEach(({row,panel})=>{tbody.appendChild(row);if(panel)tbody.appendChild(panel);});
+}
+function showToast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2500);}
+</script>
+</body></html>

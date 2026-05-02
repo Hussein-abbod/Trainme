@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Management - TrainMe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#006565",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-fixed": "#002020",
+                        "surface-tint": "#006a6a",
+                        "outline": "#6e7979",
+                        "surface": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#f0fcfc",
+                        "secondary": "#166969",
+                        "on-primary-container": "#e3fffe",
+                        "inverse-primary": "#76d6d5",
+                        "outline-variant": "#bdc9c8",
+                        "on-secondary-fixed-variant": "#004f4f",
+                        "tertiary-fixed": "#d9e5e5",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary-fixed": "#93f2f2",
+                        "on-tertiary-fixed-variant": "#3e4949",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "surface-container-high": "#eae7e7",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#bdc9c9",
+                        "surface-variant": "#e5e2e1",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-container": "#a3edec",
+                        "primary-container": "#008080",
+                        "inverse-surface": "#313030",
+                        "on-secondary-container": "#1d6d6d",
+                        "secondary-fixed-dim": "#8ad3d2",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-bright": "#fcf9f8",
+                        "on-surface-variant": "#3e4949",
+                        "on-surface": "#1c1b1b",
+                        "primary-fixed-dim": "#76d6d5",
+                        "tertiary-container": "#697575",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#131d1e",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#a6efef",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#002020",
+                        "background": "#fcf9f8",
+                        "tertiary": "#515c5d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "80px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Fustat"],
+                        "body-lg": ["Fustat"],
+                        "h2": ["Fustat"],
+                        "h1": ["Fustat"],
+                        "label-sm": ["Fustat"],
+                        "body-md": ["Fustat"],
+                        "h3": ["Fustat"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md antialiased pb-20 md:pb-0">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest font-['Fustat'] text-sm font-medium antialiased border-b border-surface-variant shadow-sm sticky top-0 z-50 w-full">
+<div class="flex items-center justify-between h-16 w-full px-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: \'FILL\' 1;">school</span></div>
+<a href="homepage.html" class="text-2xl font-black tracking-tight text-primary">TrainMe</a>
+</div>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="discovery_feed.html">Internships</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="companies_directory.html">Companies</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="saved_internships.html">Saved</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="my_applications.html">Applications</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors py-4 font-label-md text-label-md" href="messages.html">Messages</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<a href="notifications.html" aria-label="notifications" class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</a>
+<a href="student_profile.html">
+<img alt="Student Profile Avatar" class="w-8 h-8 rounded-full border border-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3n1eNkImGK3C5LRSu6rdlOIlmCsV0RIK4vcp0j8-agvhPhzCtq-v6wHvkgYS1U7bBgryeXVa5J1DTGiVEGPiRJrnXemsPrMpRbwNPdsfkprtO79G8iIRfHV3m8i7xpOyKJZAEVT4Q_shzdvj0-CNdheBRmmStduUTUY1NWVOYF-XEMGrQy42-adQtMqTWL4Sjnv8GviC8FMhmHyytYNsgz2Hdvm3afNNIBru041GcIMRf1IkvS_8Uk1kXyWVBu89jajiXNwakfU"/>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-4 md:px-gutter py-md md:py-lg flex flex-col items-center">
+<div class="w-full max-w-3xl flex flex-col gap-md">
+<!-- Page Header -->
+<div class="w-full">
+<h1 class="font-h2 text-h2 text-on-background">Profile Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Complete your profile to increase your chances of landing an internship.</p>
+</div>
+<!-- Profile Header Card -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col sm:flex-row items-center sm:items-start gap-md">
+<div class="relative">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-surface-variant border-2 border-surface-container-lowest shadow-sm">
+<img alt="Profile Picture" class="w-full h-full object-cover" data-alt="A professional headshot of a young male student in business casual attire. The background is a soft, blurred office environment. Lighting is bright and even, reflecting a clean, corporate aesthetic suitable for a job portal profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY4jUntCdf8jtIgOuy3QWiDrSjkS94WBsFIjnWq3Zt-X1-2pZPpbNmJ4qXmlBUbuepdc3dEweN06eHa7Hr2nxQ2lfyN8kBuvKSAUP_XTNKYxd76nuk0mX8uw53hvy5tc_rJtqb2c4zJ2WGPaqWrsPn9qQVR9DsPApeRN_ZBB6cfexStRMNSHgMeNKo_N6Ko_Mx7Pcz0EAnRVN5UjFHV-0iYBs73b2hUVh6KBlmWKIErTAPbyR3RYzBkOKa0To80gp2GnxWmXnoWWo"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm md:text-base">photo_camera</span>
+</button>
+</div>
+<div class="flex flex-col text-center sm:text-left mt-sm sm:mt-0">
+<h2 class="font-h3 text-h3 text-on-background">Ahmad bin Abdullah</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">University of Malaya</p>
+<p class="font-label-md text-label-md text-primary mt-xs">Computer Science Undergraduate</p>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Profile Completeness</span>
+<span class="font-h3 text-h3 text-primary">80%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Add your resume and portfolio links to reach 100%.</p>
+</div>
+<!-- About Me -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-label-md text-label-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">person</span> About Me
+</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="bioCount">0/500</span>
+</div>
+<textarea id="bioField" oninput="document.getElementById('bioCount').textContent=this.value.length+'/500'" maxlength="500" rows="4" class="w-full border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant resize-none" placeholder="Tell employers about yourself — your interests, goals, and what makes you a great intern...">Passionate Computer Science student with a keen interest in full-stack development and UI/UX design. Currently exploring machine learning applications in e-commerce. Looking for a meaningful internship where I can contribute to real-world projects while growing my technical and soft skills.</textarea>
+</div>
+<!-- Education Details -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
+<h3 class="font-label-md text-label-md text-on-background flex items-center gap-2 mb-sm">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span> Education
+</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Degree Programme</label>
+<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Bachelor of Computer Science (Software Engineering)" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">University</label>
+<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-outline-variant" value="Universiti Malaya" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Expected Graduation</label>
+<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="June 2027" type="month"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Current CGPA</label>
+<input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all" value="3.72" type="text" placeholder="e.g. 3.50"/>
+</div>
+</div>
+</div>
+<!-- Bento Grid Area -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Document Upload -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col col-span-1">
+<h3 class="font-label-md text-label-md text-on-background mb-sm">Resume / CV</h3>
+<div class="flex-grow border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center p-md bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer text-center group">
+<span class="material-symbols-outlined text-4xl text-outline mb-sm group-hover:text-primary transition-colors">upload_file</span>
+<p class="font-label-md text-label-md text-on-background">Upload your CV</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">(PDF only, max 5MB)</p>
+</div>
+</div>
+<!-- Portfolio Links -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col gap-sm col-span-1">
+<h3 class="font-label-md text-label-md text-on-background mb-xs">Professional Links</h3>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">LinkedIn</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-sm">link</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://linkedin.com/in/username" type="url"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">GitHub</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-sm">code</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://github.com/username" type="url"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Personal Portfolio</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-sm">language</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="https://yourportfolio.com" type="url"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Skills Tagging -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant flex flex-col gap-sm">
+<div>
+<h3 class="font-label-md text-label-md text-on-background">Skills</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Add skills to help employers find you.</p>
+</div>
+<div class="flex flex-wrap gap-2 mb-xs">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary-container text-on-secondary-container">
+                        Python
+                        <button class="flex-shrink-0 ml-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-on-secondary-container hover:bg-secondary hover:text-on-secondary focus:outline-none focus:bg-secondary focus:text-on-secondary" type="button">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary-container text-on-secondary-container">
+                        UI/UX Design
+                        <button class="flex-shrink-0 ml-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-on-secondary-container hover:bg-secondary hover:text-on-secondary focus:outline-none focus:bg-secondary focus:text-on-secondary" type="button">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary-container text-on-secondary-container">
+                        Project Management
+                        <button class="flex-shrink-0 ml-1.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-on-secondary-container hover:bg-secondary hover:text-on-secondary focus:outline-none focus:bg-secondary focus:text-on-secondary" type="button">
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</span>
+</div>
+<div class="relative mt-xs">
+<input class="block w-full pl-3 pr-3 py-2 border border-outline-variant rounded-lg font-body-md text-body-md text-on-background bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder-outline-variant" placeholder="Add a skill... (e.g. React, Data Analysis)" type="text"/>
+</div>
+</div>
+<!-- Action Area -->
+<div class="flex justify-end pt-sm border-t border-surface-container-highest mt-sm">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-2 px-6 rounded-lg transition-colors shadow-sm">
+                    Save Changes
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-lowest/90 backdrop-blur-md border-t border-outline-variant rounded-t-xl shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm mt-1">Applied</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-1">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

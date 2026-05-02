@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrainMe | Stop Searching. Start Training.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f0eded",
+                      "on-background": "#1c1b1b",
+                      "secondary-fixed": "#a6efef",
+                      "surface": "#fcf9f8",
+                      "on-primary-fixed": "#002020",
+                      "surface-container-high": "#eae7e7",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#a3edec",
+                      "surface-container-low": "#f6f3f2",
+                      "primary-fixed-dim": "#76d6d5",
+                      "surface-tint": "#006a6a",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#1c1b1b",
+                      "inverse-surface": "#313030",
+                      "on-secondary-fixed-variant": "#004f4f",
+                      "primary": "#006565",
+                      "secondary-fixed-dim": "#8ad3d2",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#76d6d5",
+                      "on-primary-container": "#e3fffe",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "tertiary": "#515c5d",
+                      "tertiary-container": "#697575",
+                      "on-secondary-fixed": "#002020",
+                      "primary-container": "#008080",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#1d6d6d",
+                      "error-container": "#ffdad6",
+                      "secondary": "#166969",
+                      "tertiary-fixed-dim": "#bdc9c9",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#d9e5e5",
+                      "on-tertiary-fixed": "#131d1e",
+                      "surface-bright": "#fcf9f8",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container-highest": "#e5e2e1",
+                      "primary-fixed": "#93f2f2",
+                      "outline-variant": "#bdc9c8",
+                      "surface-dim": "#dcd9d9",
+                      "on-tertiary-container": "#f0fcfc",
+                      "on-primary-fixed-variant": "#004f4f",
+                      "outline": "#6e7979",
+                      "on-surface-variant": "#3e4949",
+                      "on-tertiary-fixed-variant": "#3e4949",
+                      "background": "#fcf9f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "48px",
+                      "md": "24px",
+                      "xl": "80px",
+                      "xs": "4px",
+                      "container-max": "1200px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Fustat"
+                      ],
+                      "h2": [
+                              "Fustat"
+                      ],
+                      "body-lg": [
+                              "Fustat"
+                      ],
+                      "h3": [
+                              "Fustat"
+                      ],
+                      "h1": [
+                              "Fustat"
+                      ],
+                      "body-md": [
+                              "Fustat"
+                      ],
+                      "label-md": [
+                              "Fustat"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h2": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.25",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8; /* background */
+            color: #1c1b1b; /* on-background */
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 font-inter text-sm font-medium tracking-wide">
+<div class="max-w-7xl mx-auto px-8 flex justify-between items-center h-20">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2" href="homepage.html">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<span class="text-2xl font-black text-teal-600 dark:text-teal-400 tracking-tighter">TrainMe</span>
+</a>
+<!-- Navigation Links -->
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-gray-600 dark:text-gray-400 hover:text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-200 active:scale-95 transition-transform" href="#">For Students</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-200 active:scale-95 transition-transform" href="#">For Companies</a>
+<a class="text-gray-600 dark:text-gray-400 hover:text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 transition-all duration-200 active:scale-95 transition-transform" href="#">Mission</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-4">
+<a href="login.html" class="hidden md:block font-label-md text-label-md text-primary hover:text-primary-container transition-colors">Login</a>
+<a href="role_selection.html" class="bg-primary text-on-primary px-sm py-xs rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm active:scale-95">Join Now</a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-[80px]"> <!-- pt to offset fixed nav -->
+<!-- Section 1: Identity (Hero) -->
+<section class="relative bg-surface-container-lowest overflow-hidden border-b border-surface-variant">
+<div class="max-w-container-max mx-auto px-gutter py-xl lg:py-[120px] grid grid-cols-1 lg:grid-cols-2 gap-lg items-center">
+<div class="z-10">
+<h1 class="font-h1 text-h1 text-on-surface mb-md">Stop Searching.<br/><span class="text-primary">Start Training.</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-2xl">
+                        TrainMe: Your First Step into the Industry. TrainMe is a dedicated platform built for the Malaysian ecosystem. We remove the "3-5 years experience" noise and focus entirely on connecting university students with companies ready to mentor the next generation.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-sm">
+<a href="role_selection.html" class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm text-center">Get Started</a>
+<a href="#mission" class="border border-outline px-lg py-sm rounded-full font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors text-center">Learn More</a>
+</div>
+</div>
+<div class="relative z-0 h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border border-surface-variant">
+<img alt="Students collaborating" class="w-full h-full object-cover" data-alt="A modern, brightly lit co-working space featuring a diverse group of young Malaysian university students collaborating around a sleek white table. They are engaged in a dynamic discussion, pointing at a laptop screen. The environment is professional yet approachable, characterized by clean lines, ample natural light streaming through large windows, and subtle teal accents in the modern furniture. The overall aesthetic is clean, corporate, and optimistic, embodying a modern tech ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDED4eym50DkzKBtr9m1wf_7aH73-aGn7i6PS19jdOFiyA3Em2dwaCzbngrC7KvXxqzKrRrUHHfxrXzOEQRJoQLK2mYiTgJ5LR6CtKa7EQWT1AdrmOnN5OMIMedMPXc4eWy5LtZYwMr7mYiMUyrS6SXrltxDkD5NrjnhYnc4X2JDL6YOZWJI1rIEQkrFL6QxKC22WNXCw7ibJEq-e86JstWhBmdrG2Jv68kiXDA8TWhsdcCXtRyGxhbfHaoCAzHoeJkc-pl94ojtG8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -top-[10%] -right-[5%] w-[500px] h-[500px] bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
+</section>
+<!-- Section 2: Value Prop (3-column grid) -->
+<section class="bg-surface py-xl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Designed for Clarity</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant hover:border-primary hover:shadow-sm transition-all duration-300 group">
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mb-sm group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">For Students</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">Direct access to internship-only roles, CV hosting, and easy one-click applications.</p>
+<ul class="space-y-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start"><span class="material-symbols-outlined text-primary text-[18px] mr-xs mt-[2px]">check_circle</span> <strong>Simplified Discovery:</strong> No more scrolling through senior roles. Every listing is an internship.</li>
+<li class="flex items-start"><span class="material-symbols-outlined text-primary text-[18px] mr-xs mt-[2px]">check_circle</span> <strong>Status Transparency:</strong> See exactly where your application stands—no more "ghosting."</li>
+</ul>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant hover:border-primary hover:shadow-sm transition-all duration-300 group">
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mb-sm group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">business</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">For Companies</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">A streamlined applicant tracking system to filter, accept, or reject student applications without the noise of general job boards.</p>
+<ul class="space-y-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start"><span class="material-symbols-outlined text-primary text-[18px] mr-xs mt-[2px]">check_circle</span> <strong>Talent Pipeline:</strong> Direct access to students from top Malaysian universities (like MMU, UM, APU) without LinkedIn spam.</li>
+</ul>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-surface-variant hover:border-primary hover:shadow-sm transition-all duration-300 group">
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mb-sm group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">The Ecosystem</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">A noise-free environment where every post is a training opportunity. We curate the platform to ensure relevance and quality for both sides of the market.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: How It Works -->
+<section class="bg-surface-container-lowest py-xl border-b border-surface-variant">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<span class="inline-flex items-center justify-center px-sm py-xs bg-primary-container/10 text-primary font-label-sm text-label-sm rounded-full mb-sm">Simple Process</span>
+<h2 class="font-h2 text-h2 text-on-surface">How It Works</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs max-w-xl mx-auto">Three simple steps to kickstart your career</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md relative">
+<!-- Connecting line (desktop only) -->
+<div class="hidden md:block absolute top-16 left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 bg-surface-container-lowest p-md rounded-xl border border-surface-variant text-center hover:border-primary hover:shadow-[0_4px_16px_rgba(0,101,101,0.08)] transition-all duration-300 group">
+<div class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center mx-auto mb-md text-xl font-bold shadow-md group-hover:scale-110 transition-transform">1</div>
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mx-auto mb-sm">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">person_add</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">Create Your Profile</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Sign up, upload your CV, and showcase your skills to stand out to employers.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 bg-surface-container-lowest p-md rounded-xl border border-surface-variant text-center hover:border-primary hover:shadow-[0_4px_16px_rgba(0,101,101,0.08)] transition-all duration-300 group">
+<div class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center mx-auto mb-md text-xl font-bold shadow-md group-hover:scale-110 transition-transform">2</div>
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mx-auto mb-sm">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">Discover Internships</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Browse curated listings filtered by industry, location, and stipend — only internships, zero noise.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 bg-surface-container-lowest p-md rounded-xl border border-surface-variant text-center hover:border-primary hover:shadow-[0_4px_16px_rgba(0,101,101,0.08)] transition-all duration-300 group">
+<div class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center mx-auto mb-md text-xl font-bold shadow-md group-hover:scale-110 transition-transform">3</div>
+<div class="w-12 h-12 bg-primary-container/10 rounded-full flex items-center justify-center mx-auto mb-sm">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">send</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">Apply & Track</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">One-click apply and track your application status in real-time — no more ghosting.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Social Proof -->
+<section class="bg-surface-container py-xl border-b border-surface-variant">
+<div class="max-w-container-max mx-auto px-gutter">
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+<div class="text-center p-md">
+<div class="font-h1 text-h1 text-primary mb-xs"><span class="counter" data-target="2500">0</span>+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Students Registered</p>
+</div>
+<div class="text-center p-md">
+<div class="font-h1 text-h1 text-primary mb-xs"><span class="counter" data-target="180">0</span>+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Partner Companies</p>
+</div>
+<div class="text-center p-md">
+<div class="font-h1 text-h1 text-primary mb-xs"><span class="counter" data-target="650">0</span>+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Internships Posted</p>
+</div>
+<div class="text-center p-md">
+<div class="font-h1 text-h1 text-primary mb-xs"><span class="counter" data-target="92">0</span>%</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Placement Rate</p>
+</div>
+</div>
+<!-- Trusted By Universities -->
+<div class="text-center">
+<p class="font-label-md text-label-md text-outline mb-md uppercase tracking-widest">Trusted by students from</p>
+<div class="flex flex-wrap justify-center items-center gap-x-lg gap-y-md">
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">UM</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">MMU</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">APU</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">UiTM</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">UTM</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest rounded-full border border-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">Taylor's</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Testimonials -->
+<section class="bg-surface-container-lowest py-xl border-b border-surface-variant">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-lg">
+<span class="inline-flex items-center justify-center px-sm py-xs bg-primary-container/10 text-primary font-label-sm text-label-sm rounded-full mb-sm">Success Stories</span>
+<h2 class="font-h2 text-h2 text-on-surface">What People Say</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Testimonial 1 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-surface-variant hover:border-primary/30 transition-all duration-300">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md italic">"TrainMe made my internship search so much easier. I applied to 5 companies in one day and got 2 interviews within a week. No more LinkedIn confusion!"</p>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container/20 rounded-full flex items-center justify-center">
+<span class="font-label-md text-label-md text-primary font-bold">NA</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Nur Aisyah</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">CS Student, MMU</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-surface-variant hover:border-primary/30 transition-all duration-300">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md italic">"As an employer, we struggled to find quality interns. TrainMe's ATS streamlined everything — we hired 3 amazing interns in just 2 weeks."</p>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-secondary-container/40 rounded-full flex items-center justify-center">
+<span class="font-label-md text-label-md text-secondary font-bold">RF</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Rizal Faizal</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">HR Manager, TechSolutions Inc.</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-surface-variant hover:border-primary/30 transition-all duration-300">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px] text-amber-400" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md italic">"I could finally track my applications in one place. The status updates meant I always knew where I stood. Got my dream internship at a fintech startup!"</p>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container/20 rounded-full flex items-center justify-center">
+<span class="font-label-md text-label-md text-primary font-bold">AM</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Ahmad Mirza</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">BIS Student, APU</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Mission -->
+<section class="bg-surface-container py-xl border-y border-surface-variant">
+<div class="max-w-3xl mx-auto px-gutter text-center">
+<span class="material-symbols-outlined text-primary text-[48px] mb-sm" style="font-variation-settings: 'FILL' 1;">flag</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-md">Our Mission</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Our goal is to empower every Malaysian student to find a quality internship that matches their skills. We believe that the right training placement is the foundation of a successful career. We aim to make the transition from classroom to office as seamless as possible. The goal is to bridge the gap between Malaysian universities and the corporate world, ensuring no student is left behind due to the clutter of 'professional-only' platforms like LinkedIn or Indeed.
+                </p>
+</div>
+</section>
+<!-- Section 4: The Gateway (User Segmentation) -->
+<section class="bg-surface-container-lowest py-xl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Left Card (Student) -->
+<div class="relative overflow-hidden rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] group hover:border-primary transition-colors">
+<div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
+<img alt="Student typing on laptop" class="w-full h-full object-cover" data-alt="A close-up shot of a young student's hands typing enthusiastically on a modern laptop keyboard, set against a pristine white desk. The lighting is bright and airy, typical of a modern cafe or sleek university library. Subtle teal elements are visible in the blurred background, reinforcing the corporate-modern aesthetic. The overall mood is focused, ambitious, and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKvLpOelu2RcNKmOgvMC9sxRFasD261vZTjU8ThJ4zzKHtx9DrPI58elGkyFsmVGDHoAqVVLXTpswkYPg19cua_v0UL6IjaAUJrr4D-loBrg6npN0vOGNcpHsbxx5SgR6-kympFNIeT68zTRLkUtoUSIi3UsIXcVZRBeJR4opSIqufWmT4K0BQoZbgPUymfkdn25MvtwEjR-ge3H5R2TFEX1bIuQ0VFlWhpndcTXRbTwr-XtrgDTVgzphOet-UWwX_9eW6vs1dhQ0"/>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-flex items-center justify-center px-sm py-xs bg-primary-container/10 text-primary font-label-sm text-label-sm rounded-full mb-sm">For Students</span>
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Looking for your first break?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Create your profile and upload your CV today to discover exclusive internship opportunities.</p>
+</div>
+<div class="mt-md">
+<a href="student_registration.html" class="bg-primary text-on-primary px-md py-sm rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm w-max">Join as Student</a>
+</div>
+</div>
+</div>
+<!-- Right Card (Company) -->
+<div class="relative overflow-hidden rounded-2xl border border-surface-variant p-lg flex flex-col justify-between min-h-[300px] bg-surface-container-low group hover:border-[#005f5f] transition-colors">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<span class="inline-flex items-center justify-center px-sm py-xs bg-tertiary/10 text-tertiary font-label-sm text-label-sm rounded-full mb-sm">For Employers</span>
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Looking for fresh perspectives?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Post your internship offers and manage your talent pool with our streamlined applicant tracking system.</p>
+</div>
+<div class="mt-md">
+<a href="company_registration.html" class="bg-[#005f5f] text-on-primary px-md py-sm rounded-full font-label-md text-label-md hover:bg-primary transition-colors shadow-sm w-max">Join as Company</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-surface-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full max-w-7xl mx-auto gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<a class="flex items-center gap-2 text-lg font-semibold text-on-background" href="homepage.html">
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+TrainMe</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2026 TrainMe Malaysia. Empowering the next generation of talent.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-gutter gap-y-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="about.html">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="#">Contact</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="privacy.html">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline decoration-primary underline-offset-4 transition-colors" href="terms.html">Terms of Service</a>
+</nav>
+</div>
+</footer>
+<script>
+// Animate counter numbers when they scroll into view
+const counters = document.querySelectorAll('.counter');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = +counter.dataset.target;
+            const duration = 2000;
+            const start = performance.now();
+            const animate = (now) => {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                counter.textContent = Math.floor(target * ease).toLocaleString();
+                if (progress < 1) requestAnimationFrame(animate);
+                else counter.textContent = target.toLocaleString();
+            };
+            requestAnimationFrame(animate);
+            observer.unobserve(counter);
+        }
+    });
+}, { threshold: 0.5 });
+counters.forEach(c => observer.observe(c));
+</script>
+</body></html>

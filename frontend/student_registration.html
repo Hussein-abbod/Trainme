@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TrainMe - Student Registration</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#a6efef",
+                        "tertiary-fixed": "#d9e5e5",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "primary-container": "#008080",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "surface-variant": "#e5e2e1",
+                        "outline-variant": "#bdc9c8",
+                        "on-tertiary-fixed": "#131d1e",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#a3edec",
+                        "on-secondary-container": "#1d6d6d",
+                        "primary": "#006565",
+                        "on-secondary-fixed-variant": "#004f4f",
+                        "on-primary-fixed-variant": "#004f4f",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf9f8",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#bdc9c9",
+                        "primary-fixed": "#93f2f2",
+                        "inverse-surface": "#313030",
+                        "inverse-primary": "#76d6d5",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1c1b1b",
+                        "secondary": "#166969",
+                        "outline": "#6e7979",
+                        "on-primary-container": "#e3fffe",
+                        "on-primary-fixed": "#002020",
+                        "tertiary-container": "#697575",
+                        "on-tertiary-container": "#f0fcfc",
+                        "on-secondary-fixed": "#002020",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary-fixed-variant": "#3e4949",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#515c5d",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#76d6d5",
+                        "surface-tint": "#006a6a",
+                        "on-surface-variant": "#3e4949",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-fixed-dim": "#8ad3d2",
+                        "surface-dim": "#dcd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Fustat"],
+                        "label-md": ["Fustat"],
+                        "label-sm": ["Fustat"],
+                        "h2": ["Fustat"],
+                        "h1": ["Fustat"],
+                        "body-md": ["Fustat"],
+                        "h3": ["Fustat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "h2": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex">
+<!-- Left Panel: Brand Visual (Hidden on smaller screens) -->
+<div class="hidden lg:flex w-1/2 relative bg-surface-container-high overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A high-quality, professional photograph of a diverse group of university students collaborating around a modern glass table in a bright, sunlit campus library. The lighting is high-key and natural, creating an optimistic, light-mode aesthetic. The scene incorporates subtle teal accents in the environment, tying into a corporate yet approachable brand identity. The mood is ambitious, focused, and collaborative, representing the transition from academia to the professional workforce." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVlsMoy39K6FnDdjcZ6mPuaC7rn5X5FYr20BNi9hiqzzRmT7OIkYcjzhNMSta2jOtneW3Bkgr3ZKSFEWnUkpY8a3krey9IR2HLhBpuuR-0PDMA1tz3uiREXzyyewNk46JDrO5vV8RMoNdUP9omqFSb0oEL7qbp_C_WrFmR-sN18wwVhTp7xiYB_lL5V0-W6LLLD9VuxteIPefzCeR1ibaKp9UTL_zORHoN1IqUCpisOV7HbgFr1xXFy4Rm4b-Yqa5uiYQRZ9uJ5CA');"></div>
+<!-- Teal Gradient Overlay for brand presence and text readability -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-transparent"></div>
+<!-- Content Overlay -->
+<div class="relative z-10 p-xl flex flex-col justify-between h-full w-full">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 bg-white rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<span class="font-h2 text-h2 text-on-primary tracking-tight">TrainMe</span>
+</div>
+<div class="max-w-md">
+<h1 class="font-h1 text-h1 text-on-primary mb-md">Bridge the gap to your future.</h1>
+<p class="font-body-lg text-body-lg text-on-primary/90">Join Malaysia's premier platform connecting ambitious students with top-tier corporate internships. Build your profile, gain experience, and launch your career.</p>
+</div>
+</div>
+</div>
+<!-- Right Panel: Registration Form -->
+<div class="w-full lg:w-1/2 flex items-center justify-center p-md md:p-lg lg:p-xl bg-surface-container-lowest relative overflow-y-auto">
+<!-- Mobile Logo (Visible only when left panel is hidden) -->
+<div class="absolute top-md left-md lg:hidden flex items-center gap-xs">
+<div class="w-7 h-7 bg-primary rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: 'FILL' 1;">school</span></div>
+<span class="font-h3 text-h3 text-primary tracking-tight">TrainMe</span>
+</div>
+<div class="w-full max-w-[480px] pt-lg lg:pt-0">
+<!-- Header -->
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Create Student Account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Register to discover exclusive internship opportunities.</p>
+</div>
+<!-- Verification Success Message (As requested by prompt to show it has been sent) -->
+<div class="mb-md p-md bg-secondary-container rounded-lg border border-secondary-fixed flex items-start gap-sm shadow-sm">
+<span class="material-symbols-outlined text-on-secondary-container mt-[2px]" style="font-variation-settings: 'FILL' 1;">mark_email_unread</span>
+<div>
+<h3 class="font-label-md text-label-md text-on-secondary-container mb-xs">Verify Your Email</h3>
+<p class="font-body-md text-body-md text-on-secondary-container/80 text-sm">A verification link has been sent to your university email. Please click the link to activate your account and start applying for roles.</p>
+</div>
+</div>
+<!-- Form -->
+<form class="space-y-md" id="studentRegForm">
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="fullName">Full Name (As per IC/Passport)</label>
+<input class="w-full rounded bg-surface border border-outline-variant px-sm py-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:border-2 focus:ring-0 transition-all duration-200" id="fullName" name="fullName" placeholder="e.g. Ahmad bin Abdullah" required="" type="text"/>
+</div>
+<!-- University Name (Searchable Dropdown Mockup) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="university">University Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full rounded bg-surface border border-outline-variant pl-10 pr-10 py-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:border-2 focus:ring-0 transition-all duration-200" id="university" name="university" placeholder="Search for your university..." required="" type="text"/>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors">arrow_drop_down</span>
+</div>
+</div>
+<!-- University Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="email">University Email</label>
+<input class="w-full rounded bg-surface border border-outline-variant px-sm py-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:border-2 focus:ring-0 transition-all duration-200" id="email" name="email" placeholder="student@siswa.um.edu.my" required="" type="email"/>
+<p class="mt-xs font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                        Please use your .edu.my or student email
+                    </p>
+</div>
+<!-- Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="password">Password</label>
+<div class="relative">
+<input class="w-full rounded bg-surface border border-outline-variant px-sm py-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:border-2 focus:ring-0 transition-all duration-200" id="password" name="password" placeholder="••••••••" required="" type="password" oninput="checkStrength(this.value)"/>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style="font-size: 20px;" onclick="togglePw(this)">visibility_off</span>
+</div>
+<!-- Password Strength Meter -->
+<div class="mt-2">
+<div class="flex gap-1 mb-1">
+<div id="bar1" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar2" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar3" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+<div id="bar4" class="h-1 flex-1 rounded-full bg-surface-container-high transition-all duration-300"></div>
+</div>
+<p id="strengthLabel" class="font-label-sm text-label-sm text-outline transition-colors"></p>
+</div>
+</div>
+<!-- Confirm Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="confirmPassword">Confirm Password</label>
+<div class="relative">
+<input class="w-full rounded bg-surface border border-outline-variant px-sm py-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:border-2 focus:ring-0 transition-all duration-200" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required="" type="password"/>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style="font-size: 20px;">visibility_off</span>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full mt-lg bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md py-sm px-md rounded-full shadow-sm hover:shadow transition-all duration-200 flex justify-center items-center gap-xs" type="submit">
+                    Complete Registration
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Login Link -->
+<p class="mt-md text-center font-body-md text-body-md text-on-surface-variant">
+                Already have an account? 
+                <a class="font-label-md text-label-md text-primary hover:text-surface-tint underline decoration-primary/30 underline-offset-4 transition-colors" href="login.html">Log in here</a>
+</p>
+</div>
+</div>
+<script>
+function checkStrength(pw) {
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    const colors = ['', '#ba1a1a', '#e65100', '#f9a825', '#006565'];
+    const labels = ['', 'Weak — add uppercase, numbers & symbols', 'Fair — try adding special characters', 'Good — almost there!', 'Strong password ✓'];
+    const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3'), document.getElementById('bar4')];
+    const level = pw.length === 0 ? 0 : Math.min(score, 4);
+    bars.forEach((b, i) => { b.style.background = i < level ? colors[level] : '#eae7e7'; });
+    const label = document.getElementById('strengthLabel');
+    label.textContent = labels[level] || '';
+    label.style.color = colors[level] || '';
+}
+function togglePw(icon) {
+    const input = icon.previousElementSibling;
+    if (input.type === 'password') { input.type = 'text'; icon.textContent = 'visibility'; }
+    else { input.type = 'password'; icon.textContent = 'visibility_off'; }
+}
+</script>
+<!-- TrainMe JS -->
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pages/student_register.js"></script>
+</body></html>
