@@ -13,6 +13,7 @@ backend/.mypy_cache/
 # ─── Node / Frontend ──────────────────────────────────
 frontend/node_modules/
 frontend/.env
+frontend/dist/
 
 # ─── OS & Editor ──────────────────────────────────────
 .DS_Store
