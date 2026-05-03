@@ -17,43 +17,20 @@ export class ApiError extends Error {
   }
 }
 
+const memoryCache = new Map();
+
 export const apiCache = {
-  get: (key) => {
-    try {
-      const item = sessionStorage.getItem(`tm_cache_${key}`);
-      if (!item) return undefined;
-      const parsed = JSON.parse(item);
-      return parsed;
-    } catch (e) {
-      return undefined;
-    }
-  },
-  set: (key, value) => {
-    try {
-      sessionStorage.setItem(`tm_cache_${key}`, JSON.stringify(value));
-    } catch (e) {}
-  },
-  has: (key) => !!sessionStorage.getItem(`tm_cache_${key}`),
-  clear: () => {
-    try {
-      Object.keys(sessionStorage).forEach(k => {
-        if (k.startsWith('tm_cache_')) sessionStorage.removeItem(k);
-      });
-    } catch (e) {}
-  },
-  delete: (key) => {
-    try {
-      sessionStorage.removeItem(`tm_cache_${key}`);
-    } catch (e) {}
-  },
+  get: (key) => memoryCache.get(key),
+  set: (key, value) => memoryCache.set(key, value),
+  has: (key) => memoryCache.has(key),
+  clear: () => memoryCache.clear(),
+  delete: (key) => memoryCache.delete(key),
   clearPattern: (pattern) => {
-    try {
-      Object.keys(sessionStorage).forEach(k => {
-        if (k.startsWith('tm_cache_') && k.includes(pattern)) {
-          sessionStorage.removeItem(k);
-        }
-      });
-    } catch (e) {}
+    for (const key of memoryCache.keys()) {
+      if (key.includes(pattern)) {
+        memoryCache.delete(key);
+      }
+    }
   }
 };
 
