@@ -48,6 +48,7 @@ def list_internships(
     industry: str | None = Query(None),
     work_type: str | None = Query(None),
     eligibility: str | None = Query(None),
+    sort: str | None = Query("newest", description="Sort by newest, deadline, or stipend-high"),
     skip: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=100),
     _: User = Depends(get_current_user),
@@ -80,7 +81,16 @@ def list_internships(
         # Match exact eligibility or 'both'
         query = query.filter(or_(Internship.eligibility == eligibility, Internship.eligibility == 'both'))
 
-    items = query.order_by(Internship.created_at.desc()).offset(skip).limit(limit).all()
+    if sort == "deadline":
+        query = query.order_by(Internship.deadline.asc())
+    elif sort == "stipend-high":
+        # Stipend is a string like "RM 1,200/mo". Simple desc string sort is a decent approximation 
+        # or we could try to cast but SQLite/MySQL handle string casting differently.
+        query = query.order_by(Internship.stipend.desc())
+    else:
+        query = query.order_by(Internship.created_at.desc())
+
+    items = query.offset(skip).limit(limit).all()
     return _enrich_with_count(items, db)
 
 

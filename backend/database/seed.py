@@ -18,7 +18,7 @@ from sqlalchemy import text
 from app.database import SessionLocal, create_tables, engine, Base
 from app.models import (
     Application, ApplicationStatus, Bookmark, Company,
-    Internship, InternshipStatus, Student, University, User, UserRole, WorkType,
+    Internship, InternshipStatus, Student, University, User, UserRole, WorkType, StudentEligibility
 )
 from app.security import hash_password
 
@@ -209,6 +209,7 @@ def reset_and_seed():
             deadline=now + timedelta(days=60),
             start_date=now + timedelta(days=90),
             status=InternshipStatus.active,
+            eligibility=StudentEligibility.both,
         )
         internship2 = Internship(
             company_id=company_user1.id,
@@ -223,6 +224,7 @@ def reset_and_seed():
             deadline=now + timedelta(days=30),
             start_date=now + timedelta(days=60),
             status=InternshipStatus.active,
+            eligibility=StudentEligibility.local,
         )
         internship3 = Internship(
             company_id=company_user2.id,
@@ -237,6 +239,7 @@ def reset_and_seed():
             deadline=now + timedelta(days=45),
             start_date=now + timedelta(days=75),
             status=InternshipStatus.active,
+            eligibility=StudentEligibility.local,
         )
         internship4 = Internship(
             company_id=company_user3.id,
@@ -251,6 +254,7 @@ def reset_and_seed():
             deadline=now + timedelta(days=40),
             start_date=now + timedelta(days=70),
             status=InternshipStatus.active,
+            eligibility=StudentEligibility.international,
         )
         internship5 = Internship(
             company_id=company_user3.id,
@@ -265,6 +269,7 @@ def reset_and_seed():
             deadline=now + timedelta(days=50),
             start_date=now + timedelta(days=80),
             status=InternshipStatus.active,
+            eligibility=StudentEligibility.both,
         )
 
         db.add_all([internship1, internship2, internship3, internship4, internship5])

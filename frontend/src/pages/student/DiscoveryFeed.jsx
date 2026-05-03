@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.jsx';
 import { Internships, Bookmarks } from '../../api/index.js';
 import { getMediaUrl } from '../../api/client.js';
 import { useToast } from '../../context/ToastContext.jsx';
-import { skeletonCard } from '../../utils/helpers.jsx';
+import { skeletonCard, Spinner } from '../../utils/helpers.jsx';
 
 const PAGE_SIZE = 9;
 
@@ -91,6 +91,7 @@ export default function DiscoveryFeed() {
     if (location) params.location = location;
     if (industry) params.industry = industry;
     if (eligibility) params.eligibility = eligibility;
+    if (sort) params.sort = sort;
     try {
       const data = await Internships.list(params);
       setInternships(prev => reset ? data : [...prev, ...data]);
@@ -99,7 +100,7 @@ export default function DiscoveryFeed() {
     } catch (err) {
       toast('Could not load internships: ' + err.message, 'error');
     } finally { setLoading(false); }
-  }, [search, location, industry, eligibility, skip]);
+  }, [search, location, industry, eligibility, sort, skip]);
 
   // Initial load
   useEffect(() => {
@@ -115,7 +116,7 @@ export default function DiscoveryFeed() {
     }
     const t = setTimeout(() => loadInternships(true), 400);
     return () => clearTimeout(t);
-  }, [search, location, industry, eligibility]);
+  }, [search, location, industry, eligibility, sort]);
 
   async function toggleBookmark(id, isBookmarked) {
     try {
@@ -173,14 +174,23 @@ export default function DiscoveryFeed() {
         </section>
 
         {/* Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
-          {loading && internships.length === 0
-            ? Array.from({ length: 6 }).map((_, i) => <div key={i}>{skeletonCard()}</div>)
-            : internships.map(item => (
-                <InternshipCard key={item.id} item={item} isBookmarked={bookmarkedIds.has(item.id)} onToggleBookmark={toggleBookmark} navigate={navigate} />
-              ))
-          }
-        </section>
+        <div className="relative">
+          {loading && internships.length > 0 && (
+            <div className="absolute inset-0 z-10 bg-surface-container-lowest/50 backdrop-blur-sm flex items-center justify-center rounded-xl">
+              <div className="bg-primary/10 p-md rounded-full text-primary">
+                <Spinner />
+              </div>
+            </div>
+          )}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md min-h-[200px]">
+            {loading && internships.length === 0
+              ? Array.from({ length: 6 }).map((_, i) => <div key={i}>{skeletonCard()}</div>)
+              : internships.map(item => (
+                  <InternshipCard key={item.id} item={item} isBookmarked={bookmarkedIds.has(item.id)} onToggleBookmark={toggleBookmark} navigate={navigate} />
+                ))
+            }
+          </section>
+        </div>
 
         {/* Empty State */}
         {!loading && internships.length === 0 && (
