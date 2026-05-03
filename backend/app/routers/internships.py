@@ -78,8 +78,7 @@ def list_internships(
     if work_type:
         query = query.filter(Internship.work_type == work_type)
     if eligibility:
-        # Match exact eligibility or 'both'
-        query = query.filter(or_(Internship.eligibility == eligibility, Internship.eligibility == 'both'))
+        query = query.filter(Internship.eligibility == eligibility)
 
     if sort == "deadline":
         query = query.order_by(Internship.deadline.asc())
