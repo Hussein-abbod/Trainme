@@ -1,6 +1,7 @@
 """
 Application routes — students apply, companies manage pipeline.
 """
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -12,7 +13,7 @@ from app.models import (
 )
 from app.schemas import (
     ApplicationCreate, ApplicationOut, ApplicationStatusUpdate,
-    ApplicantOut, MessageResponse,
+    ApplicantOut, ApplicationRatingUpdate, MessageResponse,
 )
 
 router = APIRouter(prefix="/applications", tags=["Applications"])
@@ -152,6 +153,10 @@ def update_application_status(
     if payload.notes is not None:
         app.notes = payload.notes
 
+    # Auto-set start_date when accepted
+    if payload.status == ApplicationStatus.accepted and app.start_date is None:
+        app.start_date = datetime.utcnow()
+
     # Notify the student
     status_labels = {
         ApplicationStatus.under_review: "Under Review",
@@ -169,3 +174,39 @@ def update_application_status(
 
     db.commit()
     return MessageResponse(message=f"Application status updated to {payload.status.value}.")
+
+
+@router.patch("/{application_id}/evaluate", response_model=MessageResponse)
+def evaluate_student(
+    application_id: int,
+    payload: ApplicationRatingUpdate,
+    current_user: User = Depends(require_company),
+    db: Session = Depends(get_db),
+):
+    """Company adds/updates rating, comment, months completed, and end date for an accepted intern (visible to university)."""
+    app = (
+        db.query(Application)
+        .join(Internship, Application.internship_id == Internship.id)
+        .filter(
+            Application.id == application_id,
+            Internship.company_id == current_user.id,
+            Application.status == ApplicationStatus.accepted,
+        )
+        .first()
+    )
+    if not app:
+        raise HTTPException(status_code=404, detail="Accepted application not found.")
+
+    if payload.rating is not None:
+        if not (1.0 <= payload.rating <= 5.0):
+            raise HTTPException(status_code=400, detail="Rating must be between 1 and 5.")
+        app.rating = payload.rating
+    if payload.company_comment is not None:
+        app.company_comment = payload.company_comment
+    if payload.months_completed is not None:
+        app.months_completed = payload.months_completed
+    if payload.end_date is not None:
+        app.end_date = payload.end_date
+
+    db.commit()
+    return MessageResponse(message="Student evaluation updated.")

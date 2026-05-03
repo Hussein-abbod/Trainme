@@ -1,17 +1,18 @@
 """
-Authentication routes: register (student/company), login, me.
+Authentication routes: register (student/company/university), login, me.
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.dependencies import get_current_user
-from app.models import Company, Student, User, UserRole
+from app.models import Company, Student, University, User, UserRole
 from app.schemas import (
     CompanyRegisterRequest,
     LoginRequest,
     StudentRegisterRequest,
     TokenResponse,
+    UniversityRegisterRequest,
     UserOut,
 )
 from app.security import create_access_token, hash_password, verify_password
@@ -34,7 +35,7 @@ def register_student(payload: StudentRegisterRequest, db: Session = Depends(get_
     db.add(user)
     db.flush()  # get the user.id without committing
 
-    student = Student(user_id=user.id, university=payload.university)
+    student = Student(user_id=user.id, university=payload.university, student_id=payload.student_id)
     db.add(student)
     db.commit()
     db.refresh(user)
@@ -70,6 +71,54 @@ def register_company(payload: CompanyRegisterRequest, db: Session = Depends(get_
 
     token = create_access_token({"sub": str(user.id), "role": user.role.value})
     return TokenResponse(access_token=token, role=user.role, user_id=user.id, name=user.name)
+
+
+@router.post("/register/university", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
+def register_university(payload: UniversityRegisterRequest, db: Session = Depends(get_db)):
+    """Register a new university account."""
+    if db.query(User).filter(User.email == payload.email).first():
+        raise HTTPException(status_code=400, detail="Email already registered.")
+
+    # Ensure the email_domain is unique
+    domain = payload.email_domain.lower().strip()
+    if db.query(University).filter(University.email_domain == domain).first():
+        raise HTTPException(status_code=400, detail="A university with this email domain is already registered.")
+
+    user = User(
+        role=UserRole.university,
+        name=payload.name,
+        email=payload.email,
+        password_hash=hash_password(payload.password),
+    )
+    db.add(user)
+    db.flush()
+
+    university = University(
+        user_id=user.id,
+        uni_name=payload.uni_name,
+        email_domain=domain,
+        website=payload.website,
+        address=payload.address,
+    )
+    db.add(university)
+    db.commit()
+    db.refresh(user)
+
+    token = create_access_token({"sub": str(user.id), "role": user.role.value})
+    return TokenResponse(access_token=token, role=user.role, user_id=user.id, name=user.name)
+
+
+@router.get("/universities", response_model=list[dict])
+def list_universities(db: Session = Depends(get_db)):
+    """Public endpoint: list all registered universities (for student registration dropdown)."""
+    unis = db.query(University).all()
+    return [
+        {
+            "uni_name": u.uni_name,
+            "email_domain": u.email_domain,
+        }
+        for u in unis
+    ]
 
 
 @router.post("/login", response_model=TokenResponse)

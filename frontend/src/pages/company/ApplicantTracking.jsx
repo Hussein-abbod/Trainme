@@ -52,6 +52,53 @@ export default function ApplicantTracking() {
 
   const selectCls = "w-full sm:w-auto px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary outline-none font-body-md";
 
+// At the top level state for evaluation
+  const [evalForm, setEvalForm] = useState({ rating: 0, company_comment: '', months_completed: '', end_date: '' });
+  const [submittingEval, setSubmittingEval] = useState(false);
+
+  // When selectedApp changes, initialize evalForm if accepted
+  useEffect(() => {
+    if (selectedApp) {
+      setEvalForm({
+        rating: selectedApp.rating || 0,
+        company_comment: selectedApp.company_comment || '',
+        months_completed: selectedApp.months_completed || '',
+        end_date: selectedApp.end_date ? selectedApp.end_date.split('T')[0] : '',
+      });
+    }
+  }, [selectedApp]);
+
+  async function handleEvaluationSubmit(e) {
+    e.preventDefault();
+    setSubmittingEval(true);
+    try {
+      const payload = {
+        rating: evalForm.rating ? Number(evalForm.rating) : null,
+        company_comment: evalForm.company_comment || null,
+        months_completed: evalForm.months_completed ? Number(evalForm.months_completed) : null,
+        end_date: evalForm.end_date ? new Date(evalForm.end_date).toISOString() : null,
+      };
+      await Applications.evaluate(selectedApp.id, payload);
+      toast('Evaluation updated successfully', 'success');
+      setApplicants(prev => prev.map(a => a.id === selectedApp.id ? { ...a, ...payload } : a));
+    } catch (err) {
+      toast('Failed to save evaluation', 'error');
+    } finally {
+      setSubmittingEval(false);
+    }
+  }
+
+  const StarInput = ({ value, onChange }) => (
+    <div className="flex gap-1">
+      {[1, 2, 3, 4, 5].map(i => (
+        <button type="button" key={i} onClick={() => onChange(i)}
+          className={`material-symbols-outlined text-[24px] ${i <= value ? 'text-yellow-500 filled-icon' : 'text-outline-variant hover:text-yellow-200'}`}>
+          star
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <div className="bg-background text-on-background min-h-screen flex flex-col antialiased">
       <CompanyNavbar />
@@ -117,7 +164,7 @@ export default function ApplicantTracking() {
                             <option value="rejected">Reject</option>
                           </select>
                           <button onClick={() => setSelectedApp(app)} className="px-3 py-1 bg-primary text-on-primary rounded hover:bg-surface-tint text-sm transition-colors">
-                            View Profile
+                            {app.status === 'accepted' ? 'Evaluate / View' : 'View Profile'}
                           </button>
                         </div>
                       </td>
@@ -135,14 +182,15 @@ export default function ApplicantTracking() {
       {selectedApp && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedApp(null)} />
-          <div className="relative bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+          <div className="relative bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-200">
             <div className="p-md border-b border-surface-variant flex justify-between items-center bg-surface">
               <h2 className="font-h3 text-on-surface">Applicant Profile</h2>
-              <button onClick={() => setSelectedApp(null)} className="material-symbols-outlined text-on-surface-variant hover:text-error">close</button>
+              <button onClick={() => setSelectedApp(null)} className="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">close</button>
             </div>
+            
             <div className="p-md overflow-y-auto space-y-md">
               <div className="flex items-center gap-md">
-                <div className="w-16 h-16 bg-surface-variant rounded-full flex items-center justify-center text-2xl font-bold text-on-surface-variant">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-2xl font-bold text-primary">
                   {selectedApp.student?.user?.name?.charAt(0) || '?'}
                 </div>
                 <div>
@@ -152,45 +200,91 @@ export default function ApplicantTracking() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-surface-container p-sm rounded-lg">
+                <div className="bg-surface-container p-sm rounded-lg border border-surface-variant">
                   <span className="text-xs text-outline block mb-1">University</span>
-                  <span className="font-medium">{selectedApp.student?.university || '—'}</span>
+                  <span className="font-medium text-sm">{selectedApp.student?.university || '—'}</span>
                 </div>
-                <div className="bg-surface-container p-sm rounded-lg">
+                <div className="bg-surface-container p-sm rounded-lg border border-surface-variant">
+                  <span className="text-xs text-outline block mb-1">Student ID</span>
+                  <span className="font-medium text-sm">{selectedApp.student?.student_id || '—'}</span>
+                </div>
+                <div className="bg-surface-container p-sm rounded-lg border border-surface-variant">
                   <span className="text-xs text-outline block mb-1">Major</span>
-                  <span className="font-medium">{selectedApp.student?.major || '—'}</span>
+                  <span className="font-medium text-sm">{selectedApp.student?.major || '—'}</span>
                 </div>
-                <div className="bg-surface-container p-sm rounded-lg">
-                  <span className="text-xs text-outline block mb-1">CGPA</span>
-                  <span className="font-medium">{selectedApp.student?.cgpa || '—'}</span>
-                </div>
-                <div className="bg-surface-container p-sm rounded-lg">
-                  <span className="text-xs text-outline block mb-1">Year</span>
-                  <span className="font-medium">{selectedApp.student?.year_of_study || '—'}</span>
+                <div className="bg-surface-container p-sm rounded-lg border border-surface-variant">
+                  <span className="text-xs text-outline block mb-1">CGPA / Year</span>
+                  <span className="font-medium text-sm">{selectedApp.student?.cgpa || '—'} (Yr {selectedApp.student?.year_of_study || '—'})</span>
                 </div>
               </div>
 
               {selectedApp.cover_letter && (
                 <div>
-                  <h4 className="font-label-md mb-xs">Cover Letter</h4>
-                  <div className="bg-surface-container-low p-sm rounded-lg text-sm whitespace-pre-wrap border border-surface-variant">
-                    {selectedApp.cover_letter}
+                  <h4 className="font-label-md mb-xs flex items-center gap-1"><span className="material-symbols-outlined text-[18px]">description</span> Cover Letter</h4>
+                  <div className="bg-surface-container-low p-sm rounded-lg text-sm whitespace-pre-wrap border border-surface-variant text-on-surface-variant italic">
+                    "{selectedApp.cover_letter}"
                   </div>
                 </div>
               )}
 
               {selectedApp.student?.skills?.length > 0 && (
                 <div>
-                  <h4 className="font-label-md mb-xs">Skills</h4>
+                  <h4 className="font-label-md mb-xs flex items-center gap-1"><span className="material-symbols-outlined text-[18px]">bolt</span> Skills</h4>
                   <div className="flex gap-2 flex-wrap">
-                    {selectedApp.student.skills.map(s => <span key={s} className="px-2 py-1 bg-secondary-container text-on-secondary-container rounded text-xs">{s}</span>)}
+                    {selectedApp.student.skills.map(s => <span key={s} className="px-2 py-1 bg-secondary-container text-on-secondary-container rounded text-xs font-medium border border-secondary-container/50">{s}</span>)}
+                  </div>
+                </div>
+              )}
+
+              {/* Evaluation Section (Only if Accepted) */}
+              {selectedApp.status === 'accepted' && (
+                <div className="mt-md border-t border-surface-variant pt-md">
+                  <div className="bg-surface-container-high rounded-xl p-md border border-primary/20">
+                    <h4 className="font-label-lg text-primary mb-xs flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[20px]">rate_review</span>
+                      Intern Evaluation
+                    </h4>
+                    <p className="text-xs text-on-surface-variant mb-md">
+                      Share feedback on this intern's performance. Their university can view this evaluation to track their progress.
+                    </p>
+                    <form onSubmit={handleEvaluationSubmit} className="space-y-sm">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+                        <div>
+                          <label className="block text-xs font-medium text-on-surface mb-1">Rating (1-5)</label>
+                          <StarInput value={evalForm.rating} onChange={(v) => setEvalForm(f => ({ ...f, rating: v }))} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-on-surface mb-1">Months Completed</label>
+                          <input type="number" min="0" max="24" value={evalForm.months_completed} onChange={(e) => setEvalForm(f => ({ ...f, months_completed: e.target.value }))}
+                            className="w-full bg-surface border border-outline-variant rounded px-2 py-1 text-sm focus:border-primary outline-none" placeholder="e.g. 3" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-on-surface mb-1">Expected End Date</label>
+                        <input type="date" value={evalForm.end_date} onChange={(e) => setEvalForm(f => ({ ...f, end_date: e.target.value }))}
+                          className="w-full bg-surface border border-outline-variant rounded px-2 py-1 text-sm focus:border-primary outline-none" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-on-surface mb-1">Feedback / Comments</label>
+                        <textarea rows="3" value={evalForm.company_comment} onChange={(e) => setEvalForm(f => ({ ...f, company_comment: e.target.value }))}
+                          className="w-full bg-surface border border-outline-variant rounded px-2 py-1 text-sm focus:border-primary outline-none resize-none" placeholder="Provide feedback on their performance..."></textarea>
+                      </div>
+                      <div className="flex justify-end pt-2">
+                        <button type="submit" disabled={submittingEval}
+                          className="px-4 py-1.5 bg-primary text-on-primary rounded font-label-md text-sm hover:bg-surface-tint transition-colors flex items-center gap-1 disabled:opacity-60">
+                          {submittingEval ? <Spinner /> : <><span className="material-symbols-outlined text-[16px]">save</span> Save Evaluation</>}
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               )}
             </div>
-            <div className="p-md border-t border-surface-variant bg-surface flex justify-end gap-sm">
+            
+            <div className="p-md border-t border-surface-variant bg-surface flex justify-between items-center gap-sm">
+              <span className="text-xs text-outline">Applied on {formatDate(selectedApp.applied_at)}</span>
               {selectedApp.student?.cv_url && (
-                <a href={getMediaUrl(selectedApp.student.cv_url)} target="_blank" rel="noreferrer" className="px-4 py-2 border border-primary text-primary rounded-lg font-label-md flex items-center gap-1 hover:bg-primary/5">
+                <a href={getMediaUrl(selectedApp.student.cv_url)} target="_blank" rel="noreferrer" className="px-4 py-2 border border-primary text-primary rounded-lg font-label-md text-sm flex items-center gap-1 hover:bg-primary/5 transition-colors">
                   <span className="material-symbols-outlined text-[18px]">download</span> Download CV
                 </a>
               )}

@@ -8,7 +8,8 @@ export default function ProtectedRoute({ requiredRole = null }) {
   if (!token) return <Navigate to="/login" replace />;
 
   if (requiredRole && user?.role !== requiredRole) {
-    const home = user?.role === 'company' ? '/dashboard' : '/discover';
+    const roleHome = { company: '/dashboard', university: '/university/dashboard', student: '/discover' };
+    const home = roleHome[user?.role] || '/';
     return <Navigate to={home} replace />;
   }
 

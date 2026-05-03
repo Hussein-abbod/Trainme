@@ -82,3 +82,13 @@ def require_admin(
     if token_data.role != UserRole.admin.value:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admins only.")
     return TokenUser(id=token_data.user_id, role=token_data.role)
+
+
+def require_university(
+    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
+) -> TokenUser:
+    """Validate JWT and assert role == university — NO database query."""
+    token_data = _decode_or_401(credentials)
+    if token_data.role != UserRole.university.value:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Universities only.")
+    return TokenUser(id=token_data.user_id, role=token_data.role)

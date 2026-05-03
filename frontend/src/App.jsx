@@ -3,21 +3,25 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import { ToastProvider } from './context/ToastContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 
-// Pages
+// Auth Pages
 import Home from './pages/Home.jsx';
 import Login from './pages/auth/Login.jsx';
 import RoleSelection from './pages/auth/RoleSelection.jsx';
 import StudentRegister from './pages/auth/StudentRegister.jsx';
 import CompanyRegister from './pages/auth/CompanyRegister.jsx';
+import UniversityRegister from './pages/auth/UniversityRegister.jsx';
 import ForgotPassword from './pages/auth/ForgotPassword.jsx';
 
+// Student Pages
 import DiscoveryFeed from './pages/student/DiscoveryFeed.jsx';
 import InternshipDetail from './pages/student/InternshipDetail.jsx';
 import MyApplications from './pages/student/MyApplications.jsx';
 import StudentProfile from './pages/student/StudentProfile.jsx';
 import SavedInternships from './pages/student/SavedInternships.jsx';
 import ApplicationSuccess from './pages/student/ApplicationSuccess.jsx';
+import PublicCompanyProfile from './pages/student/PublicCompanyProfile.jsx';
 
+// Company Pages
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
 import ApplicantTracking from './pages/company/ApplicantTracking.jsx';
 import CreateInternship from './pages/company/CreateInternship.jsx';
@@ -25,10 +29,14 @@ import MyInternships from './pages/company/MyInternships.jsx';
 import CompanyProfileEdit from './pages/company/CompanyProfileEdit.jsx';
 import CompaniesDirectory from './pages/company/CompaniesDirectory.jsx';
 
+// University Pages
+import UniversityDashboard from './pages/university/UniversityDashboard.jsx';
+
+// Shared Pages
 import Messages from './pages/shared/Messages.jsx';
 import Notifications from './pages/shared/Notifications.jsx';
-import PublicCompanyProfile from './pages/student/PublicCompanyProfile.jsx';
 
+// Info Pages
 import About from './pages/info/About.jsx';
 import Privacy from './pages/info/Privacy.jsx';
 import Terms from './pages/info/Terms.jsx';
@@ -46,6 +54,7 @@ export default function App() {
             <Route path="/register" element={<RoleSelection />} />
             <Route path="/register/student" element={<StudentRegister />} />
             <Route path="/register/company" element={<CompanyRegister />} />
+            <Route path="/register/university" element={<UniversityRegister />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
             {/* Info */}
@@ -66,11 +75,16 @@ export default function App() {
 
             {/* Company - protected */}
             <Route element={<ProtectedRoute requiredRole="company" />}>
-              <Route path="/dashboard"        element={<CompanyDashboard />} />
-              <Route path="/applicants"        element={<ApplicantTracking />} />
-              <Route path="/post-internship"   element={<CreateInternship />} />
-              <Route path="/my-internships"    element={<MyInternships />} />
-              <Route path="/company-profile"   element={<CompanyProfileEdit />} />
+              <Route path="/dashboard"      element={<CompanyDashboard />} />
+              <Route path="/applicants"     element={<ApplicantTracking />} />
+              <Route path="/post-internship" element={<CreateInternship />} />
+              <Route path="/my-internships" element={<MyInternships />} />
+              <Route path="/company-profile" element={<CompanyProfileEdit />} />
+            </Route>
+
+            {/* University - protected */}
+            <Route element={<ProtectedRoute requiredRole="university" />}>
+              <Route path="/university/dashboard" element={<UniversityDashboard />} />
             </Route>
 
             {/* Shared - any authenticated */}

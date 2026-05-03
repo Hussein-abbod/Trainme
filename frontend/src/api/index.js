@@ -1,14 +1,15 @@
 /**
- * TrainMe API Namespaces — React version
- * Ported from js/api.js
+ * TrainMe API Namespaces
  */
 import { apiFetch, apiUpload } from './client.js';
 
 export const Auth = {
-  registerStudent: (data) => apiFetch('/auth/register/student', { method: 'POST', body: JSON.stringify(data) }),
-  registerCompany: (data) => apiFetch('/auth/register/company',  { method: 'POST', body: JSON.stringify(data) }),
-  login:           (data) => apiFetch('/auth/login',             { method: 'POST', body: JSON.stringify(data) }),
-  me:              ()     => apiFetch('/auth/me'),
+  registerStudent:    (data) => apiFetch('/auth/register/student',    { method: 'POST', body: JSON.stringify(data) }),
+  registerCompany:    (data) => apiFetch('/auth/register/company',    { method: 'POST', body: JSON.stringify(data) }),
+  registerUniversity: (data) => apiFetch('/auth/register/university', { method: 'POST', body: JSON.stringify(data) }),
+  login:              (data) => apiFetch('/auth/login',               { method: 'POST', body: JSON.stringify(data) }),
+  me:                 ()     => apiFetch('/auth/me'),
+  listUniversities:   ()     => apiFetch('/auth/universities'),
 };
 
 export const Students = {
@@ -37,8 +38,8 @@ export const Companies = {
 export const Internships = {
   list:       (params = {}) => apiFetch('/internships/?' + new URLSearchParams(params)),
   get:        (id)          => apiFetch(`/internships/${id}`),
-  create:     (data)        => apiFetch('/internships/',     { method: 'POST',   body: JSON.stringify(data) }),
-  update:     (id, data)    => apiFetch(`/internships/${id}`, { method: 'PUT',  body: JSON.stringify(data) }),
+  create:     (data)        => apiFetch('/internships/',      { method: 'POST',   body: JSON.stringify(data) }),
+  update:     (id, data)    => apiFetch(`/internships/${id}`, { method: 'PUT',    body: JSON.stringify(data) }),
   delete:     (id)          => apiFetch(`/internships/${id}`, { method: 'DELETE' }),
   myListings: ()            => apiFetch('/internships/company/my-listings'),
 };
@@ -51,7 +52,8 @@ export const Applications = {
     const params = status ? `?status_filter=${status}` : '';
     return apiFetch(`/applications/internship/${internshipId}${params}`);
   },
-  updateStatus: (id, data) => apiFetch(`/applications/${id}/status`, { method: 'PATCH', body: JSON.stringify(data) }),
+  updateStatus: (id, data) => apiFetch(`/applications/${id}/status`,  { method: 'PATCH', body: JSON.stringify(data) }),
+  evaluate:     (id, data) => apiFetch(`/applications/${id}/evaluate`, { method: 'PATCH', body: JSON.stringify(data) }),
 };
 
 export const Bookmarks = {
@@ -76,4 +78,10 @@ export const Notifications = {
 
 export const Dashboard = {
   company: () => apiFetch('/dashboard/company'),
+};
+
+export const University = {
+  getMyProfile:    ()          => apiFetch('/university/me'),
+  updateMyProfile: (data)      => apiFetch('/university/me', { method: 'PUT', body: JSON.stringify(data) }),
+  getStudents:     (params={}) => apiFetch('/university/students?' + new URLSearchParams(params)),
 };

@@ -21,6 +21,7 @@ from app.routers import (
     messages,
     notifications,
     students,
+    university,
 )
 
 # ─── Logging ──────────────────────────────────────────────────
@@ -98,6 +99,7 @@ for router_module in [
     messages,
     notifications,
     dashboard,
+    university,
 ]:
     app.include_router(router_module.router, prefix=API_PREFIX)
 

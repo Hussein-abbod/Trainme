@@ -20,9 +20,10 @@ from app.database import Base
 # ─────────────────────────────────────────────────────────────
 
 class UserRole(str, enum.Enum):
-    student = "student"
-    company = "company"
-    admin   = "admin"
+    student    = "student"
+    company    = "company"
+    university = "university"
+    admin      = "admin"
 
 
 class ApplicationStatus(str, enum.Enum):
@@ -87,11 +88,12 @@ class User(TimestampMixin, Base):
     is_verified = Column(Boolean, default=False, nullable=False)
 
     # Relationships
-    student_profile  = relationship("Student",      back_populates="user", uselist=False, cascade="all, delete-orphan")
-    company_profile  = relationship("Company",      back_populates="user", uselist=False, cascade="all, delete-orphan")
-    notifications    = relationship("Notification", back_populates="user",                cascade="all, delete-orphan")
-    sent_messages    = relationship("Message",      foreign_keys="Message.sender_id",   back_populates="sender")
-    received_messages= relationship("Message",      foreign_keys="Message.receiver_id", back_populates="receiver")
+    student_profile     = relationship("Student",     back_populates="user", uselist=False, cascade="all, delete-orphan")
+    company_profile     = relationship("Company",     back_populates="user", uselist=False, cascade="all, delete-orphan")
+    university_profile  = relationship("University",  back_populates="user", uselist=False, cascade="all, delete-orphan")
+    notifications       = relationship("Notification", back_populates="user",               cascade="all, delete-orphan")
+    sent_messages       = relationship("Message",     foreign_keys="Message.sender_id",   back_populates="sender")
+    received_messages   = relationship("Message",     foreign_keys="Message.receiver_id", back_populates="receiver")
 
     def __repr__(self) -> str:
         return f"<User id={self.id} email={self.email} role={self.role}>"
@@ -102,6 +104,7 @@ class Student(TimestampMixin, Base):
 
     user_id       = Column(BigInteger, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
     university    = Column(String(255), nullable=True)
+    student_id    = Column(String(50), nullable=True)   # University student ID (e.g. 1211104523)
     year_of_study = Column(Integer, nullable=True)
     cgpa          = Column(Float, nullable=True)
     major         = Column(String(255), nullable=True)
@@ -140,6 +143,24 @@ class Company(TimestampMixin, Base):
 
     def __repr__(self) -> str:
         return f"<Company user_id={self.user_id} name={self.company_name}>"
+
+
+class University(TimestampMixin, Base):
+    __tablename__ = "universities"
+
+    user_id      = Column(BigInteger, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    uni_name     = Column(String(255), nullable=False)
+    email_domain = Column(String(100), nullable=False, unique=True, index=True)  # e.g. "mmu.edu.my"
+    website      = Column(String(500), nullable=True)
+    description  = Column(Text, nullable=True)
+    logo_url     = Column(String(500), nullable=True)
+    address      = Column(String(500), nullable=True)
+
+    # Relationships
+    user = relationship("User", back_populates="university_profile")
+
+    def __repr__(self) -> str:
+        return f"<University user_id={self.user_id} name={self.uni_name}>"
 
 
 # ─────────────────────────────────────────────────────────────
@@ -183,13 +204,18 @@ class Application(TimestampMixin, Base):
         UniqueConstraint("student_id", "internship_id", name="uq_student_internship"),
     )
 
-    id            = Column(BigInteger, primary_key=True, autoincrement=True)
-    student_id    = Column(BigInteger, ForeignKey("students.user_id", ondelete="CASCADE"), nullable=False, index=True)
-    internship_id = Column(BigInteger, ForeignKey("internships.id",   ondelete="CASCADE"), nullable=False, index=True)
-    status        = Column(Enum(ApplicationStatus), default=ApplicationStatus.pending, nullable=False)
-    cover_letter  = Column(Text, nullable=True)
-    notes         = Column(Text, nullable=True)  # Company internal notes
-    applied_at    = Column(DateTime, server_default=func.now(), nullable=False)
+    id              = Column(BigInteger, primary_key=True, autoincrement=True)
+    student_id      = Column(BigInteger, ForeignKey("students.user_id", ondelete="CASCADE"), nullable=False, index=True)
+    internship_id   = Column(BigInteger, ForeignKey("internships.id",   ondelete="CASCADE"), nullable=False, index=True)
+    status          = Column(Enum(ApplicationStatus), default=ApplicationStatus.pending, nullable=False)
+    cover_letter    = Column(Text, nullable=True)
+    notes           = Column(Text, nullable=True)       # Company internal notes
+    company_comment = Column(Text, nullable=True)       # Company comment visible to university
+    rating          = Column(Float, nullable=True)      # Company rating 1-5 visible to university
+    start_date      = Column(DateTime, nullable=True)   # Actual internship start date (when accepted)
+    end_date        = Column(DateTime, nullable=True)   # Expected internship end date
+    months_completed= Column(Integer, nullable=True)    # Months completed so far
+    applied_at      = Column(DateTime, server_default=func.now(), nullable=False)
 
     # Relationships
     student    = relationship("Student",    back_populates="applications")

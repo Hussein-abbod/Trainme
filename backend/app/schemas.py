@@ -43,6 +43,7 @@ class StudentRegisterRequest(BaseModel):
     email: EmailStr
     password: str
     university: Optional[str] = None
+    student_id: Optional[str] = None   # university-assigned student ID
 
     @field_validator("password")
     @classmethod
@@ -59,6 +60,23 @@ class CompanyRegisterRequest(BaseModel):
     company_name: str
     ssm_number: Optional[str] = None
     industry: Optional[str] = None
+
+    @field_validator("password")
+    @classmethod
+    def password_min_length(cls, v: str) -> str:
+        if len(v) < 8:
+            raise ValueError("Password must be at least 8 characters.")
+        return v
+
+
+class UniversityRegisterRequest(BaseModel):
+    name: str           # contact person name
+    email: EmailStr
+    password: str
+    uni_name: str
+    email_domain: str   # e.g. "mmu.edu.my"
+    website: Optional[str] = None
+    address: Optional[str] = None
 
     @field_validator("password")
     @classmethod
@@ -109,6 +127,7 @@ class UserOut(BaseModel):
 
 class StudentProfileUpdate(BaseModel):
     university: Optional[str] = None
+    student_id: Optional[str] = None
     year_of_study: Optional[int] = None
     cgpa: Optional[float] = None
     major: Optional[str] = None
@@ -122,6 +141,7 @@ class StudentProfileUpdate(BaseModel):
 class StudentProfileOut(BaseModel):
     user_id: int
     university: Optional[str]
+    student_id: Optional[str]
     year_of_study: Optional[int]
     cgpa: Optional[float]
     major: Optional[str]
@@ -167,6 +187,64 @@ class CompanyProfileOut(BaseModel):
     user: UserOut
 
     model_config = {"from_attributes": True}
+
+
+# ─────────────────────────────────────────────────────────────
+# University Schemas
+# ─────────────────────────────────────────────────────────────
+
+class UniversityProfileUpdate(BaseModel):
+    uni_name: Optional[str] = None
+    website: Optional[str] = None
+    description: Optional[str] = None
+    address: Optional[str] = None
+
+
+class UniversityProfileOut(BaseModel):
+    user_id: int
+    uni_name: str
+    email_domain: str
+    website: Optional[str]
+    description: Optional[str]
+    logo_url: Optional[str]
+    address: Optional[str]
+    user: UserOut
+
+    model_config = {"from_attributes": True}
+
+
+class UniversityStudentOut(BaseModel):
+    """Summary of a student's internship for the university dashboard."""
+    student_user_id: int
+    student_name: str
+    student_email: str
+    student_id_number: Optional[str]   # university student ID
+    major: Optional[str]
+    cgpa: Optional[float]
+    cv_url: Optional[str]
+    # Internship info
+    application_id: int
+    internship_title: str
+    company_name: str
+    company_user_id: int
+    application_status: str
+    applied_at: datetime
+    internship_start_date: Optional[datetime]
+    internship_end_date: Optional[datetime]
+    months_completed: Optional[int]
+    # Company evaluation
+    rating: Optional[float]
+    company_comment: Optional[str]
+
+    model_config = {"from_attributes": True}
+
+
+class ApplicationRatingUpdate(BaseModel):
+    """Company updates rating/comment for university visibility."""
+    rating: Optional[float] = None
+    company_comment: Optional[str] = None
+    months_completed: Optional[int] = None
+    end_date: Optional[datetime] = None
 
 
 # ─────────────────────────────────────────────────────────────
@@ -275,6 +353,11 @@ class ApplicationOut(BaseModel):
     status: ApplicationStatus
     cover_letter: Optional[str]
     notes: Optional[str]
+    rating: Optional[float]
+    company_comment: Optional[str]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    months_completed: Optional[int]
     applied_at: datetime
     updated_at: datetime
     internship: InternshipListOut
@@ -289,6 +372,11 @@ class ApplicantOut(BaseModel):
     status: ApplicationStatus
     cover_letter: Optional[str]
     notes: Optional[str]
+    rating: Optional[float]
+    company_comment: Optional[str]
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    months_completed: Optional[int]
     applied_at: datetime
     updated_at: datetime
     student: StudentProfileOut
