@@ -4,6 +4,7 @@ import { University, Messages } from '../../api/index.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useToast } from '../../context/ToastContext.jsx';
 import { Spinner } from '../../utils/helpers.jsx';
+import { getMediaUrl } from '../../api/client.js';
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -187,7 +188,7 @@ function StudentCard({ student, onContact }) {
               Contact Company
             </button>
             {student.cv_url && (
-              <a href={student.cv_url} target="_blank" rel="noreferrer"
+              <a href={getMediaUrl(student.cv_url)} target="_blank" rel="noreferrer"
                 className="flex items-center gap-xs bg-surface-container-high text-on-surface font-label-md text-sm py-xs px-md rounded-full hover:bg-surface-variant transition-colors border border-outline-variant">
                 <span className="material-symbols-outlined text-[16px]">description</span>
                 View CV
