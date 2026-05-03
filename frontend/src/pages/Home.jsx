@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.jsx';
+import heroImage from '../assets/home_image.jpg';
 
 function Counter({ target, suffix = '+' }) {
   const ref = useRef(null);
@@ -61,7 +62,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-sm border border-surface-variant">
-              <img alt="Students collaborating" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDED4eym50DkzKBtr9m1wf_7aH73-aGn7i6PS19jdOFiyA3Em2dwaCzbngrC7KvXxqzKrRrUHHfxrXzOEQRJoQLK2mYiTgJ5LR6CtKa7EQWT1AdrmOnN5OMIMedMPXc4eWy5LtZYwMr7mYiMUyrS6SXrltxDkD5NrjnhYnc4X2JDL6YOZWJI1rIEQkrFL6QxKC22WNXCw7ibJEq-e86JstWhBmdrG2Jv68kiXDA8TWhsdcCXtRyGxhbfHaoCAzHoeJkc-pl94ojtG8" />
+              <img alt="Students collaborating" className="w-full h-full object-cover" src={heroImage} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
           </div>
