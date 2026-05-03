@@ -96,10 +96,10 @@ export default function Login() {
     `w-full pl-lg pr-sm py-[10px] rounded border ${errors[field] ? 'border-error' : 'border-outline-variant'} bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md transition-colors placeholder:text-outline-variant`;
 
   return (
-    <div className="bg-surface-container-lowest text-on-surface antialiased font-body-md text-body-md h-screen flex">
-      <div className="flex flex-col md:flex-row w-full h-full">
+    <div className="bg-surface-container-lowest text-on-surface antialiased font-body-md text-body-md min-h-screen flex">
+      <div className="flex flex-col md:flex-row w-full">
         {/* Left Branding */}
-        <div className="hidden md:flex md:w-5/12 lg:w-1/2 relative bg-surface-container-high overflow-hidden">
+        <div className="hidden md:flex md:w-5/12 lg:w-1/2 relative bg-surface-container-high h-screen sticky top-0 overflow-hidden">
           <img alt="Students collaborating" className="absolute inset-0 w-full h-full object-cover" src={loginImage} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent mix-blend-multiply" />
           <div className="absolute inset-0 flex flex-col justify-between p-lg xl:p-xl text-white">
@@ -117,8 +117,8 @@ export default function Login() {
         </div>
 
         {/* Right Form */}
-        <div className="w-full md:w-7/12 lg:w-1/2 flex items-center justify-center p-md sm:p-lg lg:p-xl bg-surface-container-lowest overflow-y-auto">
-          <div className="w-full max-w-[420px]">
+        <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col items-center justify-center p-md sm:p-lg lg:p-xl min-h-screen bg-surface-container-lowest">
+          <div className="w-full max-w-[420px] py-md my-auto">
             <div className="md:hidden flex items-center gap-2 mb-xl">
               <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center">
                 <span className="material-symbols-outlined text-white text-[18px] filled-icon">school</span>
