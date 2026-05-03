@@ -36,7 +36,12 @@ def _enrich_with_count(items: list[Internship], db: Session) -> list[dict]:
         d = {col.name: getattr(item, col.name) for col in item.__table__.columns}
         d["applicant_count"] = count or 0
         if item.company:
-            d["company"] = item.company
+            d["company"] = {
+                "user_id": item.company.user_id,
+                "company_name": item.company.company_name,
+                "industry": item.company.industry,
+                "logo_url": item.company.logo_url
+            }
         result.append(d)
     return result
 

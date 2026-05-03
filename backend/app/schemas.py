@@ -189,6 +189,16 @@ class CompanyProfileOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class CompanyListOut(BaseModel):
+    """Simplified company schema for list views."""
+    user_id: int
+    company_name: str
+    industry: Optional[str]
+    logo_url: Optional[str]
+
+    model_config = {"from_attributes": True}
+
+
 # ─────────────────────────────────────────────────────────────
 # University Schemas
 # ─────────────────────────────────────────────────────────────
@@ -323,7 +333,7 @@ class InternshipListOut(BaseModel):
     eligibility: StudentEligibility
     created_at: datetime
     applicant_count: int = 0
-    company: Optional[CompanyProfileOut] = None
+    company: Optional[CompanyListOut] = None
 
     @field_validator("skills", mode="before")
     @classmethod
