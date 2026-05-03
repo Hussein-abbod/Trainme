@@ -20,7 +20,7 @@ export default function CreateInternship() {
   // For Edit Mode
   const editId = new URLSearchParams(location.search).get('edit');
 
-  const [form, setForm] = useState({ title: '', location: '', stipend: '', duration: '', work_type: 'onsite', deadline: '', description: '' });
+  const [form, setForm] = useState({ title: '', location: '', stipend: '', duration: '', work_type: 'onsite', deadline: '', description: '', eligibility: 'both' });
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState('');
   const [loading, setLoading] = useState(!!editId);
@@ -38,6 +38,7 @@ export default function CreateInternship() {
             work_type: data.work_type || 'onsite',
             deadline: data.deadline ? data.deadline.substring(0, 10) : '',
             description: data.description || '',
+            eligibility: data.eligibility || 'both',
           });
           setSkills(data.skills || []);
         })
@@ -111,6 +112,14 @@ export default function CreateInternship() {
             <div className="flex flex-col gap-xs">
               <label className="font-label-md text-on-surface">Duration</label>
               <input value={form.duration} onChange={set('duration')} placeholder="e.g. 3 Months" className={inputCls} />
+            </div>
+            <div className="flex flex-col gap-xs">
+              <label className="font-label-md text-on-surface">Student Eligibility</label>
+              <select value={form.eligibility} onChange={set('eligibility')} className={inputCls}>
+                <option value="both">Both Local & International</option>
+                <option value="local">Local Students Only</option>
+                <option value="international">International Students Only</option>
+              </select>
             </div>
           </div>
 

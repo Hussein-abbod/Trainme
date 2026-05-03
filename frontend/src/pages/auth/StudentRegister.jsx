@@ -11,6 +11,7 @@ export default function StudentRegister() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPw, setShowPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
   const [form, setForm] = useState({ fullName: '', university: '', email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
   const [pwStrength, setPwStrength] = useState({ level: 0, color: '', label: '' });
@@ -97,7 +98,7 @@ export default function StudentRegister() {
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="password">Password</label>
               <div className="relative">
-                <input id="password" type={showPw ? 'text' : 'password'} required value={form.password} onChange={onPwChange} placeholder="••••••••" className={inputCls('password')} />
+                <input id="password" type={showPw ? 'text' : 'password'} required value={form.password} onChange={onPwChange} placeholder="••••••••" className={`${inputCls('password')} pr-10`} />
                 <button type="button" onClick={() => setShowPw(v => !v)} className="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style={{ fontSize: 20 }}>
                   {showPw ? 'visibility' : 'visibility_off'}
                 </button>
@@ -116,7 +117,12 @@ export default function StudentRegister() {
             </div>
             <div>
               <label className="block font-label-md text-label-md text-on-surface mb-xs" htmlFor="confirmPassword">Confirm Password</label>
-              <input id="confirmPassword" type="password" required value={form.confirmPassword} onChange={set('confirmPassword')} placeholder="••••••••" className={inputCls('confirmPassword')} />
+              <div className="relative">
+                <input id="confirmPassword" type={showConfirmPw ? 'text' : 'password'} required value={form.confirmPassword} onChange={set('confirmPassword')} placeholder="••••••••" className={`${inputCls('confirmPassword')} pr-10`} />
+                <button type="button" onClick={() => setShowConfirmPw(v => !v)} className="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style={{ fontSize: 20 }}>
+                  {showConfirmPw ? 'visibility' : 'visibility_off'}
+                </button>
+              </div>
               {errors.confirmPassword && <p className="text-error text-xs mt-1">{errors.confirmPassword}</p>}
             </div>
             <button type="submit" disabled={loading} className="w-full mt-lg bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md py-sm px-md rounded-full shadow-sm hover:shadow transition-all duration-200 flex justify-center items-center gap-xs disabled:opacity-60">

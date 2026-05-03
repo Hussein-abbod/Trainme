@@ -104,6 +104,7 @@ export default function InternshipDetail() {
                 {internship.location && <span className="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">location_on</span>{internship.location}</span>}
                 {internship.duration && <span className="bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">schedule</span>{internship.duration}</span>}
                 {internship.work_type && <span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full font-label-sm text-label-sm">{workTypeLabel(internship.work_type)}</span>}
+                {internship.eligibility && internship.eligibility !== 'both' && <span className="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">public</span>{internship.eligibility.charAt(0).toUpperCase() + internship.eligibility.slice(1)} Only</span>}
                 {internship.stipend && <span className="bg-primary/10 text-primary px-3 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">payments</span>{internship.stipend}</span>}
               </div>
 

@@ -11,6 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: '', password: '' });
+  const [showPw, setShowPw] = useState(false);
   const [errors, setErrors] = useState({});
 
   if (isLoggedIn) {
@@ -90,7 +91,10 @@ export default function Login() {
                   <span className="absolute inset-y-0 left-0 flex items-center pl-sm text-outline">
                     <span className="material-symbols-outlined" style={{ fontSize: 20 }}>lock</span>
                   </span>
-                  <input id="password" type="password" required value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="••••••••" className={inputCls('password')} />
+                  <input id="password" type={showPw ? 'text' : 'password'} required value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="••••••••" className={`${inputCls('password')} pr-10`} />
+                  <button type="button" onClick={() => setShowPw(v => !v)} className="absolute inset-y-0 right-0 flex items-center pr-sm text-outline hover:text-on-surface focus:outline-none">
+                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>{showPw ? 'visibility' : 'visibility_off'}</span>
+                  </button>
                 </div>
                 {errors.password && <p className="text-error text-xs mt-1">{errors.password}</p>}
               </div>

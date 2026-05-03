@@ -21,6 +21,8 @@ export default function CompanyRegister() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ contactName: '', company_name: '', ssm_number: '', email: '', industry: '', password: '', confirmPassword: '', terms: false });
+  const [showPw, setShowPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
   const [errors, setErrors] = useState({});
   const [pwStrength, setPwStrength] = useState({ level: 0, color: '', label: '' });
 
@@ -119,7 +121,12 @@ export default function CompanyRegister() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-md mt-sm pt-md border-t border-surface-variant">
                 <div className="flex flex-col gap-xs">
                   <label className="font-label-md text-on-surface" htmlFor="password">Password</label>
-                  <input id="password" type="password" required value={form.password} onChange={onPwChange} placeholder="••••••••" className={inputCls('password')} />
+                  <div className="relative">
+                    <input id="password" type={showPw ? 'text' : 'password'} required value={form.password} onChange={onPwChange} placeholder="••••••••" className={`${inputCls('password')} pr-10`} />
+                    <button type="button" onClick={() => setShowPw(v => !v)} className="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style={{ fontSize: 20 }}>
+                      {showPw ? 'visibility' : 'visibility_off'}
+                    </button>
+                  </div>
                   {form.password && (
                     <div>
                       <div className="flex gap-1 mb-1">
@@ -132,7 +139,12 @@ export default function CompanyRegister() {
                 </div>
                 <div className="flex flex-col gap-xs">
                   <label className="font-label-md text-on-surface" htmlFor="confirmPassword">Confirm Password</label>
-                  <input id="confirmPassword" type="password" required value={form.confirmPassword} onChange={set('confirmPassword')} placeholder="••••••••" className={inputCls('confirmPassword')} />
+                  <div className="relative">
+                    <input id="confirmPassword" type={showConfirmPw ? 'text' : 'password'} required value={form.confirmPassword} onChange={set('confirmPassword')} placeholder="••••••••" className={`${inputCls('confirmPassword')} pr-10`} />
+                    <button type="button" onClick={() => setShowConfirmPw(v => !v)} className="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline cursor-pointer hover:text-on-surface transition-colors" style={{ fontSize: 20 }}>
+                      {showConfirmPw ? 'visibility' : 'visibility_off'}
+                    </button>
+                  </div>
                   {errors.confirmPassword && <p className="text-error text-xs">{errors.confirmPassword}</p>}
                 </div>
               </div>

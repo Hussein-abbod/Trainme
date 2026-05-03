@@ -43,6 +43,7 @@ function InternshipCard({ item, isBookmarked, onToggleBookmark, navigate }) {
         <div className="flex flex-wrap gap-xs mb-sm">
           {item.location && <span className="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">location_on</span>{item.location}</span>}
           {item.duration && <span className="bg-surface-container-high text-on-surface px-2 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">schedule</span>{item.duration}</span>}
+          {item.eligibility && item.eligibility !== 'both' && <span className="bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">public</span>{item.eligibility.charAt(0).toUpperCase() + item.eligibility.slice(1)} Only</span>}
           {item.stipend && <span className="bg-primary/10 text-primary px-2 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">payments</span>{item.stipend}</span>}
         </div>
         {skills.length > 0 && (
@@ -76,6 +77,7 @@ export default function DiscoveryFeed() {
   const [search, setSearch] = useState('');
   const [location, setLocation] = useState('');
   const [industry, setIndustry] = useState('');
+  const [eligibility, setEligibility] = useState('');
   const [sort, setSort] = useState('newest');
 
   useEffect(() => {
@@ -88,6 +90,7 @@ export default function DiscoveryFeed() {
     if (search.trim()) params.search = search.trim();
     if (location) params.location = location;
     if (industry) params.industry = industry;
+    if (eligibility) params.eligibility = eligibility;
     try {
       const data = await Internships.list(params);
       setInternships(prev => reset ? data : [...prev, ...data]);
@@ -96,7 +99,7 @@ export default function DiscoveryFeed() {
     } catch (err) {
       toast('Could not load internships: ' + err.message, 'error');
     } finally { setLoading(false); }
-  }, [search, location, industry, skip]);
+  }, [search, location, industry, eligibility, skip]);
 
   // Initial load
   useEffect(() => {
@@ -112,7 +115,7 @@ export default function DiscoveryFeed() {
     }
     const t = setTimeout(() => loadInternships(true), 400);
     return () => clearTimeout(t);
-  }, [search, location, industry]);
+  }, [search, location, industry, eligibility]);
 
   async function toggleBookmark(id, isBookmarked) {
     try {
@@ -128,7 +131,7 @@ export default function DiscoveryFeed() {
     } catch (err) { toast(err.message || 'Failed to update bookmark', 'error'); }
   }
 
-  function clearFilters() { setSearch(''); setLocation(''); setIndustry(''); }
+  function clearFilters() { setSearch(''); setLocation(''); setIndustry(''); setEligibility(''); }
 
   const selectCls = 'pl-3 pr-8 py-2 border border-outline-variant rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none cursor-pointer text-sm';
 
@@ -155,6 +158,11 @@ export default function DiscoveryFeed() {
                 <select value={industry} onChange={e => setIndustry(e.target.value)} className={selectCls}>
                   <option value="">Industry</option>
                   {['tech','business','engineering','marketing','design'].map(i => <option key={i} value={i} className="capitalize">{i.charAt(0).toUpperCase()+i.slice(1)}</option>)}
+                </select>
+                <select value={eligibility} onChange={e => setEligibility(e.target.value)} className={selectCls}>
+                  <option value="">Eligibility</option>
+                  <option value="local">Local Only</option>
+                  <option value="international">International Only</option>
                 </select>
                 <select value={sort} onChange={e => setSort(e.target.value)} className={selectCls}>
                   <option value="newest">Sort: Newest</option>

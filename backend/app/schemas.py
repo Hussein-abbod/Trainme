@@ -11,7 +11,7 @@ from pydantic import BaseModel, EmailStr, field_validator, model_validator
 
 from app.models import (
     ApplicationStatus, InternshipStatus, NotificationType,
-    UserRole, WorkType,
+    UserRole, WorkType, StudentEligibility
 )
 
 
@@ -185,6 +185,7 @@ class InternshipCreate(BaseModel):
     deadline: Optional[datetime] = None
     start_date: Optional[datetime] = None
     status: InternshipStatus = InternshipStatus.active
+    eligibility: StudentEligibility = StudentEligibility.both
 
 
 class InternshipUpdate(BaseModel):
@@ -199,6 +200,7 @@ class InternshipUpdate(BaseModel):
     deadline: Optional[datetime] = None
     start_date: Optional[datetime] = None
     status: Optional[InternshipStatus] = None
+    eligibility: Optional[StudentEligibility] = None
 
 
 class InternshipOut(BaseModel):
@@ -215,6 +217,7 @@ class InternshipOut(BaseModel):
     deadline: Optional[datetime]
     start_date: Optional[datetime]
     status: InternshipStatus
+    eligibility: StudentEligibility
     created_at: datetime
     company: CompanyProfileOut
 
@@ -239,6 +242,7 @@ class InternshipListOut(BaseModel):
     skills: list[str] = []
     deadline: Optional[datetime]
     status: InternshipStatus
+    eligibility: StudentEligibility
     created_at: datetime
     applicant_count: int = 0
 

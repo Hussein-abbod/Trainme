@@ -47,6 +47,7 @@ def list_internships(
     location: str | None = Query(None),
     industry: str | None = Query(None),
     work_type: str | None = Query(None),
+    eligibility: str | None = Query(None),
     skip: int = Query(0, ge=0),
     limit: int = Query(20, ge=1, le=100),
     _: User = Depends(get_current_user),
@@ -75,6 +76,9 @@ def list_internships(
         query = query.filter(Company.industry.ilike(f"%{industry}%"))
     if work_type:
         query = query.filter(Internship.work_type == work_type)
+    if eligibility:
+        # Match exact eligibility or 'both'
+        query = query.filter(or_(Internship.eligibility == eligibility, Internship.eligibility == 'both'))
 
     items = query.order_by(Internship.created_at.desc()).offset(skip).limit(limit).all()
     return _enrich_with_count(items, db)

@@ -47,6 +47,12 @@ class WorkType(str, enum.Enum):
     hybrid = "hybrid"
 
 
+class StudentEligibility(str, enum.Enum):
+    local = "local"
+    international = "international"
+    both = "both"
+
+
 class NotificationType(str, enum.Enum):
     application_received  = "application_received"
     status_changed        = "status_changed"
@@ -156,6 +162,7 @@ class Internship(TimestampMixin, Base):
     deadline    = Column(DateTime, nullable=True)
     start_date  = Column(DateTime, nullable=True)
     status      = Column(Enum(InternshipStatus), default=InternshipStatus.active)
+    eligibility = Column(Enum(StudentEligibility), default=StudentEligibility.both)
 
     # Relationships
     company      = relationship("Company",     back_populates="internships")

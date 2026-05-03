@@ -17,7 +17,34 @@ export class ApiError extends Error {
   }
 }
 
-export const apiCache = new Map();
+export const apiCache = {
+  get: (key) => {
+    try {
+      const item = sessionStorage.getItem(`tm_cache_${key}`);
+      return item ? JSON.parse(item) : undefined;
+    } catch (e) {
+      return undefined;
+    }
+  },
+  set: (key, value) => {
+    try {
+      sessionStorage.setItem(`tm_cache_${key}`, JSON.stringify(value));
+    } catch (e) {}
+  },
+  has: (key) => !!sessionStorage.getItem(`tm_cache_${key}`),
+  clear: () => {
+    try {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith('tm_cache_')) sessionStorage.removeItem(k);
+      });
+    } catch (e) {}
+  },
+  delete: (key) => {
+    try {
+      sessionStorage.removeItem(`tm_cache_${key}`);
+    } catch (e) {}
+  }
+};
 
 export async function apiFetch(path, options = {}) {
   const method = options.method || 'GET';
