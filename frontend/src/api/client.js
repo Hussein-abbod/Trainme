@@ -90,10 +90,12 @@ export async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
 
   if (res.status === 401) {
-    sessionStorage.removeItem('tm_token');
-    sessionStorage.removeItem('tm_user');
-    window.location.href = '/login';
-    return;
+    if (path !== '/auth/login') {
+      sessionStorage.removeItem('tm_token');
+      sessionStorage.removeItem('tm_user');
+      window.location.href = '/login';
+    }
+    // For /auth/login, do not return early so it throws ApiError below
   }
 
   const data = res.status !== 204 ? await res.json().catch(() => ({})) : {};

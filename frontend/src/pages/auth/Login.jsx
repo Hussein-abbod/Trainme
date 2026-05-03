@@ -28,8 +28,12 @@ export default function Login() {
       toast(`Welcome back, ${data.name}!`, 'success');
       setTimeout(() => navigate(data.role === 'company' ? '/dashboard' : '/discover'), 600);
     } catch (err) {
-      setErrors({ password: 'Invalid email or password.' });
-      toast(err.message || 'Invalid email or password.', 'error');
+      if (err.status === 401 || err.status === 400) {
+        setErrors({ password: 'Invalid email or password.' });
+      } else {
+        setErrors({ password: 'A server error occurred. Please try again later.' });
+      }
+      toast(err.status === 401 ? 'Invalid email or password.' : (err.message || 'Login failed.'), 'error');
     } finally {
       setLoading(false);
     }
