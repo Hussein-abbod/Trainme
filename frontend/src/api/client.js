@@ -86,9 +86,12 @@ export async function apiFetch(path, options = {}) {
   const token = sessionStorage.getItem('tm_token');
   const cacheKey = `${method}:${path}:${token}`;
 
-  // Serve from cache for GET requests (cache lives until logout or a mutation)
-  if (method === 'GET' && !path.includes('unread-count') && apiCache.has(cacheKey)) {
-    return apiCache.get(cacheKey).data;
+  // Serve from cache for GET requests
+  if (method === 'GET' && !path.includes('unread-count')) {
+    const cachedData = apiCache.get(cacheKey);
+    if (cachedData !== undefined) {
+      return cachedData.data;
+    }
   }
 
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
