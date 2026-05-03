@@ -323,6 +323,7 @@ class InternshipListOut(BaseModel):
     eligibility: StudentEligibility
     created_at: datetime
     applicant_count: int = 0
+    company: Optional[CompanyProfileOut] = None
 
     @field_validator("skills", mode="before")
     @classmethod
