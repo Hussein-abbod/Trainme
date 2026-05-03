@@ -160,29 +160,32 @@ def reset_and_seed():
         db.add_all(s_users)
         db.flush()
 
+        # Using a publicly accessible sample PDF for dummy CVs
+        dummy_pdf_url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+
         student_profiles = [
             Student(user_id=s_users[0].id, university="Multimedia University (MMU)", student_id="1211104001",
-                    year_of_study=3, cgpa=3.6, major="Computer Science", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=3, cgpa=3.6, major="Computer Science", cv_url=dummy_pdf_url,
                     bio="Passionate CS student interested in full-stack development.",
                     skills=json.dumps(["Python", "JavaScript", "React", "FastAPI", "SQL"])),
             Student(user_id=s_users[1].id, university="Multimedia University (MMU)", student_id="1211104002",
-                    year_of_study=2, cgpa=3.8, major="Information Technology", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=2, cgpa=3.8, major="Information Technology", cv_url=dummy_pdf_url,
                     bio="IT student passionate about UI/UX design and mobile development.",
                     skills=json.dumps(["Flutter", "Figma", "JavaScript", "HTML", "CSS"])),
             Student(user_id=s_users[2].id, university="Multimedia University (MMU)", student_id="1211104003",
-                    year_of_study=3, cgpa=3.4, major="Data Science", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=3, cgpa=3.4, major="Data Science", cv_url=dummy_pdf_url,
                     bio="Data enthusiast with a love for machine learning and visualization.",
                     skills=json.dumps(["Python", "R", "TensorFlow", "Power BI", "SQL"])),
             Student(user_id=s_users[3].id, university="Multimedia University (MMU)", student_id="1211104004",
-                    year_of_study=4, cgpa=3.9, major="Software Engineering", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=4, cgpa=3.9, major="Software Engineering", cv_url=dummy_pdf_url,
                     bio="Final year student specializing in cloud architecture and DevOps.",
                     skills=json.dumps(["AWS", "Docker", "Kubernetes", "CI/CD", "Python"])),
             Student(user_id=s_users[4].id, university="Universiti Teknologi Malaysia (UTM)", student_id="A21EC0001",
-                    year_of_study=3, cgpa=3.5, major="Electrical Engineering", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=3, cgpa=3.5, major="Electrical Engineering", cv_url=dummy_pdf_url,
                     bio="Engineering student keen on embedded systems and IoT.",
                     skills=json.dumps(["C++", "Arduino", "MATLAB", "Python", "PCB Design"])),
             Student(user_id=s_users[5].id, university="Universiti Teknologi Malaysia (UTM)", student_id="A21EC0002",
-                    year_of_study=2, cgpa=3.7, major="Finance", cv_url="/uploads/dummy_cv.pdf",
+                    year_of_study=2, cgpa=3.7, major="Finance", cv_url=dummy_pdf_url,
                     bio="Finance student interested in risk management and investment analysis.",
                     skills=json.dumps(["Excel", "Bloomberg", "Financial Modelling", "SQL", "Power BI"])),
         ]
