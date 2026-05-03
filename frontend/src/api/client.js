@@ -21,7 +21,14 @@ export const apiCache = {
   get: (key) => {
     try {
       const item = sessionStorage.getItem(`tm_cache_${key}`);
-      return item ? JSON.parse(item) : undefined;
+      if (!item) return undefined;
+      const parsed = JSON.parse(item);
+      // Invalidate cache after 30 seconds to ensure fresh data
+      if (Date.now() - parsed.timestamp > 30000) {
+        sessionStorage.removeItem(`tm_cache_${key}`);
+        return undefined;
+      }
+      return parsed;
     } catch (e) {
       return undefined;
     }
