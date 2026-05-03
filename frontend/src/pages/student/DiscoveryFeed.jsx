@@ -141,35 +141,33 @@ export default function DiscoveryFeed() {
       <main className="flex-grow max-w-[1200px] w-full mx-auto px-gutter py-lg md:py-xl pb-24 md:pb-xl">
         {/* Header */}
         <section className="mb-lg">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <h1 className="font-h2 text-h2 text-on-surface w-full md:w-auto">Discover Internships</h1>
-            <div className="w-full md:w-auto flex flex-col sm:flex-row gap-sm items-center">
-              <div className="relative w-full sm:w-64">
+          <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+            <h1 className="font-h2 text-h2 text-on-surface shrink-0">Discover Internships</h1>
+            <div className="flex flex-wrap gap-sm items-center w-full lg:w-auto lg:justify-end">
+              <div className="relative w-full sm:w-64 shrink-0">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
                 <input value={search} onChange={e => setSearch(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-on-surface-variant/70" placeholder="Search internships..." type="text" />
               </div>
-              <div className="flex gap-sm w-full sm:w-auto flex-wrap">
-                <select value={location} onChange={e => setLocation(e.target.value)} className={selectCls}>
-                  <option value="">All Locations</option>
-                  {MALAYSIA_LOCATIONS.map(loc => (
-                    <option key={loc} value={loc}>{loc}</option>
-                  ))}
-                </select>
-                <select value={industry} onChange={e => setIndustry(e.target.value)} className={selectCls}>
-                  <option value="">Industry</option>
-                  {['tech','business','engineering','marketing','design'].map(i => <option key={i} value={i} className="capitalize">{i.charAt(0).toUpperCase()+i.slice(1)}</option>)}
-                </select>
-                <select value={eligibility} onChange={e => setEligibility(e.target.value)} className={selectCls}>
-                  <option value="">Eligibility</option>
-                  <option value="local">Local Only</option>
-                  <option value="international">International Only</option>
-                </select>
-                <select value={sort} onChange={e => setSort(e.target.value)} className={selectCls}>
-                  <option value="newest">Sort: Newest</option>
-                  <option value="deadline">Sort: Deadline</option>
-                  <option value="stipend-high">Sort: Stipend (High → Low)</option>
-                </select>
-              </div>
+              <select value={location} onChange={e => setLocation(e.target.value)} className={`${selectCls} grow sm:grow-0`}>
+                <option value="">All Locations</option>
+                {MALAYSIA_LOCATIONS.map(loc => (
+                  <option key={loc} value={loc}>{loc}</option>
+                ))}
+              </select>
+              <select value={industry} onChange={e => setIndustry(e.target.value)} className={`${selectCls} grow sm:grow-0`}>
+                <option value="">Industry</option>
+                {['tech','business','engineering','marketing','design'].map(i => <option key={i} value={i} className="capitalize">{i.charAt(0).toUpperCase()+i.slice(1)}</option>)}
+              </select>
+              <select value={eligibility} onChange={e => setEligibility(e.target.value)} className={`${selectCls} grow sm:grow-0`}>
+                <option value="">Eligibility</option>
+                <option value="local">Local Only</option>
+                <option value="international">International Only</option>
+              </select>
+              <select value={sort} onChange={e => setSort(e.target.value)} className={`${selectCls} grow sm:grow-0`}>
+                <option value="newest">Sort: Newest</option>
+                <option value="deadline">Sort: Deadline</option>
+                <option value="stipend-high">Sort: Stipend (High → Low)</option>
+              </select>
             </div>
           </div>
         </section>
