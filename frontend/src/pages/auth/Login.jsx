@@ -4,6 +4,7 @@ import { Auth } from '../../api/index.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useToast } from '../../context/ToastContext.jsx';
 import { Spinner } from '../../utils/helpers.jsx';
+import loginImage from '../../assets/login_image.png';
 
 export default function Login() {
   const { login, isLoggedIn, role } = useAuth();
@@ -99,7 +100,7 @@ export default function Login() {
       <div className="flex flex-col md:flex-row w-full h-full">
         {/* Left Branding */}
         <div className="hidden md:flex md:w-5/12 lg:w-1/2 relative bg-surface-container-high overflow-hidden">
-          <img alt="Students collaborating" className="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC9u50E0CySXMAMg6jy07rWJ98jEhOREZVS8eleuIP0ttSkNwdXbm13-OvtiWHVFBezm3kWchX-uIflnVLjDvge-zTkWhJMW2dG2MGIAQo3mXfjqrEeIJ_rVbD21mCRQpQ2zRAoRVQcu8oxFqY4eUEK154TMkuOSabujLdLodJ4W2fqcBcG8J2vgujew2RJGnO3keG9wIlB7-jawJ-SbdD5M26CGpyQIZxZomQo15RuLxmid3eMPKeMPp44gSuoRR6VIQBBtJ4CrU" />
+          <img alt="Students collaborating" className="absolute inset-0 w-full h-full object-cover" src={loginImage} />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent mix-blend-multiply" />
           <div className="absolute inset-0 flex flex-col justify-between p-lg xl:p-xl text-white">
             <div className="flex items-center gap-2">
