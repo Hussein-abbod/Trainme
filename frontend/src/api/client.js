@@ -54,7 +54,7 @@ export async function apiFetch(path, options = {}) {
     apiCache.clear();
   }
 
-  const token = localStorage.getItem('tm_token');
+  const token = sessionStorage.getItem('tm_token');
   const cacheKey = `${method}:${path}:${token}`;
 
   // Serve from cache for GET requests (cache lives until logout or a mutation)
@@ -68,8 +68,8 @@ export async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
 
   if (res.status === 401) {
-    localStorage.removeItem('tm_token');
-    localStorage.removeItem('tm_user');
+    sessionStorage.removeItem('tm_token');
+    sessionStorage.removeItem('tm_user');
     window.location.href = '/login';
     return;
   }
@@ -87,7 +87,7 @@ export async function apiFetch(path, options = {}) {
 
 export async function apiUpload(path, formData) {
   apiCache.clear(); // Clear cache on file uploads as well
-  const token = localStorage.getItem('tm_token');
+  const token = sessionStorage.getItem('tm_token');
   const headers = {};
   if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(`${API_BASE}${path}`, { method: 'POST', headers, body: formData });

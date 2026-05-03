@@ -42,7 +42,7 @@ export default function Notifications() {
 
   /** Bust the unread-count cache so the navbar badge refreshes instantly */
   function clearUnreadCache() {
-    const token = localStorage.getItem('tm_token');
+    const token = sessionStorage.getItem('tm_token');
     const key = `GET:/notifications/unread-count:${token}`;
     if (apiCache) apiCache.delete(key);
   }
