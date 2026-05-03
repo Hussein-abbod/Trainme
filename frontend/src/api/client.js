@@ -43,15 +43,37 @@ export const apiCache = {
     try {
       sessionStorage.removeItem(`tm_cache_${key}`);
     } catch (e) {}
+  },
+  clearPattern: (pattern) => {
+    try {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith('tm_cache_') && k.includes(pattern)) {
+          sessionStorage.removeItem(k);
+        }
+      });
+    } catch (e) {}
   }
 };
 
 export async function apiFetch(path, options = {}) {
   const method = options.method || 'GET';
 
-  // Clear cache on any data mutation
+  // Smart cache invalidation on data mutation
   if (method !== 'GET') {
-    apiCache.clear();
+    if (path.includes('/applications')) {
+      apiCache.clearPattern('/applications');
+      apiCache.clearPattern('/dashboard');
+    } else if (path.includes('/internships')) {
+      apiCache.clearPattern('/internships');
+      apiCache.clearPattern('/dashboard');
+    } else if (path.includes('/messages')) {
+      apiCache.clearPattern('/messages');
+    } else if (path.includes('/bookmarks')) {
+      apiCache.clearPattern('/bookmarks');
+      apiCache.clearPattern('/internships');
+    } else {
+      apiCache.clear();
+    }
   }
 
   const token = sessionStorage.getItem('tm_token');
