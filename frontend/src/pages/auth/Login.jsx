@@ -13,9 +13,57 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPw, setShowPw] = useState(false);
   const [errors, setErrors] = useState({});
+  const [selectedDemoRole, setSelectedDemoRole] = useState('student');
+
+  const DEMO_ACCOUNTS = {
+    student: [
+      { label: 'Ahmad Razif (MMU)', email: 'ahmad@student.mmu.edu.my' },
+      { label: 'Nurul Ain (MMU)', email: 'nurul@student.mmu.edu.my' },
+      { label: 'Wei Liang (MMU)', email: 'weiliang@student.mmu.edu.my' },
+      { label: 'Priya Nair (MMU)', email: 'priya@student.mmu.edu.my' },
+      { label: 'Arif Hakim (UTM)', email: 'arif@graduate.utm.my' },
+      { label: 'Siti Hajar (UTM)', email: 'siti@graduate.utm.my' },
+    ],
+    company: [
+      { label: 'TechSolutions HR', email: 'hr@techsolutions.com.my' },
+      { label: 'FinanceHub HR', email: 'hr@financehub.com.my' },
+      { label: 'GreenEnergy HR', email: 'hr@greenenergy.com.my' },
+    ],
+    university: [
+      { label: 'MMU Admin', email: 'admin@mmu.edu.my' },
+      { label: 'UTM Admin', email: 'admin@utm.my' },
+    ]
+  };
 
   if (isLoggedIn) {
-    return <Navigate to={role === 'company' ? '/dashboard' : '/discover'} replace />;
+    if (role === 'company') return <Navigate to="/dashboard" replace />;
+    if (role === 'university') return <Navigate to="/university/dashboard" replace />;
+    return <Navigate to="/discover" replace />;
+  }
+
+  async function handleDemoLogin(email) {
+    setForm({ email, password: 'password123' });
+    setErrors({});
+    setLoading(true);
+    try {
+      const data = await Auth.login({ email, password: 'password123' });
+      login(data);
+      toast(`Welcome back, ${data.name}!`, 'success');
+      setTimeout(() => {
+        if (data.role === 'company') navigate('/dashboard');
+        else if (data.role === 'university') navigate('/university/dashboard');
+        else navigate('/discover');
+      }, 600);
+    } catch (err) {
+      if (err.status === 401 || err.status === 400) {
+        setErrors({ password: 'Invalid email or password.' });
+      } else {
+        setErrors({ password: 'A server error occurred. Please try again later.' });
+      }
+      toast(err.status === 401 ? 'Invalid email or password.' : (err.message || 'Login failed.'), 'error');
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleSubmit(e) {
@@ -26,7 +74,11 @@ export default function Login() {
       const data = await Auth.login({ email: form.email, password: form.password });
       login(data);
       toast(`Welcome back, ${data.name}!`, 'success');
-      setTimeout(() => navigate(data.role === 'company' ? '/dashboard' : '/discover'), 600);
+      setTimeout(() => {
+        if (data.role === 'company') navigate('/dashboard');
+        else if (data.role === 'university') navigate('/university/dashboard');
+        else navigate('/discover');
+      }, 600);
     } catch (err) {
       if (err.status === 401 || err.status === 400) {
         setErrors({ password: 'Invalid email or password.' });
@@ -125,6 +177,46 @@ export default function Login() {
                 Don't have an account?{' '}
                 <Link to="/register" className="font-label-md text-label-md text-primary hover:text-primary-fixed-dim transition-colors ml-xs">Sign up</Link>
               </p>
+            </div>
+
+            {/* Demo Accounts Section */}
+            <div className="mt-xl pt-lg border-t border-outline-variant">
+              <div className="flex flex-col items-center mb-md">
+                <h3 className="font-label-lg text-label-lg text-on-surface">Demo Accounts</h3>
+                <p className="text-sm text-on-surface-variant text-center mt-1">Select a role to quickly log in with test data.</p>
+              </div>
+              
+              <div className="flex justify-center gap-2 mb-md">
+                {['student', 'company', 'university'].map(r => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => setSelectedDemoRole(r)}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium capitalize transition-colors ${
+                      selectedDemoRole === r 
+                        ? 'bg-primary text-on-primary shadow-sm' 
+                        : 'bg-surface-container hover:bg-surface-container-high text-on-surface'
+                    }`}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+                {DEMO_ACCOUNTS[selectedDemoRole].map((acc, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleDemoLogin(acc.email)}
+                    disabled={loading}
+                    className="p-3 border border-outline-variant rounded-xl text-left hover:bg-surface-container hover:border-primary transition-all flex flex-col items-start focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent group"
+                  >
+                    <span className="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors truncate w-full">{acc.label}</span>
+                    <span className="text-xs text-on-surface-variant truncate w-full mt-0.5">{acc.email}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
